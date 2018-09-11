@@ -1,5 +1,7 @@
 # cqrs-architecture
 
+## Distributed computing rules
+
 ### CAP Theorem
 
 1. Consistency: Every read receives the most recent write or an error
