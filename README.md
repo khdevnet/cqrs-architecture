@@ -32,3 +32,8 @@ While nothing in life is free, the costs of setting and running a WAN network ar
 
 8. The network is homogenous
 This fallacy was added to the original seven by Gosling, the creator of Java, in 1997. With the advent of mobile, no network today is homogenous, but an increasing number of tools are being built that do let you try out things across different networks and environments. The key point here is to ensure you have no vendor lock-in.
+
+### Durability Guarantees
+1. Message is persisted
+2. Message is not removed until processed
+3. Duplicate messages are recognized
