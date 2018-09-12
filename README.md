@@ -37,4 +37,4 @@ This fallacy was added to the original seven by Gosling, the creator of Java, in
 1. Message is persisted
 2. Message is not removed until processed
 3. Duplicate messages are recognized
-4. Save subscribtions, avoid duplicated subscriptions
+4. Save subscriptions, avoid duplicated subscriptions
