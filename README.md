@@ -38,3 +38,13 @@ This fallacy was added to the original seven by Gosling, the creator of Java, in
 2. Message is not removed until processed
 3. Duplicate messages are recognized
 4. Save subscriptions, avoid duplicated subscriptions
+
+### Separate configurations
+#### Topological configurations      
+*Should be related to topology configuration and make possible to change configuration of each element in it. Store all settings in one place*
+* separate config file
+* shared database
+
+#### Internal configuration      
+*Should be related only to internal application configurations*
+* Web.config file
