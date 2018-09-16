@@ -48,3 +48,22 @@ This fallacy was added to the original seven by Gosling, the creator of Java, in
 #### Internal configuration      
 *Should be related only to internal application configurations*
 * Web.config file
+
+### Deployment
+* Save all configurations in one place (database)
+* Save Service, Handlers, Messages  versions and names in one place
+
+### Operational Concerns
+#### Configuration
+Separate topological from internal
+Separate config file
+Shared database
+#### Versioning
+Databases
+Services
+Messages
+XML Namespaces
+#### Deployment
+Keep good records
+Back-to-front
+Remotely scriptable
