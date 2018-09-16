@@ -24,8 +24,9 @@ namespace CQRS.Socks.Order.WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] CreateOrderModel createOrder)
+        public CreateOrderResponseModel Post([FromBody] CreateOrderModel createOrder)
         {
+            return new CreateOrderResponseModel() { OrderId = createOrder.OrderId };
         }
 
         // PUT api/values/5
