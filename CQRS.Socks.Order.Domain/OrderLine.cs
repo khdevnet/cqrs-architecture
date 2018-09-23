@@ -1,12 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
-namespace PharmaNet.Fulfillment.Domain
+namespace CQRS.Socks.Order.Domain
 {
     public class OrderLine
     {
-        public virtual Customer Customer { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual int Quantity { get; set; }
-        public virtual IList<OutOfStock> OutOfStocks { get; set; }
+        public int Id { get; set; }
+
+        public Guid OrderId { get; set; }
+
+        public Order Order { get; set; }
+
+        public int WarehouseId { get; set; }
+
+        public Warehouse Warehouse { get; set; }
+
+        public int ProductId { get; set; }
+
+        public Product Product { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

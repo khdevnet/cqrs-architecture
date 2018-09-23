@@ -1,9 +1,14 @@
-﻿
-namespace PharmaNet.Fulfillment.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace CQRS.Socks.Order.Domain
 {
     public class Product
     {
-        public virtual int Id { get; set; }
-        public virtual int ProductNumber { get; set; }
+        public int Id { get; set; }
+
+        public Item Item { get; set; }
+
+        public ICollection<OrderLine> OrderLines { get; set; }
     }
 }
