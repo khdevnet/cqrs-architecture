@@ -7,6 +7,8 @@ namespace CQRS.Socks.Order.Domain
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public Item Item { get; set; }
 
         public ICollection<OrderLine> OrderLines { get; set; }
