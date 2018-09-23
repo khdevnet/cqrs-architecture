@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CQRS.Socks.Order.Client
 {
-    public class ClientWebApplicationFactory<TStartup>
+    public class ClientWebApplicationFactory
         : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)

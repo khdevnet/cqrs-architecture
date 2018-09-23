@@ -27,11 +27,17 @@ namespace CQRS.Socks.Order.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+                {
+                    SocksShopDbContext context = serviceScope.ServiceProvider.GetRequiredService<SocksShopDbContext>();
+                    context.Database.EnsureDeleted();
+                    context.Database.Migrate();
+                }
             }
 
             app.UseMvc();

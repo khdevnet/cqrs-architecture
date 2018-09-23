@@ -1,5 +1,6 @@
 ﻿using CQRS.Socks.Order.WebApi;
 using CQRS.Socks.Order.WebApi.Models;
+using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CQRS.Socks.Order.Client
     {
         static void Main(string[] args)
         {
-            using (var webFactory = new ClientWebApplicationFactory<Startup>())
+            using (var webFactory = new ClientWebApplicationFactory())
             {
 
                 IEnumerable<CreateOrderModel> createOrderModels = Enumerable.Range(0, 99)
