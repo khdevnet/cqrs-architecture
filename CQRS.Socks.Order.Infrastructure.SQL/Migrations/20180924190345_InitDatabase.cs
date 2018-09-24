@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,8 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,6 +127,11 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "Name", "ShippingAddress" },
+                values: new object[] { 1, "Han Solo", "Stars" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ProductId",

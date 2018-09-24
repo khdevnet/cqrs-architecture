@@ -32,6 +32,10 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Han Solo", ShippingAddress = "Stars" }
+                    );
                 });
 
             modelBuilder.Entity("CQRS.Socks.Order.Domain.Item", b =>
@@ -102,6 +106,8 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

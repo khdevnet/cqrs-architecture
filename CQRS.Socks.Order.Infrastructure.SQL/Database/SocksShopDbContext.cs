@@ -20,6 +20,11 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Database
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasData(new Customer { Id = 1, Name = "Han Solo", ShippingAddress = "Stars" });
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

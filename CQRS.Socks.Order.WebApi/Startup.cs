@@ -1,4 +1,6 @@
-﻿using CQRS.Socks.Order.Infrastructure.SQL.Database;
+﻿using Autofac;
+using CQRS.Socks.Order.Infrastructure.SQL;
+using CQRS.Socks.Order.Infrastructure.SQL.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +24,12 @@ namespace CQRS.Socks.Order.WebApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             string connection = Configuration.GetConnectionString("SocksShopDatabase");
-            services.AddDbContext<SocksShopDbContext>
-                (options => options.UseSqlServer(connection));
+            services.RegisterDbContext(connection);
+        }
+
+        public static void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<SQLAutofacModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

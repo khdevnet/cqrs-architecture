@@ -1,10 +1,8 @@
-﻿using CQRS.Socks.Order.WebApi;
-using CQRS.Socks.Order.WebApi.Models;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using CQRS.Socks.Order.Client.Extensibility.Models;
 
 namespace CQRS.Socks.Order.Client
 {
@@ -12,37 +10,34 @@ namespace CQRS.Socks.Order.Client
     {
         static void Main(string[] args)
         {
-            using (var webFactory = new ClientWebApplicationFactory())
+            string url = "http://localhost:17591";
+            IEnumerable<CreateOrderModel> createOrderModels = Enumerable.Range(0, 99)
+      .Select(n => new CreateOrderModel() { OrderId = Guid.NewGuid(), CustomerName = "Han Solo", CustomerAddress = "Stars" }).ToList();
+            var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
+            var actualOrderIds = new List<Guid>();
+            foreach (CreateOrderModel orderModel in createOrderModels)
             {
-
-                IEnumerable<CreateOrderModel> createOrderModels = Enumerable.Range(0, 99)
-          .Select(n => new CreateOrderModel() { OrderId = Guid.NewGuid(), CustomerName = "TestUser1" }).ToList();
-                var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
-                var actualOrderIds = new List<Guid>();
-                foreach (CreateOrderModel orderModel in createOrderModels)
+                using (var client = new HttpClient())
                 {
-                    using (HttpClient client = webFactory.CreateClient())
-                    {
-                        Console.WriteLine("Create Order Id: " + orderModel.OrderId);
-                        HttpResponseMessage response = client.PostAsJsonAsync("/api/orders", orderModel).Result;
-                        actualOrderIds.Add(response.Content.ReadAsAsync<CreateOrderResponseModel>().Result.OrderId);
-                    }
+                    Console.WriteLine("Create Order Id: " + orderModel.OrderId);
+                    HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/orders", orderModel).Result;
+                    actualOrderIds.Add(response.Content.ReadAsAsync<CreateOrderResponseModel>().Result.OrderId);
                 }
-
-                while (expectedOrderIds.Any())
-                {
-                    foreach (Guid item in actualOrderIds)
-                    {
-                        int index = expectedOrderIds.IndexOf(item);
-                        if (index > -1)
-                        {
-                            Console.WriteLine("Order Created Order Id: " + item);
-                            expectedOrderIds.RemoveAt(index);
-                        }
-                    }
-                }
-
             }
+
+            while (expectedOrderIds.Any())
+            {
+                foreach (Guid item in actualOrderIds)
+                {
+                    int index = expectedOrderIds.IndexOf(item);
+                    if (index > -1)
+                    {
+                        Console.WriteLine("Order Created Order Id: " + item);
+                        expectedOrderIds.RemoveAt(index);
+                    }
+                }
+            }
+
             Console.ReadKey();
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CQRS.Socks.Order.WebApi.Models
+namespace CQRS.Socks.Order.Client.Extensibility.Models
 {
     public class CreateOrderResponseModel
     {
