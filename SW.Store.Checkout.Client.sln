@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Socks.Order.Client", "CQRS.Socks.Order.Client\CQRS.Socks.Order.Client.csproj", "{55375522-76CB-49FB-B00B-91FD1B3B376F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Client", "SW.Store.Checkout.Client\SW.Store.Checkout.Client.csproj", "{55375522-76CB-49FB-B00B-91FD1B3B376F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Socks.Order.Client.Extensibility", "CQRS.Socks.Order.Client.Extensibility\CQRS.Socks.Order.Client.Extensibility.csproj", "{059B39FE-7CD7-43FC-995C-7463902E9E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Extensibility", "SW.Store.Checkout..Extensibility\SW.Store.Checkout.Extensibility.csproj", "{059B39FE-7CD7-43FC-995C-7463902E9E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
