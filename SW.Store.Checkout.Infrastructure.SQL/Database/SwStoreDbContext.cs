@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SW.Store.Checkout.Infrastructure.SQL.Database
 {
-    public class SocksShopDbContext : DbContext
+    public class SwStoreDbContext : DbContext
     {
 
-        public SocksShopDbContext(DbContextOptions<SocksShopDbContext> options) : base(options) { }
+        public SwStoreDbContext(DbContextOptions<SwStoreDbContext> options) : base(options) { }
 
         public DbSet<Domain.Order> Orders { get; set; }
 

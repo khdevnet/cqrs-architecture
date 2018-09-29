@@ -7,9 +7,9 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
 {
     internal abstract class CrudRepository<TEntity, TId> : ICrudRepository<TEntity, TId> where TEntity : class
     {
-        protected readonly SocksShopDbContext db;
+        protected readonly SwStoreDbContext db;
 
-        public CrudRepository(SocksShopDbContext db)
+        public CrudRepository(SwStoreDbContext db)
         {
             this.db = db;
         }

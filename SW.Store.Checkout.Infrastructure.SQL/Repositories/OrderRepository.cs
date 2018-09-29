@@ -7,7 +7,7 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
     internal class OrderRepository : CrudRepository<Domain.Order, Guid>, IOrderRepository
     {
 
-        public OrderRepository(SocksShopDbContext db) : base(db)
+        public OrderRepository(SwStoreDbContext db) : base(db)
         {
 
         }

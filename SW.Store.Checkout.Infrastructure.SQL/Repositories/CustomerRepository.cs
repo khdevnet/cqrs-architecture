@@ -8,7 +8,7 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
     internal class CustomerRepository : CrudRepository<Customer, int>, ICustomerRepository
     {
 
-        public CustomerRepository(SocksShopDbContext db) : base(db)
+        public CustomerRepository(SwStoreDbContext db) : base(db)
         {
 
         }

@@ -11,7 +11,7 @@ namespace SW.Store.Checkout.Infrastructure.SQL
     {
         public static void RegisterDbContext(this IServiceCollection collection, string connection)
         {
-            collection.AddDbContext<SocksShopDbContext>
+            collection.AddDbContext<SwStoreDbContext>
                 (options => options.UseSqlServer(connection));
         }
     }

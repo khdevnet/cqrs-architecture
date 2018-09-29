@@ -24,7 +24,7 @@ namespace SW.Store.Checkout.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            string connection = Configuration.GetConnectionString("SocksShopDatabase");
+            string connection = Configuration.GetConnectionString(nameof(SwStoreDbContext));
             services.RegisterDbContext(connection);
         }
 
@@ -42,7 +42,7 @@ namespace SW.Store.Checkout.WebApi
                 app.UseDeveloperExceptionPage();
                 using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
                 {
-                    SocksShopDbContext context = serviceScope.ServiceProvider.GetRequiredService<SocksShopDbContext>();
+                    SwStoreDbContext context = serviceScope.ServiceProvider.GetRequiredService<SwStoreDbContext>();
                     context.Database.EnsureDeleted();
                     context.Database.Migrate();
                 }
