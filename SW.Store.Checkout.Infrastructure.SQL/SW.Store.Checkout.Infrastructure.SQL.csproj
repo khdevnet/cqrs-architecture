@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CQRS.Socks.Order.Domain\CQRS.Socks.Order.Domain.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
   </ItemGroup>
 
 </Project>

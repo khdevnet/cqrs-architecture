@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CQRS.Socks.Order.Infrastructure.SQL.Database;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CQRS.Socks.Order.Infrastructure.SQL
+namespace SW.Store.Checkout.Infrastructure.SQL
 {
     public static class DatabaseExtensions
     {

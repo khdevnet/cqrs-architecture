@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Autofac.Extensions.DependencyInjection;
 
-namespace CQRS.Socks.Order.WebApi
+namespace SW.Store.Checkout.WebApi
 {
     public class Program
     {

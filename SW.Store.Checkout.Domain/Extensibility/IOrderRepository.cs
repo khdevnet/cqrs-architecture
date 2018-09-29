@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CQRS.Socks.Order.Domain.Extensibility
+namespace SW.Store.Checkout.Domain.Extensibility
 {
     public interface IOrderRepository : ICrudRepository<Order, Guid>
     {

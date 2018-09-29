@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace CQRS.Socks.Order.Service
+namespace SW.Store.Checkout.Service
 {
     public class ServiceAutofacModule : Module
     {

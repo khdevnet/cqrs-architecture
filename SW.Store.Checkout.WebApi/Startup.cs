@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using CQRS.Socks.Order.Infrastructure.SQL;
-using CQRS.Socks.Order.Infrastructure.SQL.Database;
-using CQRS.Socks.Order.Service;
+using SW.Store.Checkout.Infrastructure.SQL;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
+using SW.Store.Checkout.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CQRS.Socks.Order.WebApi
+namespace SW.Store.Checkout.WebApi
 {
     public class Startup
     {

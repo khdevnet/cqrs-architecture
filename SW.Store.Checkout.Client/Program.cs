@@ -1,10 +1,10 @@
-﻿using CQRS.Socks.Order.Client.Extensibility.Models;
+﻿using SW.Store.Checkout.Client.Extensibility.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
-namespace CQRS.Socks.Order.Client
+namespace SW.Store.Checkout.Client
 {
     class Program
     {

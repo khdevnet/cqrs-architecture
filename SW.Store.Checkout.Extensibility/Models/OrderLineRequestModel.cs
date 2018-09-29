@@ -1,4 +1,4 @@
-﻿namespace CQRS.Socks.Order.Client.Extensibility.Models
+﻿namespace SW.Store.Checkout.Client.Extensibility.Models
 {
     public class OrderLineRequestModel
     {

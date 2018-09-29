@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CQRS.Socks.Order.Domain
+namespace SW.Store.Checkout.Domain
 {
     public class Product
     {

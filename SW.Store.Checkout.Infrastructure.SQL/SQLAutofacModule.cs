@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using CQRS.Socks.Order.Infrastructure.SQL.Repositories;
+using SW.Store.Checkout.Infrastructure.SQL.Repositories;
 
-namespace CQRS.Socks.Order.Infrastructure.SQL
+namespace SW.Store.Checkout.Infrastructure.SQL
 {
     public class SQLAutofacModule : Module
     {

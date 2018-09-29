@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
+namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
 {
     public partial class InitialDatabase : Migration
     {

@@ -1,6 +1,6 @@
-﻿using CQRS.Socks.Order.Domain;
+﻿using SW.Store.Checkout.Domain;
 
-namespace CQRS.Socks.Order.Service
+namespace SW.Store.Checkout.Service
 {
     public interface ICheckoutService
     {

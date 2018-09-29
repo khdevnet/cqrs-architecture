@@ -1,8 +1,8 @@
 ﻿using System;
-using CQRS.Socks.Order.Domain.Extensibility;
-using CQRS.Socks.Order.Infrastructure.SQL.Database;
+using SW.Store.Checkout.Domain.Extensibility;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
 
-namespace CQRS.Socks.Order.Infrastructure.SQL.Repositories
+namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
 {
     internal class OrderRepository : CrudRepository<Domain.Order, Guid>, IOrderRepository
     {

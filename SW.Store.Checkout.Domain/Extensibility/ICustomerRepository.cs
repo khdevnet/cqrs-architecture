@@ -1,4 +1,4 @@
-﻿namespace CQRS.Socks.Order.Domain.Extensibility
+﻿namespace SW.Store.Checkout.Domain.Extensibility
 {
     public interface ICustomerRepository : ICrudRepository<Customer, int>
     {

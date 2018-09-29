@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Socks.Order.Domain", "CQRS.Socks.Order.Domain\CQRS.Socks.Order.Domain.csproj", "{3A9589F2-C0DD-48ED-943D-D1309026A205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Domain", "SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj", "{3A9589F2-C0DD-48ED-943D-D1309026A205}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2854D622-22C2-4A29-9596-CEDA1A4A61C3}"
 	ProjectSection(SolutionItems) = preProject

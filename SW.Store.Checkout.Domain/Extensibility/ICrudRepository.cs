@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CQRS.Socks.Order.Domain.Extensibility
+namespace SW.Store.Checkout.Domain.Extensibility
 {
     public interface ICrudRepository<TEntity, TId> where TEntity : class
     {

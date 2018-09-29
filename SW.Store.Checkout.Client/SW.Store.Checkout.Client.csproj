@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CQRS.Socks.Order.Client.Extensibility\CQRS.Socks.Order.Client.Extensibility.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
   </ItemGroup>
 
 </Project>

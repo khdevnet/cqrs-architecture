@@ -1,9 +1,9 @@
-﻿using CQRS.Socks.Order.Client.Extensibility.Models;
-using CQRS.Socks.Order.Domain.Extensibility;
-using CQRS.Socks.Order.Service;
+﻿using SW.Store.Checkout.Client.Extensibility.Models;
+using SW.Store.Checkout.Domain.Extensibility;
+using SW.Store.Checkout.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CQRS.Socks.Order.WebApi.Controllers
+namespace SW.Store.Checkout.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

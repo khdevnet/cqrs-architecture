@@ -17,10 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CQRS.Socks.Order.Client.Extensibility\CQRS.Socks.Order.Client.Extensibility.csproj" />
-    <ProjectReference Include="..\CQRS.Socks.Order.Domain\CQRS.Socks.Order.Domain.csproj" />
-    <ProjectReference Include="..\CQRS.Socks.Order.Infrastructure.SQL\CQRS.Socks.Order.Infrastructure.SQL.csproj" />
-    <ProjectReference Include="..\CQRS.Socks.Order.Service\CQRS.Socks.Order.Service.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.SQL\SW.Store.Checkout.Infrastructure.SQL.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Service\SW.Store.Checkout.Service.csproj" />
   </ItemGroup>
 
 </Project>

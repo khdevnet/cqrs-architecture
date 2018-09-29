@@ -1,7 +1,7 @@
-﻿using CQRS.Socks.Order.Domain;
+﻿using SW.Store.Checkout.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CQRS.Socks.Order.Infrastructure.SQL.Database
+namespace SW.Store.Checkout.Infrastructure.SQL.Database
 {
     public class SocksShopDbContext : DbContext
     {

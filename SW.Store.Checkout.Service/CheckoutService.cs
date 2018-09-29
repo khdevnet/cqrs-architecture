@@ -1,6 +1,6 @@
-﻿using CQRS.Socks.Order.Domain.Extensibility;
+﻿using SW.Store.Checkout.Domain.Extensibility;
 
-namespace CQRS.Socks.Order.Service
+namespace SW.Store.Checkout.Service
 {
     internal class CheckoutService : ICheckoutService
     {
