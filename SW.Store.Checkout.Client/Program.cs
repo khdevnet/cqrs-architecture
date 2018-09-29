@@ -11,11 +11,11 @@ namespace SW.Store.Checkout.Client
         static void Main(string[] args)
         {
             string url = "http://localhost:51971";
-            IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 2)
+            IEnumerable<OrderDto> createOrderModels = Enumerable.Range(0, 2)
       .Select(n => CreateOrderRequestModel()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
-            foreach (CreateOrderRequestModel orderModel in createOrderModels)
+            foreach (OrderDto orderModel in createOrderModels)
             {
                 using (var client = new HttpClient())
                 {
@@ -41,9 +41,9 @@ namespace SW.Store.Checkout.Client
             Console.ReadKey();
         }
 
-        private static CreateOrderRequestModel CreateOrderRequestModel()
+        private static OrderDto CreateOrderRequestModel()
         {
-            return new CreateOrderRequestModel()
+            return new OrderDto()
             {
                 OrderId = Guid.NewGuid(),
                 CustomerName = "Han Solo",

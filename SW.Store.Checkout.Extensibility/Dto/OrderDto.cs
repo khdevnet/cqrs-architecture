@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Client.Extensibility.Models
 {
-    public class CreateOrderRequestModel
+    public class OrderDto
     {
         public Guid OrderId { get; set; }
 

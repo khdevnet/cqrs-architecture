@@ -22,7 +22,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public CreateOrderResponseModel Post([FromBody] CreateOrderRequestModel createOrder)
+        public CreateOrderResponseModel Post([FromBody] OrderDto createOrder)
         {
             var createdOrder = checkoutService.ProcessOrder(new Domain.Order()
             {
