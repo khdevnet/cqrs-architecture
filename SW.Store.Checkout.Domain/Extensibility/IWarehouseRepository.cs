@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace SW.Store.Checkout.Domain.Extensibility
+﻿namespace SW.Store.Checkout.Domain.Extensibility
 {
     public interface IWarehouseRepository : ICrudRepository<Warehouse, int>
     {
-       IEnumerable<Warehouse> Get(string reference);
+        Warehouse Get(int productId, int quantity);
     }
 }

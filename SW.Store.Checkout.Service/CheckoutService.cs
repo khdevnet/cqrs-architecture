@@ -4,7 +4,6 @@ using SW.Store.Checkout.Extensibility;
 using SW.Store.Checkout.Extensibility.Dto;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Transactions;
 
 namespace SW.Store.Checkout.Service
@@ -51,12 +50,10 @@ namespace SW.Store.Checkout.Service
                         Quantity = orderLine.Quantity
                     };
 
-                    Warehouse warehouse = warehouses
-                        .FirstOrDefault(w => w.Items.Where(it => it.ProductId == orderLine.ProductNumber).Sum(it => it.Quantity) >= orderLine.Quantity);
-                    if (warehouse != null)
+                    orderLineEntity.Warehouse = warehouseRepository.Get(orderLine.ProductNumber, orderLine.Quantity);
+                    if (orderLineEntity.Warehouse != null)
                     {
-                        orderLineEntity.Warehouse = warehouse;
-                        UpdateWarehouseItemQuantity(orderLine.ProductNumber, warehouse.Id, orderLine.Quantity);
+                        UpdateWarehouseItemQuantity(orderLine.ProductNumber, orderLineEntity.Warehouse.Id, orderLine.Quantity);
                     }
                     else
                     {

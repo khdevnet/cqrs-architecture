@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SW.Store.Checkout.Domain;
+﻿using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Infrastructure.SQL.Database;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
@@ -14,9 +12,9 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
 
         }
 
-        public IEnumerable<Warehouse> Get(string reference)
+        public Warehouse Get(int productId, int quantity)
         {
-           return db.Set<Warehouse>().Include(reference).ToList();
+            return db.Warehouses.FirstOrDefault(w => w.Items.Where(it => it.ProductId == productId).Sum(it => it.Quantity) >= quantity);
         }
     }
 }
