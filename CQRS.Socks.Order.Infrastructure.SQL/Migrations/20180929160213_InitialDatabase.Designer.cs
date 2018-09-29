@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
 {
     [DbContext(typeof(SocksShopDbContext))]
-    [Migration("20180924190345_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20180929160213_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,6 +114,14 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new { Id = 1, Name = "R2-D2" },
+                        new { Id = 2, Name = "Speeder" },
+                        new { Id = 3, Name = "BB-8" },
+                        new { Id = 4, Name = "Blaster" },
+                        new { Id = 5, Name = "Death star" }
+                    );
                 });
 
             modelBuilder.Entity("CQRS.Socks.Order.Domain.Warehouse", b =>

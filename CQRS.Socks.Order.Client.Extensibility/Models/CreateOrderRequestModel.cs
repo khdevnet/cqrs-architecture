@@ -11,6 +11,6 @@ namespace CQRS.Socks.Order.Client.Extensibility.Models
 
         public string CustomerAddress { get; set; }
 
-        public IEnumerable<OrderLineModel> Lines { get; set; }
+        public IEnumerable<OrderLineRequestModel> Lines { get; set; }
     }
 }

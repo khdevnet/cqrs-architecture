@@ -23,6 +23,12 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().HasData(new Customer { Id = 1, Name = "Han Solo", ShippingAddress = "Stars" });
+
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 1, Name = "R2-D2" });
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 2, Name = "Speeder" });
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 3, Name = "BB-8" });
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 4, Name = "Blaster" });
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 5, Name = "Death star" });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

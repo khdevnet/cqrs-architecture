@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CQRS.Socks.Order.Domain.Extensibility;
 using CQRS.Socks.Order.Infrastructure.SQL.Database;
 
@@ -18,6 +19,11 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Repositories
             db.Set<TEntity>().Add(entity);
             db.SaveChanges();
             return entity;
+        }
+
+        public IEnumerable<TEntity> Get()
+        {
+            return db.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(TId id)

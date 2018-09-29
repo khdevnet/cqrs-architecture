@@ -1,12 +1,9 @@
 ﻿namespace CQRS.Socks.Order.Client.Extensibility.Models
 {
-    public class OrderLineModel
+    public class OrderLineRequestModel
     {
-        public class Line
-        {
-            public int ProductNumber { get; set; }
+        public int ProductNumber { get; set; }
 
-            public int Quantity { get; set; }
-        }
+        public int Quantity { get; set; }
     }
 }

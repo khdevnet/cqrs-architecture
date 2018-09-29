@@ -112,6 +112,14 @@ namespace CQRS.Socks.Order.Infrastructure.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new { Id = 1, Name = "R2-D2" },
+                        new { Id = 2, Name = "Speeder" },
+                        new { Id = 3, Name = "BB-8" },
+                        new { Id = 4, Name = "Blaster" },
+                        new { Id = 5, Name = "Death star" }
+                    );
                 });
 
             modelBuilder.Entity("CQRS.Socks.Order.Domain.Warehouse", b =>

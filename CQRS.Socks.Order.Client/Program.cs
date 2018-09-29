@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CQRS.Socks.Order.Client.Extensibility.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using CQRS.Socks.Order.Client.Extensibility.Models;
 
 namespace CQRS.Socks.Order.Client
 {
@@ -12,7 +12,7 @@ namespace CQRS.Socks.Order.Client
         {
             string url = "http://localhost:51971";
             IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 2)
-      .Select(n => new CreateOrderRequestModel() { OrderId = Guid.NewGuid(), CustomerName = "Han Solo", CustomerAddress = "Stars" }).ToList();
+      .Select(n => CreateOrderRequestModel()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
             foreach (CreateOrderRequestModel orderModel in createOrderModels)
@@ -39,6 +39,29 @@ namespace CQRS.Socks.Order.Client
             }
 
             Console.ReadKey();
+        }
+
+        private static CreateOrderRequestModel CreateOrderRequestModel()
+        {
+            return new CreateOrderRequestModel()
+            {
+                OrderId = Guid.NewGuid(),
+                CustomerName = "Han Solo",
+                CustomerAddress = "Stars",
+                Lines = new[]
+                 {
+                     new OrderLineRequestModel
+                     {
+                          ProductNumber = 1,
+                          Quantity = 1
+                     },
+                     new OrderLineRequestModel
+                     {
+                          ProductNumber = 2,
+                          Quantity = 1
+                     }
+                 }
+            };
         }
     }
 }
