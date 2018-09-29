@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Domain
 {
@@ -9,7 +8,7 @@ namespace SW.Store.Checkout.Domain
 
         public string Name { get; set; }
 
-        public Item Item { get; set; }
+        public ICollection<WarehouseItem> WarehouseItems { get; set; }
 
         public ICollection<OrderLine> OrderLines { get; set; }
     }

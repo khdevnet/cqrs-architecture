@@ -1,4 +1,5 @@
-﻿using SW.Store.Checkout.Client.Extensibility.Models;
+﻿using SW.Store.Checkout.Client.Extensibility.Client;
+using SW.Store.Checkout.Extensibility.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SW.Store.Checkout.Client
         static void Main(string[] args)
         {
             string url = "http://localhost:51971";
-            IEnumerable<OrderDto> createOrderModels = Enumerable.Range(0, 2)
+            IEnumerable<OrderDto> createOrderModels = Enumerable.Range(0, 5000)
       .Select(n => CreateOrderRequestModel()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
@@ -21,22 +22,32 @@ namespace SW.Store.Checkout.Client
                 {
                     Console.WriteLine("Create Order Id: " + orderModel.OrderId);
                     HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/orders", orderModel).Result;
-                    actualOrderIds.Add(response.Content.ReadAsAsync<CreateOrderResponseModel>().Result.OrderId);
+                    var orderResponse = response.Content.ReadAsAsync<CreateOrderResponseModel>().Result;
+                    Console.WriteLine("Order Created Order Id: " + orderResponse.OrderId);
+                    foreach (var orderLine in orderResponse.Lines)
+                    {
+                        Console.WriteLine("Order Line: ");
+                        Console.WriteLine("-- ProductNumber: " + orderLine.ProductNumber);
+                        Console.WriteLine("-- ProductName: " + orderLine.ProductName);
+                        Console.WriteLine("-- ProductQuantity: " + orderLine.Quantity);
+                        Console.WriteLine("-- ProductStatus: " + orderLine.Status);
+                    }
+                    Console.WriteLine("=======================");
                 }
             }
 
-            while (expectedOrderIds.Any())
-            {
-                foreach (Guid item in actualOrderIds)
-                {
-                    int index = expectedOrderIds.IndexOf(item);
-                    if (index > -1)
-                    {
-                        Console.WriteLine("Order Created Order Id: " + item);
-                        expectedOrderIds.RemoveAt(index);
-                    }
-                }
-            }
+            //while (expectedOrderIds.Any())
+            //{
+            //    foreach (Guid item in actualOrderIds)
+            //    {
+            //        int index = expectedOrderIds.IndexOf(item);
+            //        if (index > -1)
+            //        {
+            //            Console.WriteLine("Order Created Order Id: " + item);
+            //            expectedOrderIds.RemoveAt(index);
+            //        }
+            //    }
+            //}
 
             Console.ReadKey();
         }
@@ -50,14 +61,19 @@ namespace SW.Store.Checkout.Client
                 CustomerAddress = "Stars",
                 Lines = new[]
                  {
-                     new OrderLineRequestModel
+                     new OrderLineDto
                      {
                           ProductNumber = 1,
                           Quantity = 1
                      },
-                     new OrderLineRequestModel
+                     new OrderLineDto
                      {
                           ProductNumber = 2,
+                          Quantity = 1
+                     },
+                     new OrderLineDto
+                     {
+                          ProductNumber = 3,
                           Quantity = 1
                      }
                  }

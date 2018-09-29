@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Checkout.Domain
+﻿namespace SW.Store.Checkout.Extensibility
 {
     public enum OrderStatus
     {

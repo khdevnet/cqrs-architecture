@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SW.Store.Checkout.Extensibility;
+using System;
 using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Domain
@@ -13,6 +14,6 @@ namespace SW.Store.Checkout.Domain
 
         public Customer Customer { get; set; }
 
-        public ICollection<OrderLine> Lines { get; set; }
+        public ICollection<OrderLine> Lines { get; set; } = new List<OrderLine>();
     }
 }

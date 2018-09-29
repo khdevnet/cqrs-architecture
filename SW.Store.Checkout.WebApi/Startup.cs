@@ -1,13 +1,12 @@
 ﻿using Autofac;
-using SW.Store.Checkout.Infrastructure.SQL;
-using SW.Store.Checkout.Infrastructure.SQL.Database;
-using SW.Store.Checkout.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SW.Store.Checkout.Infrastructure.SQL;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
+using SW.Store.Checkout.Service;
 
 namespace SW.Store.Checkout.WebApi
 {
@@ -40,12 +39,7 @@ namespace SW.Store.Checkout.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-                {
-                    SwStoreDbContext context = serviceScope.ServiceProvider.GetRequiredService<SwStoreDbContext>();
-                    context.Database.EnsureDeleted();
-                    context.Database.Migrate();
-                }
+                app.ApplicationServices.MigrateDbContext();
             }
 
             app.UseMvc();

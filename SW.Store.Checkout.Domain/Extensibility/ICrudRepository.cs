@@ -8,6 +8,6 @@ namespace SW.Store.Checkout.Domain.Extensibility
 
         TEntity GetById(TId id);
 
-        IEnumerable<TEntity> Get();
+        IEnumerable<TEntity> Get(string references = null);
     }
 }

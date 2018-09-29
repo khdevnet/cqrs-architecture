@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Infrastructure.SQL.Database;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
 {
-    internal abstract class CrudRepository<TEntity, TId> : ICrudRepository<TEntity, TId> where TEntity : class
+    internal class CrudRepository<TEntity, TId> : ICrudRepository<TEntity, TId> where TEntity : class
     {
         protected readonly SwStoreDbContext db;
 
@@ -21,9 +22,11 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
             return entity;
         }
 
-        public IEnumerable<TEntity> Get()
+        public IEnumerable<TEntity> Get(string references = null)
         {
-            return db.Set<TEntity>().ToList();
+            return string.IsNullOrEmpty(references)
+                ? db.Set<TEntity>().ToList()
+                : db.Set<TEntity>().Include(references).ToList();
         }
 
         public TEntity GetById(TId id)

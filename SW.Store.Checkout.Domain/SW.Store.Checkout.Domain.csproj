@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
+  </ItemGroup>
+
 </Project>

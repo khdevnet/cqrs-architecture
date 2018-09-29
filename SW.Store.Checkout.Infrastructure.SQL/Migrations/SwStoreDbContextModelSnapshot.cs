@@ -38,28 +38,6 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                     );
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Domain.Item", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("WarehouseId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.HasIndex("WarehouseId");
-
-                    b.ToTable("Items");
-                });
-
             modelBuilder.Entity("SW.Store.Checkout.Domain.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -82,13 +60,15 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("LineStatus");
+
                     b.Property<Guid>("OrderId");
 
                     b.Property<int>("ProductId");
 
                     b.Property<int>("Quantity");
 
-                    b.Property<int>("WarehouseId");
+                    b.Property<int?>("WarehouseId");
 
                     b.HasKey("Id");
 
@@ -133,19 +113,39 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Warehouses");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Naboo" },
+                        new { Id = 2, Name = "Tatooine" }
+                    );
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Domain.Item", b =>
+            modelBuilder.Entity("SW.Store.Checkout.Domain.WarehouseItem", b =>
                 {
-                    b.HasOne("SW.Store.Checkout.Domain.Product", "Product")
-                        .WithOne("Item")
-                        .HasForeignKey("SW.Store.Checkout.Domain.Item", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("ProductId");
 
-                    b.HasOne("SW.Store.Checkout.Domain.Warehouse", "Warehouse")
-                        .WithMany("Items")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("WarehouseId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("ProductId", "WarehouseId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("WarehouseItems");
+
+                    b.HasData(
+                        new { ProductId = 1, WarehouseId = 1, Quantity = 5000 },
+                        new { ProductId = 2, WarehouseId = 1, Quantity = 5000 },
+                        new { ProductId = 3, WarehouseId = 1, Quantity = 5000 },
+                        new { ProductId = 4, WarehouseId = 1, Quantity = 5000 },
+                        new { ProductId = 5, WarehouseId = 1, Quantity = 5000 },
+                        new { ProductId = 1, WarehouseId = 2, Quantity = 5000 },
+                        new { ProductId = 2, WarehouseId = 2, Quantity = 5000 },
+                        new { ProductId = 3, WarehouseId = 2, Quantity = 5000 },
+                        new { ProductId = 4, WarehouseId = 2, Quantity = 5000 },
+                        new { ProductId = 5, WarehouseId = 2, Quantity = 5000 }
+                    );
                 });
 
             modelBuilder.Entity("SW.Store.Checkout.Domain.Order", b =>
@@ -170,6 +170,18 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
 
                     b.HasOne("SW.Store.Checkout.Domain.Warehouse", "Warehouse")
                         .WithMany()
+                        .HasForeignKey("WarehouseId");
+                });
+
+            modelBuilder.Entity("SW.Store.Checkout.Domain.WarehouseItem", b =>
+                {
+                    b.HasOne("SW.Store.Checkout.Domain.Product", "Product")
+                        .WithMany("WarehouseItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SW.Store.Checkout.Domain.Warehouse", "Warehouse")
+                        .WithMany("Items")
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

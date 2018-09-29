@@ -1,9 +1,10 @@
-﻿using SW.Store.Checkout.Domain;
+﻿using SW.Store.Checkout.Extensibility.Dto;
+using System;
 
 namespace SW.Store.Checkout.Service
 {
     public interface ICheckoutService
     {
-        Domain.Order ProcessOrder(Domain.Order order); 
+        Guid ProcessOrder(OrderDto order);
     }
 }

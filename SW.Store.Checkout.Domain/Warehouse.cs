@@ -8,6 +8,6 @@ namespace SW.Store.Checkout.Domain
 
         public string Name { get; set; }
 
-        public ICollection<Item> Items { get; set; }
+        public ICollection<WarehouseItem> Items { get; set; } = new List<WarehouseItem>();
     }
 }

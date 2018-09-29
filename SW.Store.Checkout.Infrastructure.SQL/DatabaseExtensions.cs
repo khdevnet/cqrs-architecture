@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SW.Store.Checkout.Infrastructure.SQL.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
+using System;
 
 namespace SW.Store.Checkout.Infrastructure.SQL
 {
@@ -13,6 +11,16 @@ namespace SW.Store.Checkout.Infrastructure.SQL
         {
             collection.AddDbContext<SwStoreDbContext>
                 (options => options.UseSqlServer(connection));
+        }
+
+        public static void MigrateDbContext(this IServiceProvider applicationServices)
+        {
+            using (IServiceScope serviceScope = applicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                SwStoreDbContext context = serviceScope.ServiceProvider.GetRequiredService<SwStoreDbContext>();
+                context.Database.EnsureDeleted();
+                context.Database.Migrate();
+            }
         }
     }
 }

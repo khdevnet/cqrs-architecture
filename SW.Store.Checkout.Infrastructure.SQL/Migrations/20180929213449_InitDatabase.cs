@@ -68,26 +68,24 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
+                name: "WarehouseItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Quantity = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     WarehouseId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.PrimaryKey("PK_WarehouseItems", x => new { x.ProductId, x.WarehouseId });
                     table.ForeignKey(
-                        name: "FK_Items_Products_ProductId",
+                        name: "FK_WarehouseItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Items_Warehouses_WarehouseId",
+                        name: "FK_WarehouseItems_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "Id",
@@ -101,7 +99,8 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OrderId = table.Column<Guid>(nullable: false),
-                    WarehouseId = table.Column<int>(nullable: false),
+                    LineStatus = table.Column<int>(nullable: false),
+                    WarehouseId = table.Column<int>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
@@ -125,7 +124,7 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                         column: x => x.WarehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -145,16 +144,31 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                     { 5, "Death star" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_ProductId",
-                table: "Items",
-                column: "ProductId",
-                unique: true);
+            migrationBuilder.InsertData(
+                table: "Warehouses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Naboo" },
+                    { 2, "Tatooine" }
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_WarehouseId",
-                table: "Items",
-                column: "WarehouseId");
+            migrationBuilder.InsertData(
+                table: "WarehouseItems",
+                columns: new[] { "ProductId", "WarehouseId", "Quantity" },
+                values: new object[,]
+                {
+                    { 1, 1, 5000 },
+                    { 2, 1, 5000 },
+                    { 3, 1, 5000 },
+                    { 4, 1, 5000 },
+                    { 5, 1, 5000 },
+                    { 1, 2, 5000 },
+                    { 2, 2, 5000 },
+                    { 3, 2, 5000 },
+                    { 4, 2, 5000 },
+                    { 5, 2, 5000 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLines_OrderId",
@@ -175,15 +189,20 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Migrations
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WarehouseItems_WarehouseId",
+                table: "WarehouseItems",
+                column: "WarehouseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "OrderLines");
 
             migrationBuilder.DropTable(
-                name: "OrderLines");
+                name: "WarehouseItems");
 
             migrationBuilder.DropTable(
                 name: "Orders");

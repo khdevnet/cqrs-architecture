@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SW.Store.Checkout.Client.Extensibility.Models
+namespace SW.Store.Checkout.Extensibility.Dto
 {
     public class OrderDto
     {
@@ -11,6 +11,6 @@ namespace SW.Store.Checkout.Client.Extensibility.Models
 
         public string CustomerAddress { get; set; }
 
-        public IEnumerable<OrderLineRequestModel> Lines { get; set; }
+        public IEnumerable<OrderLineDto> Lines { get; set; }
     }
 }

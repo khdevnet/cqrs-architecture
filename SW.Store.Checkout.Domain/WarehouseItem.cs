@@ -1,9 +1,7 @@
 ﻿namespace SW.Store.Checkout.Domain
 {
-    public class Item
+    public class WarehouseItem 
     {
-        public int Id { get; set; }
-
         public int Quantity { get; set; }
 
         public int ProductId { get; set; }
