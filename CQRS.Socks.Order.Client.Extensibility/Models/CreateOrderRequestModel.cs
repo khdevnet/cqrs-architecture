@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CQRS.Socks.Order.Client.Extensibility.Models
 {
-    public class CreateOrderModel
+    public class CreateOrderRequestModel
     {
         public Guid OrderId { get; set; }
 

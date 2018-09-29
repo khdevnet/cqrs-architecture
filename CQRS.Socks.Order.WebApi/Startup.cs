@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CQRS.Socks.Order.Infrastructure.SQL;
 using CQRS.Socks.Order.Infrastructure.SQL.Database;
+using CQRS.Socks.Order.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace CQRS.Socks.Order.WebApi
         public static void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule<SQLAutofacModule>();
+            builder.RegisterModule<ServiceAutofacModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

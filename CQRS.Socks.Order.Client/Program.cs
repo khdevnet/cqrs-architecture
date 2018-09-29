@@ -10,12 +10,12 @@ namespace CQRS.Socks.Order.Client
     {
         static void Main(string[] args)
         {
-            string url = "http://localhost:17591";
-            IEnumerable<CreateOrderModel> createOrderModels = Enumerable.Range(0, 99)
-      .Select(n => new CreateOrderModel() { OrderId = Guid.NewGuid(), CustomerName = "Han Solo", CustomerAddress = "Stars" }).ToList();
+            string url = "http://localhost:51971";
+            IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 2)
+      .Select(n => new CreateOrderRequestModel() { OrderId = Guid.NewGuid(), CustomerName = "Han Solo", CustomerAddress = "Stars" }).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
-            foreach (CreateOrderModel orderModel in createOrderModels)
+            foreach (CreateOrderRequestModel orderModel in createOrderModels)
             {
                 using (var client = new HttpClient())
                 {

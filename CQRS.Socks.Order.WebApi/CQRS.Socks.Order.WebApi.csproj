@@ -20,6 +20,7 @@
     <ProjectReference Include="..\CQRS.Socks.Order.Client.Extensibility\CQRS.Socks.Order.Client.Extensibility.csproj" />
     <ProjectReference Include="..\CQRS.Socks.Order.Domain\CQRS.Socks.Order.Domain.csproj" />
     <ProjectReference Include="..\CQRS.Socks.Order.Infrastructure.SQL\CQRS.Socks.Order.Infrastructure.SQL.csproj" />
+    <ProjectReference Include="..\CQRS.Socks.Order.Service\CQRS.Socks.Order.Service.csproj" />
   </ItemGroup>
 
 </Project>

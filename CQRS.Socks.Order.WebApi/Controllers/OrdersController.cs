@@ -1,5 +1,6 @@
 ﻿using CQRS.Socks.Order.Client.Extensibility.Models;
 using CQRS.Socks.Order.Domain.Extensibility;
+using CQRS.Socks.Order.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRS.Socks.Order.WebApi.Controllers
@@ -8,12 +9,12 @@ namespace CQRS.Socks.Order.WebApi.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrderRepository orderRepository;
+        private readonly ICheckoutService checkoutService;
         private readonly ICustomerRepository customerRepository;
 
-        public OrdersController(IOrderRepository orderRepository, ICustomerRepository customerRepository)
+        public OrdersController(ICheckoutService checkoutService, ICustomerRepository customerRepository)
         {
-            this.orderRepository = orderRepository;
+            this.checkoutService = checkoutService;
             this.customerRepository = customerRepository;
         }
 
@@ -21,9 +22,9 @@ namespace CQRS.Socks.Order.WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public CreateOrderResponseModel Post([FromBody] CreateOrderModel createOrder)
+        public CreateOrderResponseModel Post([FromBody] CreateOrderRequestModel createOrder)
         {
-            var createdOrder = orderRepository.Add(new Domain.Order()
+            var createdOrder = checkoutService.ProcessOrder(new Domain.Order()
             {
                 Id = createOrder.OrderId,
                 Customer = customerRepository.Get(createOrder.CustomerName, createOrder.CustomerAddress)
