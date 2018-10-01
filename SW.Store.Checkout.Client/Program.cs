@@ -9,47 +9,67 @@ namespace SW.Store.Checkout.Client
 {
     class Program
     {
+        static string url = "http://localhost:51971";
+
         static void Main(string[] args)
         {
-            string url = "http://localhost:51971";
             IEnumerable<OrderDto> createOrderModels = Enumerable.Range(0, 5000)
       .Select(n => CreateOrderRequestModel()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
             foreach (OrderDto orderModel in createOrderModels)
             {
+                actualOrderIds.Add(orderModel.OrderId);
                 using (var client = new HttpClient())
                 {
                     Console.WriteLine("Create Order Id: " + orderModel.OrderId);
                     HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/orders", orderModel).Result;
-                    var orderResponse = response.Content.ReadAsAsync<CreateOrderResponseModel>().Result;
-                    Console.WriteLine("Order Created Order Id: " + orderResponse.OrderId);
-                    foreach (var orderLine in orderResponse.Lines)
-                    {
-                        Console.WriteLine("Order Line: ");
-                        Console.WriteLine("-- ProductNumber: " + orderLine.ProductNumber);
-                        Console.WriteLine("-- ProductName: " + orderLine.ProductName);
-                        Console.WriteLine("-- ProductQuantity: " + orderLine.Quantity);
-                        Console.WriteLine("-- ProductStatus: " + orderLine.Status);
-                    }
-                    Console.WriteLine("=======================");
                 }
+                CheckPendingOrders(actualOrderIds);
+            }
+            while (actualOrderIds.Any())
+            {
+                CheckPendingOrders(actualOrderIds);
             }
 
-            //while (expectedOrderIds.Any())
-            //{
-            //    foreach (Guid item in actualOrderIds)
-            //    {
-            //        int index = expectedOrderIds.IndexOf(item);
-            //        if (index > -1)
-            //        {
-            //            Console.WriteLine("Order Created Order Id: " + item);
-            //            expectedOrderIds.RemoveAt(index);
-            //        }
-            //    }
-            //}
-
             Console.ReadKey();
+        }
+
+        private static void CheckPendingOrders(List<Guid> actualOrderIds)
+        {
+            if (actualOrderIds.Any())
+            {
+                actualOrderIds.RemoveAll(or => CheckOrderStatus(or));
+            }
+        }
+
+        private static bool CheckOrderStatus(Guid orderId)
+        {
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = client.GetAsync($"{url}/api/orders/check-status/{orderId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    CreateOrderResponseModel orderResponse = response.Content.ReadAsAsync<CreateOrderResponseModel>().Result;
+                    PrintOrderDetails(orderResponse);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static void PrintOrderDetails(CreateOrderResponseModel orderResponse)
+        {
+            Console.WriteLine("Order Created Order Id: " + orderResponse.OrderId);
+            foreach (var orderLine in orderResponse.Lines)
+            {
+                Console.WriteLine("Order Line: ");
+                Console.WriteLine("-- ProductNumber: " + orderLine.ProductNumber);
+                Console.WriteLine("-- ProductName: " + orderLine.ProductName);
+                Console.WriteLine("-- ProductQuantity: " + orderLine.Quantity);
+                Console.WriteLine("-- ProductStatus: " + orderLine.Status);
+            }
+            Console.WriteLine("=======================");
         }
 
         private static OrderDto CreateOrderRequestModel()

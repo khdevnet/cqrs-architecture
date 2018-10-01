@@ -24,26 +24,35 @@ namespace SW.Store.Checkout.WebApi.Controllers
             this.orderRepository = orderRepository;
         }
 
-        public ICustomerRepository CustomerRepository { get; }
-
         // POST api/Orders
         [HttpPost]
-        public CreateOrderResponseModel Post([FromBody] OrderDto createOrder)
+        public void Post([FromBody] OrderDto createOrder)
         {
             Guid createdOrderId = checkoutService.ProcessOrder(createOrder);
-            Domain.Order order = orderRepository.GetById(createdOrderId, "Lines.Product");
-            return new CreateOrderResponseModel()
+        }
+
+        // POST api/Orders
+        [HttpGet]
+        [Route("check-status/{id}")]
+        public IActionResult CheckStatus([FromRoute] Guid id)
+        {
+            Domain.Order order = orderRepository.GetById(id, "Lines.Product");
+            if (order != null)
             {
-                OrderId = order.Id,
-                Status = order.Status.ToString(),
-                Lines = order.Lines.Select(l => new OrderLineResponseModel
+                return Ok(new CreateOrderResponseModel()
                 {
-                    ProductName = l.Product.Name,
-                    ProductNumber = l.ProductId,
-                    Quantity = l.Quantity,
-                    Status = l.LineStatus.ToString()
-                })
-            };
+                    OrderId = order.Id,
+                    Status = order.Status.ToString(),
+                    Lines = order.Lines.Select(l => new OrderLineResponseModel
+                    {
+                        ProductName = l.Product.Name,
+                        ProductNumber = l.ProductId,
+                        Quantity = l.Quantity,
+                        Status = l.LineStatus.ToString()
+                    })
+                });
+            }
+            return NotFound();
         }
     }
 }
