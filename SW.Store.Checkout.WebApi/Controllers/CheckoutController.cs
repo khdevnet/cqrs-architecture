@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Client.Extensibility.Client;
+using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Extensibility.Client;
 using SW.Store.Checkout.Extensibility.Dto;
@@ -11,13 +12,13 @@ namespace SW.Store.Checkout.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class CheckoutController : ControllerBase
     {
         private readonly ICheckoutService checkoutService;
         private readonly ICustomerRepository customerRepository;
         private readonly IOrderRepository orderRepository;
 
-        public OrdersController(ICheckoutService checkoutService, ICustomerRepository customerRepository, IOrderRepository orderRepository)
+        public CheckoutController(ICheckoutService checkoutService, ICustomerRepository customerRepository, IOrderRepository orderRepository)
         {
             this.checkoutService = checkoutService;
             this.customerRepository = customerRepository;
@@ -28,15 +29,15 @@ namespace SW.Store.Checkout.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody] OrderDto createOrder)
         {
-            Guid createdOrderId = checkoutService.ProcessOrder(createOrder);
+            checkoutService.ProcessOrder(createOrder);
         }
 
         // POST api/Orders
         [HttpGet]
-        [Route("check-status/{id}")]
-        public IActionResult CheckStatus([FromRoute] Guid id)
+        [Route("status/{id}")]
+        public IActionResult Status([FromRoute] Guid id)
         {
-            Domain.Order order = orderRepository.GetById(id, "Lines.Product");
+            Order order = orderRepository.GetById(id, "Lines.Product");
             if (order != null)
             {
                 return Ok(new CreateOrderResponseModel()
