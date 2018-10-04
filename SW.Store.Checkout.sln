@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2854D622-22C2-4A29-9596-CEDA1A4A61C3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		RabbitMQ.md = RabbitMQ.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.WebApi", "SW.Store.Checkout.WebApi\SW.Store.Checkout.WebApi.csproj", "{3251BBEF-0309-4D14-9A62-81C760A8FBDB}"
@@ -20,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Extensibility", "SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj", "{8D204F95-49DF-403D-9F90-CB7CE0366D07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SW.Store.Checkout.Infrastructure.RabbitMQ", "SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj", "{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastructure.RabbitMQ", "SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj", "{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
