@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SW.Store.Checkout.Infrastructure.RabbitMQ;
 using SW.Store.Checkout.Infrastructure.SQL;
 using SW.Store.Checkout.Infrastructure.SQL.Database;
 using SW.Store.Checkout.Service;
@@ -31,6 +32,7 @@ namespace SW.Store.Checkout.WebApi
         {
             builder.RegisterModule<SQLAutofacModule>();
             builder.RegisterModule<ServiceAutofacModule>();
+            builder.RegisterModule<RabbitMQAutofacModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
