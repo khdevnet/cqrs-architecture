@@ -23,7 +23,6 @@ namespace SW.Store.Checkout.WebApi.Controllers
         [HttpGet]
         public IEnumerable<ProductDto> Get()
         {
-            messageBrocker.Send(new CreateOrderMessage() { Data = "Test" });
             return productService.Get();
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Client.Extensibility.Client
 {
-    public class CreateOrderResponseModel
+    public class OrderResponseModel
     {
         public Guid OrderId { get; set; }
 

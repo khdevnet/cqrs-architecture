@@ -7,21 +7,17 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
 {
     internal class MessageSender : IMessageSender
     {
-        private const string HostName = "localhost";
-        private const string QueueName = "processorder";
-        private const string RoutingKey = "processorder";
-
-        public void Send(IMessage message)
+        public void Send(string hostName, string queueName, string routingKey, IMessage message)
         {
-            var factory = new ConnectionFactory() { HostName = HostName };
+            var factory = new ConnectionFactory() { HostName = hostName };
             using (IConnection connection = factory.CreateConnection())
             using (IModel channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: QueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
                 byte[] body = GetMessageBytes(message);
 
-                channel.BasicPublish(exchange: "", routingKey: RoutingKey, basicProperties: null, body: body);
+                channel.BasicPublish(exchange: "", routingKey: routingKey, basicProperties: null, body: body);
             }
         }
 

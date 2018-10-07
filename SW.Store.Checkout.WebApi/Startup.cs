@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace SW.Store.Checkout.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             string connection = Configuration.GetConnectionString(nameof(SwStoreDbContext));
             services.RegisterDbContext(connection);

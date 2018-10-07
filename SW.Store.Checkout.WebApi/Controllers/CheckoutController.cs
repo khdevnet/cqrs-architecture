@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Client.Extensibility.Client;
 using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Extensibility.Client;
 using SW.Store.Checkout.Extensibility.Dto;
-using SW.Store.Checkout.Service;
-using System;
-using System.Linq;
+using SW.Store.Checkout.Extensibility.Messages;
+using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.WebApi.Controllers
 {
@@ -14,22 +16,28 @@ namespace SW.Store.Checkout.WebApi.Controllers
     [ApiController]
     public class CheckoutController : ControllerBase
     {
-        private readonly ICheckoutService checkoutService;
+        private readonly IMessageSender messageSender;
         private readonly ICustomerRepository customerRepository;
         private readonly IOrderRepository orderRepository;
+        private readonly IMapper mapper;
 
-        public CheckoutController(ICheckoutService checkoutService, ICustomerRepository customerRepository, IOrderRepository orderRepository)
+        public CheckoutController(
+            IMessageSender messageSender,
+            ICustomerRepository customerRepository,
+            IOrderRepository orderRepository,
+            IMapper mapper)
         {
-            this.checkoutService = checkoutService;
+            this.messageSender = messageSender;
             this.customerRepository = customerRepository;
             this.orderRepository = orderRepository;
+            this.mapper = mapper;
         }
 
         // POST api/Orders
         [HttpPost]
         public void Post([FromBody] OrderDto createOrder)
         {
-            checkoutService.ProcessOrder(createOrder);
+            messageSender.Send("localhost", "processorder", "processorder", mapper.Map<CreateOrderMessage>(createOrder));
         }
 
         // POST api/Orders
@@ -40,7 +48,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
             Order order = orderRepository.GetById(id, "Lines.Product");
             if (order != null)
             {
-                return Ok(new CreateOrderResponseModel()
+                return Ok(new OrderResponseModel()
                 {
                     OrderId = order.Id,
                     Status = order.Status.ToString(),
