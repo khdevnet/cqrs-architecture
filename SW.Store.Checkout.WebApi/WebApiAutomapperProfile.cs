@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SW.Store.Checkout.Extensibility.Dto;
+using SW.Store.Checkout.Extensibility.Client;
 using SW.Store.Checkout.Extensibility.Messages;
 
 namespace SW.Store.Checkout.WebApi
@@ -8,8 +8,8 @@ namespace SW.Store.Checkout.WebApi
     {
         public WebApiAutomapperProfile()
         {
-            CreateMap<OrderDto, CreateOrderMessage>();
-            CreateMap<OrderLineDto, OrderLineMessage>();
+            CreateMap<CreateOrderRequestModel, CreateOrderMessage>();
+            CreateMap<CreateOrderLineRequestModel, OrderLineMessage>();
         }
     }
 }

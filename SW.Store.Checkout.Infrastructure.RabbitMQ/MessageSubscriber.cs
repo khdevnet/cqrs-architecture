@@ -3,6 +3,7 @@ using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using SW.Store.Core;
 using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.Infrastructure.RabbitMQ
@@ -13,15 +14,17 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
         private readonly IConnection connection;
         private readonly IModel channel;
         private readonly EventingBasicConsumer consumer;
+        private readonly ILogger logger;
 
-        public MessageSubscriber(string hostName, string queueName, string routingKey)
+        public MessageSubscriber(string hostName, string queueName, string routingKey, ILogger logger)
         {
             connectionFactory = new ConnectionFactory() { HostName = hostName };
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
-            channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
             consumer = new EventingBasicConsumer(channel);
             channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
+            this.logger = logger;
         }
 
         public void Dispose()
@@ -42,7 +45,17 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
             consumer.Received += (model, ea) =>
             {
                 TMessage message = GetMessage(ea.Body);
-                callback(message);
+                try
+                {
+                    callback(message);
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                }
+                catch (Exception ex)
+                {
+                    channel.BasicReject(ea.DeliveryTag, true);
+
+                    logger.Error($"Reject message with DeliveryTag: {ea.DeliveryTag}", ex);
+                }
             };
         }
     }

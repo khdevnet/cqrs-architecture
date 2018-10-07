@@ -1,9 +1,7 @@
-﻿using SW.Store.Checkout.Domain;
+﻿using System.Collections.Generic;
+using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
-using SW.Store.Checkout.Extensibility.Dto;
 using SW.Store.Checkout.Service.Extensibility;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SW.Store.Checkout.Service
 {
@@ -16,14 +14,9 @@ namespace SW.Store.Checkout.Service
             this.productRepository = productRepository;
         }
 
-        public IEnumerable<ProductDto> Get()
+        public IEnumerable<Product> Get()
         {
-            return productRepository.Get()
-                .Select(p => new ProductDto
-                {
-                    Id = p.Id,
-                    Name = p.Name
-                }).ToList();
+            return productRepository.Get();
         }
     }
 }

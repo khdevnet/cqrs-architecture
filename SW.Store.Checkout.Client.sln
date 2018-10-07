@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Extensibility", "SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj", "{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Core", "SW.Store.Core\SW.Store.Core.csproj", "{66071ECB-5E6F-4349-B940-A860D612C4BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

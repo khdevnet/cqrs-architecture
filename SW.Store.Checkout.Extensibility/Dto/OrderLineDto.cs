@@ -1,6 +1,6 @@
-﻿namespace SW.Store.Checkout.Extensibility.Client
+﻿namespace SW.Store.Checkout.Extensibility.Dto
 {
-    public class CreateOrderLineRequestModel
+    public class OrderLineDto
     {
         public int ProductNumber { get; set; }
 

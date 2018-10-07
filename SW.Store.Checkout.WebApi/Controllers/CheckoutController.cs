@@ -2,11 +2,9 @@
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SW.Store.Checkout.Client.Extensibility.Client;
 using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Extensibility.Client;
-using SW.Store.Checkout.Extensibility.Dto;
 using SW.Store.Checkout.Extensibility.Messages;
 using SW.Store.Core.Messages;
 
@@ -35,7 +33,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
 
         // POST api/Orders
         [HttpPost]
-        public void Post([FromBody] OrderDto createOrder)
+        public void Post([FromBody] CreateOrderRequestModel createOrder)
         {
             messageSender.Send("localhost", "processorder", "processorder", mapper.Map<CreateOrderMessage>(createOrder));
         }

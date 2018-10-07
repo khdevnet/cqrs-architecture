@@ -1,13 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SW.Store.Checkout.Domain;
+using SW.Store.Core;
 using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Infrastructure.SQL.Database
 {
     public class SwStoreDbContext : DbContext
     {
+        private readonly IConnectionStringProvider connectionStringProvider;
 
-        public SwStoreDbContext(DbContextOptions<SwStoreDbContext> options) : base(options) { }
+        //public SwStoreDbContext(DbContextOptions<SwStoreDbContext> options) : base(options) { }
+
+        public SwStoreDbContext(IConnectionStringProvider connectionStringProvider) : base()
+        {
+            this.connectionStringProvider = connectionStringProvider;
+        }
 
         public DbSet<Order> Orders { get; set; }
 
@@ -59,7 +66,7 @@ namespace SW.Store.Checkout.Infrastructure.SQL.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseSqlServer(connectionStringProvider.Get());
         }
     }
 }

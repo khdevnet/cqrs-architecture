@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SW.Store.Checkout.Extensibility.Dto
+namespace SW.Store.Checkout.Extensibility.Client
 {
-    public class OrderDto
+    public class CreateOrderRequestModel
     {
         public Guid OrderId { get; set; }
 
@@ -11,6 +11,6 @@ namespace SW.Store.Checkout.Extensibility.Dto
 
         public string CustomerAddress { get; set; }
 
-        public IEnumerable<OrderLineDto> Lines { get; set; }
+        public IEnumerable<CreateOrderLineRequestModel> Lines { get; set; }
     }
 }

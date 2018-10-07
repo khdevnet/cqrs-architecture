@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SW.Store.Checkout.Extensibility.Client;
 
-namespace SW.Store.Checkout.Client.Extensibility.Client
+namespace SW.Store.Checkout.Extensibility.Client
 {
     public class OrderResponseModel
     {

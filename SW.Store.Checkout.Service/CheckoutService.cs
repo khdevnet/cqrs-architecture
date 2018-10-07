@@ -1,10 +1,10 @@
-﻿using SW.Store.Checkout.Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Transactions;
+using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Extensibility;
 using SW.Store.Checkout.Extensibility.Dto;
-using System;
-using System.Collections.Generic;
-using System.Transactions;
 
 namespace SW.Store.Checkout.Service
 {
@@ -30,30 +30,34 @@ namespace SW.Store.Checkout.Service
             this.warehouseItemRepository = warehouseItemRepository;
         }
 
-        public Guid ProcessOrder(OrderDto order)
+        public Guid ProcessOrder(Guid orderId, string customerName, string customerAddress, IEnumerable<OrderLineDto> orderLines)
         {
+            Order order = orderRepository.GetById(orderId);
+            if (order != null)
+            {
+                return Guid.Empty;
+            }
+
             using (var scope = new TransactionScope())
             {
                 var orderEntity = new Order
                 {
-                    Id = order.OrderId,
-                    Customer = customerRepository.Get(order.CustomerName, order.CustomerAddress)
+                    Id = orderId,
+                    CustomerId = customerRepository.Get(customerName, customerAddress).Id //  customerRepository.Get(order.CustomerName, order.CustomerAddress)
                 };
 
-                IEnumerable<Warehouse> warehouses = warehouseRepository.Get(nameof(Warehouse.Items));
-
-                foreach (OrderLineDto orderLine in order.Lines)
+                foreach (OrderLineDto orderLine in orderLines)
                 {
                     var orderLineEntity = new OrderLine
                     {
-                        Product = productRepository.GetById(orderLine.ProductNumber),
+                        ProductId = orderLine.ProductNumber, //orderLine.ProductNumber
                         Quantity = orderLine.Quantity
                     };
 
-                    orderLineEntity.Warehouse = warehouseRepository.Get(orderLine.ProductNumber, orderLine.Quantity);
+                    orderLineEntity.Warehouse = warehouseRepository.Get(orderLine.ProductNumber, orderLine.Quantity); //orderLine.ProductNumber
                     if (orderLineEntity.Warehouse != null)
                     {
-                        UpdateWarehouseItemQuantity(orderLine.ProductNumber, orderLineEntity.Warehouse.Id, orderLine.Quantity);
+                        UpdateWarehouseItemQuantity(orderLine.ProductNumber, orderLineEntity.Warehouse.Id, orderLine.Quantity); //ProductNumber
                     }
                     else
                     {

@@ -1,10 +1,10 @@
-﻿using SW.Store.Checkout.Extensibility.Dto;
+﻿using SW.Store.Checkout.Domain;
 using System.Collections.Generic;
 
 namespace SW.Store.Checkout.Service.Extensibility
 {
     public interface IProductService
     {
-        IEnumerable<ProductDto> Get();
+        IEnumerable<Product> Get();
     }
 }

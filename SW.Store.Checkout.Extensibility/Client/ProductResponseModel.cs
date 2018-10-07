@@ -1,6 +1,6 @@
-﻿namespace SW.Store.Checkout.Extensibility.Dto
+﻿namespace SW.Store.Checkout.Extensibility.Client
 {
-    public class ProductDto
+    public class ProductResponseModel
     {
         public int Id { get; set; }
 

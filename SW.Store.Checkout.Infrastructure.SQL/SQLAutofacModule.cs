@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using SW.Store.Checkout.Domain.Extensibility;
+using SW.Store.Checkout.Infrastructure.SQL.Database;
 using SW.Store.Checkout.Infrastructure.SQL.Repositories;
 
 namespace SW.Store.Checkout.Infrastructure.SQL
@@ -8,6 +9,8 @@ namespace SW.Store.Checkout.Infrastructure.SQL
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<SwStoreDbContext>().AsSelf().InstancePerLifetimeScope();
+
             builder.RegisterAssemblyTypes(typeof(SQLAutofacModule).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces();
