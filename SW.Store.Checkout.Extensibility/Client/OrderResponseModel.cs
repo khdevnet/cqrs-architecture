@@ -1,11 +1,15 @@
-﻿using SW.Store.Checkout.Extensibility.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SW.Store.Checkout.Extensibility.Client;
 
 namespace SW.Store.Checkout.Client.Extensibility.Client
 {
     public class OrderResponseModel
     {
+        public string CustomerName { get; set; }
+
+        public string CustomerAddress { get; set; }
+
         public Guid OrderId { get; set; }
 
         public string Status { get; set; }
