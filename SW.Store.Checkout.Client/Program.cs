@@ -12,7 +12,7 @@ namespace SW.Store.Checkout.Client
 
         static void Main(string[] args)
         {
-            IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 500)
+            IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 5)
       .Select(n => CreateOrderRequestModel()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
