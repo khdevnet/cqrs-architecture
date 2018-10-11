@@ -7,6 +7,6 @@ namespace SW.Store.Checkout.Service
 {
     public interface ICheckoutService
     {
-        Guid ProcessOrder(Guid orderId, string customerName, string customerAddress, IEnumerable<OrderLineDto> orderLines);
+        Guid CreateOrder(Guid orderId, string customerName, string customerAddress, IEnumerable<OrderLineDto> orderLines);
     }
 }

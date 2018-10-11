@@ -35,7 +35,7 @@ namespace SW.Store.Checkout.OrderHandler.Application
                 using (ILifetimeScope scope = container.BeginLifetimeScope())
                 {
                     ICheckoutService checkoutService = scope.Resolve<ICheckoutService>();
-                    checkoutService.ProcessOrder(createOrderMessage.OrderId, createOrderMessage.CustomerName, createOrderMessage.CustomerAddress, orderLines);
+                    checkoutService.CreateOrder(createOrderMessage.OrderId, createOrderMessage.CustomerName, createOrderMessage.CustomerAddress, orderLines);
                 }
                 Console.WriteLine($"### Message processed: {typeof(CreateOrderMessage).Name} ###");
 

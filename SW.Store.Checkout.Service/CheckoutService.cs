@@ -30,7 +30,7 @@ namespace SW.Store.Checkout.Service
             this.warehouseItemRepository = warehouseItemRepository;
         }
 
-        public Guid ProcessOrder(Guid orderId, string customerName, string customerAddress, IEnumerable<OrderLineDto> orderLines)
+        public Guid CreateOrder(Guid orderId, string customerName, string customerAddress, IEnumerable<OrderLineDto> orderLines)
         {
             Order order = orderRepository.GetById(orderId);
             if (order != null)
