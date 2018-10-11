@@ -2,8 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Extensibility.Client;
-using SW.Store.Checkout.Service.Extensibility;
-using SW.Store.Core.Messages;
+using SW.Store.Checkout.Read.Extensibility;
 
 namespace SW.Store.Checkout.WebApi.Controllers
 {
@@ -11,19 +10,17 @@ namespace SW.Store.Checkout.WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService productService;
-        private readonly IMessageSender messageBrocker;
+        private readonly IProductReadRepository productReadRepository;
 
-        public ProductsController(IProductService productService, IMessageSender messageBrocker)
+        public ProductsController(IProductReadRepository productReadRepository)
         {
-            this.productService = productService;
-            this.messageBrocker = messageBrocker;
+            this.productReadRepository = productReadRepository;
         }
 
         [HttpGet]
         public IEnumerable<ProductResponseModel> Get()
         {
-            return productService.Get()
+            return productReadRepository.Get()
                 .Select(p => new ProductResponseModel
                 {
                     Id = p.Id,

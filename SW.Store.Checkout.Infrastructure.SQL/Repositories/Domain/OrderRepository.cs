@@ -5,9 +5,9 @@ using SW.Store.Checkout.Infrastructure.SQL.Database;
 using System;
 using System.Linq;
 
-namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
+namespace SW.Store.Checkout.Infrastructure.SQL.Repositories.Domain
 {
-    internal class OrderRepository : CrudRepository<Domain.Order, Guid>, IOrderRepository
+    internal class OrderRepository : CrudRepository<Order, Guid>, IOrderRepository
     {
 
         public OrderRepository(SwStoreDbContext db) : base(db)

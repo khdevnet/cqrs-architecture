@@ -4,7 +4,7 @@ using SW.Store.Checkout.Infrastructure.SQL.Database;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
+namespace SW.Store.Checkout.Infrastructure.SQL.Repositories.Domain
 {
     internal class CrudRepository<TEntity, TId> : ICrudRepository<TEntity, TId> where TEntity : class
     {

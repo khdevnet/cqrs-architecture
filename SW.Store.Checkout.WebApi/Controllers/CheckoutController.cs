@@ -6,6 +6,7 @@ using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Extensibility.Client;
 using SW.Store.Checkout.Extensibility.Messages;
+using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.WebApi.Controllers
@@ -16,18 +17,18 @@ namespace SW.Store.Checkout.WebApi.Controllers
     {
         private readonly IMessageSender messageSender;
         private readonly ICustomerRepository customerRepository;
-        private readonly IOrderRepository orderRepository;
+        private readonly IOrderReadRepository orderReadRepository;
         private readonly IMapper mapper;
 
         public CheckoutController(
             IMessageSender messageSender,
             ICustomerRepository customerRepository,
-            IOrderRepository orderRepository,
+            IOrderReadRepository orderReadRepository,
             IMapper mapper)
         {
             this.messageSender = messageSender;
             this.customerRepository = customerRepository;
-            this.orderRepository = orderRepository;
+            this.orderReadRepository = orderReadRepository;
             this.mapper = mapper;
         }
 
@@ -43,19 +44,19 @@ namespace SW.Store.Checkout.WebApi.Controllers
         [Route("status/{id}")]
         public IActionResult Status([FromRoute] Guid id)
         {
-            Order order = orderRepository.GetById(id, "Lines.Product");
+            Read.OrderReadDto order = orderReadRepository.GetById(id);
             if (order != null)
             {
                 return Ok(new OrderResponseModel()
                 {
-                    OrderId = order.Id,
+                    OrderId = order.OrderId,
                     Status = order.Status.ToString(),
                     Lines = order.Lines.Select(l => new OrderLineResponseModel
                     {
-                        ProductName = l.Product.Name,
-                        ProductNumber = l.ProductId,
+                        ProductName = l.ProductName,
+                        ProductNumber = l.ProductNumber,
                         Quantity = l.Quantity,
-                        Status = l.LineStatus.ToString()
+                        Status = l.Status
                     })
                 });
             }

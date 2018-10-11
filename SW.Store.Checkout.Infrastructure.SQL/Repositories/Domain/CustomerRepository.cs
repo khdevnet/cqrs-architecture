@@ -3,7 +3,7 @@ using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Infrastructure.SQL.Database;
 
-namespace SW.Store.Checkout.Infrastructure.SQL.Repositories
+namespace SW.Store.Checkout.Infrastructure.SQL.Repositories.Domain
 {
     internal class CustomerRepository : CrudRepository<Customer, int>, ICustomerRepository
     {

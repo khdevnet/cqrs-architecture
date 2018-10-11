@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Infrastructure.SQL.Database;
-using SW.Store.Checkout.Infrastructure.SQL.Repositories;
+using SW.Store.Checkout.Infrastructure.SQL.Repositories.Domain;
 
 namespace SW.Store.Checkout.Infrastructure.SQL
 {

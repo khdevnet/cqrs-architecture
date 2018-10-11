@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SW.Store.Checkout.Read.Extensibility
 {
@@ -6,6 +7,6 @@ namespace SW.Store.Checkout.Read.Extensibility
     {
         TEntity GetById(TId id);
 
-        IEnumerable<TEntity> Get(string references = null);
+        IQueryable<TEntity> Get(string references = null);
     }
 }
