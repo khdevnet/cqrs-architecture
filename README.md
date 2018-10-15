@@ -1,4 +1,4 @@
-# CQRS Architecture - Star Wars store checkout domain area 
+# Star Wars store checkout domain area 
 
 ## Run Solution
 1. Configure docker RabbitMQ
@@ -78,15 +78,3 @@ XML Namespaces
 Keep good records
 Back-to-front
 Remotely scriptable
-
-
-PowerPointPlan,
-
-1. Bussines diagram
-2. MindMap diagram
-3. Highlevel architecute
-4. Sample without CQRS
-5. Sample with CQRS 
-   - Work case
-   - Case when one handler down
-   - Case when all handlers down
