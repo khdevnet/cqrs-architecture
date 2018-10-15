@@ -22,7 +22,7 @@ namespace SW.Store.Checkout.Client
                 using (var client = new HttpClient())
                 {
                     Console.WriteLine("Create Order Id: " + orderModel.OrderId);
-                    HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/checkout", orderModel).Result;
+                    HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/v1/checkout", orderModel).Result;
                 }
                 CheckPendingOrders(actualOrderIds);
             }
@@ -46,7 +46,7 @@ namespace SW.Store.Checkout.Client
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync($"{url}/api/checkout/status/{orderId}").Result;
+                HttpResponseMessage response = client.GetAsync($"{url}/api/v1/checkout/status/{orderId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     OrderResponseModel orderResponse = response.Content.ReadAsAsync<OrderResponseModel>().Result;

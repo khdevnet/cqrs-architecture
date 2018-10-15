@@ -10,7 +10,8 @@ using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CheckoutController : ControllerBase
     {
@@ -35,7 +36,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody] CreateOrderRequestModel createOrder)
         {
-            messageSender.Send("localhost", "processorder", "processorder", mapper.Map<CreateOrderMessage>(createOrder));
+            messageSender.Send("localhost", "processorder", "processorder", new MessageContext<CreateOrderMessage>("1.0", mapper.Map<CreateOrderMessage>(createOrder)));
         }
 
         // GET api/orders/status

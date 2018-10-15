@@ -29,13 +29,14 @@ namespace SW.Store.Checkout.OrderHandler.Application
 
             messageSubscriber.Subscribe(createOrderMessage =>
             {
+                // TODO: Version support
                 Console.WriteLine($"### Get message: {typeof(CreateOrderMessage).Name} ###");
                 Console.WriteLine(JsonConvert.SerializeObject(createOrderMessage));
-                IEnumerable<OrderLineDto> orderLines = createOrderMessage.Lines.Select(l => new OrderLineDto { ProductNumber = l.ProductNumber, Quantity = l.Quantity });
+                IEnumerable<OrderLineDto> orderLines = createOrderMessage.Data.Lines.Select(l => new OrderLineDto { ProductNumber = l.ProductNumber, Quantity = l.Quantity });
                 using (ILifetimeScope scope = container.BeginLifetimeScope())
                 {
                     ICheckoutService checkoutService = scope.Resolve<ICheckoutService>();
-                    checkoutService.CreateOrder(createOrderMessage.OrderId, createOrderMessage.CustomerName, createOrderMessage.CustomerAddress, orderLines);
+                    checkoutService.CreateOrder(createOrderMessage.Data.OrderId, createOrderMessage.Data.CustomerName, createOrderMessage.Data.CustomerAddress, orderLines);
                 }
                 Console.WriteLine($"### Message processed: {typeof(CreateOrderMessage).Name} ###");
 

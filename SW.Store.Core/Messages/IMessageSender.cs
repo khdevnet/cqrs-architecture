@@ -2,6 +2,6 @@
 {
     public interface IMessageSender
     {
-        void Send(string hostName, string queueName, string routingKey, IMessage message);
+        void Send<TMessage>(string hostName, string queueName, string routingKey, MessageContext<TMessage> message) where TMessage : IMessage;
     }
 }

@@ -27,6 +27,7 @@ namespace SW.Store.Checkout.WebApi
         {
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddApiVersioning();
             //string connection = Configuration.GetConnectionString(nameof(SwStoreDbContext));
             //services.RegisterDbContext(connection);
         }

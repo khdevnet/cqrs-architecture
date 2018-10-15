@@ -33,18 +33,18 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
             channel.Dispose();
         }
 
-        private static TMessage GetMessage(byte[] messageBody)
+        private static MessageContext<TMessage> GetMessage(byte[] messageBody)
         {
             string message = Encoding.UTF8.GetString(messageBody);
-            return JsonConvert.DeserializeObject<TMessage>(message);
+            return JsonConvert.DeserializeObject<MessageContext<TMessage>>(message);
         }
 
 
-        public void Subscribe(Action<TMessage> callback)
+        public void Subscribe(Action<MessageContext<TMessage>> callback)
         {
             consumer.Received += (model, ea) =>
             {
-                TMessage message = GetMessage(ea.Body);
+                MessageContext<TMessage> message = GetMessage(ea.Body);
                 try
                 {
                     callback(message);

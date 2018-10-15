@@ -7,7 +7,7 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
 {
     internal class MessageSender : IMessageSender
     {
-        public void Send(string hostName, string queueName, string routingKey, IMessage message)
+        public void Send<TMessage>(string hostName, string queueName, string routingKey, MessageContext<TMessage> message) where TMessage : IMessage
         {
             var factory = new ConnectionFactory() { HostName = hostName };
             using (IConnection connection = factory.CreateConnection())
@@ -21,7 +21,7 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
             }
         }
 
-        private static byte[] GetMessageBytes(IMessage message)
+        private static byte[] GetMessageBytes<TMessage>(MessageContext<TMessage> message) where TMessage : IMessage
         {
             string messageStr = JsonConvert.SerializeObject(message);
             return Encoding.UTF8.GetBytes(messageStr);
