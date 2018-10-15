@@ -1,4 +1,15 @@
 # Star Wars store checkout domain area 
+  * [Checkout Flows](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
+  * [Domain Entities](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
+
+# Development
+### Frameworks & Architecture Styles
+  * [CQRS Architecture](https://martinfowler.com/bliki/CQRS.html)
+  * [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+  * [Docker](https://www.docker.com/)
+  
+### Application Architecture
+  * [High Level View](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
 
 ## Start Project
 1. Configure docker RabbitMQ
