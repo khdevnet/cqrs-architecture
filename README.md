@@ -1,9 +1,9 @@
 # Star Wars store checkout domain area 
-# Bussines information
+## Bussines information
   * [Checkout Flows](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
   * [Domain Entities](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
 
-# Development
+## Development
 ### Frameworks & Architecture Styles
   * [CQRS Architecture](https://martinfowler.com/bliki/CQRS.html)
   * [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
