@@ -1,4 +1,4 @@
-# Star Wars store checkout domain area
+# Star Wars shop - Checkout component
 
 ## Start Project
 1. Configure docker RabbitMQ
