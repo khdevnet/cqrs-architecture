@@ -1,4 +1,5 @@
 # Star Wars store checkout domain area 
+# Bussines information
   * [Checkout Flows](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
   * [Domain Entities](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision)
 
