@@ -9,7 +9,6 @@ namespace SW.Store.Checkout.WebApi
         public WebApiAutomapperProfile()
         {
             CreateMap<CreateOrderRequestModel, CreateOrderMessage>();
-            CreateMap<CreateOrderLineRequestModel, OrderLineMessage>();
         }
     }
 }

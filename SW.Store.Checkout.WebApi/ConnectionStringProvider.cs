@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Checkout.Infrastructure.SQL.Database;
 using SW.Store.Core;
 
 namespace SW.Store.Checkout.WebApi
@@ -14,7 +13,7 @@ namespace SW.Store.Checkout.WebApi
         }
         public string Get()
         {
-            string connection = configuration.GetConnectionString(nameof(SwStoreDbContext));
+            string connection = configuration.GetConnectionString("EventStore");
             return connection;
         }
     }
