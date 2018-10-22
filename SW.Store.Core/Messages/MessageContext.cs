@@ -2,7 +2,7 @@
 {
     public class MessageContext<TMessage> where TMessage : IMessage
     {
-        public MessageContext(string version, TMessage data)
+        public MessageContext(string version, TMessage data) 
         {
             Version = version;
             Data = data;

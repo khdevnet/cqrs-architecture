@@ -1,9 +1,7 @@
-﻿using MediatR;
-
-namespace SW.Store.Core.Commands
+﻿namespace SW.Store.Core.Commands
 {
-    public interface ICommandHandler<in T> : IRequestHandler<T>
-        where T : ICommand
+    public interface ICommandHandler<TCommand> : IMessageHandler<TCommand>
+        where TCommand : ICommand
     {
     }
 }

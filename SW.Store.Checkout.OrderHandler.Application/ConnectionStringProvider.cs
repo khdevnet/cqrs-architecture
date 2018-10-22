@@ -1,4 +1,4 @@
-﻿using SW.Store.Core;
+﻿using SW.Store.Core.Settings;
 
 namespace SW.Store.Checkout.OrderHandler.Application
 {

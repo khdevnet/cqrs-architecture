@@ -1,10 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using SW.Store.Checkout.Domain.Accounts.Commands;
+﻿using SW.Store.Checkout.Domain.Accounts.Commands;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Core.Commands;
-using SW.Store.Core.Events;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers
 {
@@ -12,18 +8,15 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
         : ICommandHandler<CreateOrder>
     {
         private readonly IAggregationRepository repository;
-        private readonly IEventBus eventBus;
 
 
         public OrderCommandHandler(
-            IAggregationRepository repository,
-            IEventBus eventBus)
+            IAggregationRepository repository)
         {
             this.repository = repository;
-            this.eventBus = eventBus;
         }
 
-        public async Task<Unit> Handle(CreateOrder command, CancellationToken cancellationToken = default(CancellationToken))
+        public void Handle(CreateOrder command)
         {
             // TODO: Add customer
             //if (!session.Query<ClientView>().Any(c => c.Id == command.ClientId))
@@ -32,9 +25,6 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
             var order = new OrderAggregate(command.OrderId, command.CustomerId, command.Lines);
 
             repository.Store(order);
-            await eventBus.Publish(order.PendingEvents.ToArray());
-
-            return Unit.Value;
         }
     }
 }

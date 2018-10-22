@@ -12,6 +12,8 @@ using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
 using SW.Store.Checkout.Service;
 using SW.Store.Core;
+using SW.Store.Core.Commands;
+using SW.Store.Core.Settings;
 
 namespace SW.Store.Checkout.WebApi
 {
@@ -40,9 +42,9 @@ namespace SW.Store.Checkout.WebApi
         public static void ConfigureContainer(ContainerBuilder builder)
         {
             //builder.RegisterType<SwStoreDbContext>().AsSelf().InstancePerRequest();
-            builder.RegisterType<OrderCommandHandler>().As<IRequestHandler<CreateOrder, Unit>>();
             builder.RegisterType<FakeLogger>().As<ILogger>();
             builder.RegisterType<ConnectionStringProvider>().As<IConnectionStringProvider>();
+            builder.RegisterType<CommandBusSettingsProvider>().As<ICommandBusSettingsProvider>();
 
             builder.RegisterModule<CoreAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();

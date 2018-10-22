@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace SW.Store.Core.Events
+﻿namespace SW.Store.Core.Events
 {
-    public interface IEvent : INotification
+    public interface IEvent
     {
     }
 }
