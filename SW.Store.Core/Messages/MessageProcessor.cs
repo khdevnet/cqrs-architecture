@@ -24,7 +24,7 @@ namespace SW.Store.Core.Messages
                 throw new NotImplementedException($"Message handler for message type {messageType.Name} not registered.");
             }
 
-            MethodInfo handleMethod = handler.GetType().GetMethod(nameof(IMessageHandler<IMessage>.Handle));
+            MethodInfo handleMethod = handler.GetType().GetMethods().FirstOrDefault(m => m.GetParameters().Any(p => p.ParameterType == messageType));
 
             handleMethod.Invoke(handler, new[] { message });
         }

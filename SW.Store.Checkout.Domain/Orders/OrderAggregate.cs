@@ -16,7 +16,7 @@ namespace SW.Store.Checkout.Domain.Orders
 
         public Customer Customer { get; set; }
 
-        public ICollection<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
+        public List<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
 
         public OrderAggregate()
         {
@@ -35,19 +35,19 @@ namespace SW.Store.Checkout.Domain.Orders
             Append(@event);
         }
 
-        //public void RecordInflow(Guid fromId, decimal ammount)
-        //{
-        //    var @event = new NewInflowRecorded(fromId, Id, new Inflow(ammount, DateTime.Now));
-        //    Apply(@event);
-        //    Append(@event);
-        //}
+        public void AddLine(int productNumber, int quantity)
+        {
+            var @event = new OrderLineAdded(Id, productNumber, quantity);
+            Apply(@event);
+            Append(@event);
+        }
 
-        //public void RecordOutflow(Guid toId, decimal ammount)
-        //{
-        //    var @event = new NewOutflowRecorded(Id, toId, new Outflow(ammount, DateTime.Now));
-        //    Apply(@event);
-        //    Append(@event);
-        //}
+        public void RemoveLine(int productNumber)
+        {
+            var @event = new OrderLineRemoved(Id, productNumber);
+            Apply(@event);
+            Append(@event);
+        }
 
         public void Apply(OrderCreated @event)
         {
@@ -56,14 +56,22 @@ namespace SW.Store.Checkout.Domain.Orders
             Lines = @event.Lines.ToList();
         }
 
-        //public void Apply(NewInflowRecorded @event)
-        //{
-        //    Balance += @event.Inflow.Ammount;
-        //}
+        public void Apply(OrderLineAdded @event)
+        {
+            OrderLineDto line = Lines.FirstOrDefault(x => x.ProductNumber == @event.ProductNumber);
+            if (line != null)
+            {
+                line.Quantity += @event.Quantity;
+            }
+            else
+            {
+                Lines.Add(new OrderLineDto { ProductNumber = @event.ProductNumber, Quantity = @event.Quantity });
+            }
+        }
 
-        //public void Apply(NewOutflowRecorded @event)
-        //{
-        //    Balance -= @event.Outflow.Ammount;
-        //}
+        public void Apply(OrderLineRemoved @event)
+        {
+            Lines.RemoveAll(x => x.ProductNumber == @event.ProductNumber);
+        }
     }
 }

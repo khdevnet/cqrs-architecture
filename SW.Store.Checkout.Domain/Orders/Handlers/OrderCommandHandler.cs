@@ -4,8 +4,10 @@ using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers
 {
-    public class OrderCommandHandler
-        : IMessageHandler<CreateOrder>
+    public class OrderCommandHandler :
+        IMessageHandler<CreateOrder>,
+        IMessageHandler<AddOrderLine>,
+        IMessageHandler<RemoveOrderLine>
     {
         private readonly IAggregationRepository repository;
 
@@ -25,6 +27,20 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
             var order = new OrderAggregate(command.OrderId, command.CustomerId, command.Lines);
 
             repository.Store(order);
+        }
+
+        public void Handle(AddOrderLine message)
+        {
+            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(message.OrderId);
+            orderAggregate.AddLine(message.ProductNumber, message.Quantity);
+            repository.Store(orderAggregate);
+        }
+
+        public void Handle(RemoveOrderLine message)
+        {
+            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(message.OrderId);
+            orderAggregate.RemoveLine(message.ProductNumber);
+            repository.Store(orderAggregate);
         }
     }
 }

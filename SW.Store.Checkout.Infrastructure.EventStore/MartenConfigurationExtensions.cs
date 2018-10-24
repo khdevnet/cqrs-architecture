@@ -30,6 +30,7 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
                     //options.Events.InlineProjections.Add(new ClientsViewProjection());
 
                     options.Events.AddEventType(typeof(OrderCreated));
+                    options.Events.AddEventType(typeof(OrderLineAdded));
                 });
 
                 return documentStore.OpenSession();
