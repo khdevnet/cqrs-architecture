@@ -11,6 +11,8 @@ namespace SW.Store.Checkout.Domain.Orders.Events
 
         public int CustomerId { get; set; }
 
+        public string Status { get; set; }
+
         public ICollection<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
     }
 }

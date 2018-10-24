@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SW.Store.Checkout.Domain.Orders.Events;
+﻿using SW.Store.Checkout.Domain.Orders.Events;
 using SW.Store.Checkout.Extensibility;
 using SW.Store.Checkout.Extensibility.Dto;
 using SW.Store.Core.Aggregates;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SW.Store.Checkout.Domain.Orders
 {
     public class OrderAggregate : EventSourcedAggregate
     {
-        public string Status { get; set; } = OrderStatus.Created.ToString();
+        public string Status { get; private set; }
 
-        public int CustomerId { get; set; }
+        public int CustomerId { get; private set; }
 
-        public Customer Customer { get; set; }
-
-        public List<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
+        public List<OrderLineDto> Lines { get; private set; } = new List<OrderLineDto>();
 
         public OrderAggregate()
         {
@@ -28,7 +26,8 @@ namespace SW.Store.Checkout.Domain.Orders
             {
                 OrderId = orderId,
                 CustomerId = customerId,
-                Lines = lines.ToList()
+                Lines = lines.ToList(),
+                Status = OrderStatus.Created.ToString()
             };
 
             Apply(@event);

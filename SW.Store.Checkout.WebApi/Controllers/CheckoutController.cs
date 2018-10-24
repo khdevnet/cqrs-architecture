@@ -69,7 +69,6 @@ namespace SW.Store.Checkout.WebApi.Controllers
                 return Ok(new OrderResponseModel()
                 {
                     OrderId = order.OrderId,
-                    Status = order.Status.ToString(),
                     Lines = order.Lines.Select(l => new OrderLineResponseModel
                     {
                         ProductName = l.ProductName,

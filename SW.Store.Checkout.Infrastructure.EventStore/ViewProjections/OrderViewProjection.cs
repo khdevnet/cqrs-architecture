@@ -5,7 +5,7 @@ using SW.Store.Checkout.Domain.Orders.Events;
 
 namespace SW.Store.Checkout.Infrastructure.EventStore.ViewProjections
 {
-    public class OrderViewProjection : ViewProjection<OrderAggregate, Guid>
+    public class OrderViewProjection : ViewProjection<OrderView, Guid>
     {
         public OrderViewProjection()
         {

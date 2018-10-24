@@ -45,10 +45,8 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
         {
             using (IDocumentSession session = store.OpenSession())
             {
-                var s = session
-                .Query<OrderAggregate>().ToList();
                 return session
-                .Query<OrderAggregate>()
+                .Query<OrderView>()
                 .ToList()
                 .Select(a => new OrderReadDto
                 {
@@ -58,8 +56,7 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
                         ProductNumber = l.ProductNumber,
                         Quantity = l.Quantity
                     }),
-                }).FirstOrDefault();
-              //  .FirstOrDefault(p => p.OrderId == id);
+                }).FirstOrDefault(p => p.OrderId == id);
             }
         }
 
