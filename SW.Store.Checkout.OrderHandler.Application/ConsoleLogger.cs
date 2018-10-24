@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using SW.Store.Core;
 
 namespace SW.Store.Checkout.OrderHandler.Application
@@ -9,6 +10,16 @@ namespace SW.Store.Checkout.OrderHandler.Application
         {
             Console.WriteLine("##########################################");
             Console.WriteLine(message);
+        }
+
+        public void Log(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public void LogObject(object obj)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(obj));
         }
     }
 }

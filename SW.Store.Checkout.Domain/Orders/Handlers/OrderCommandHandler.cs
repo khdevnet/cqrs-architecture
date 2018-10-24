@@ -1,11 +1,11 @@
 ﻿using SW.Store.Checkout.Domain.Accounts.Commands;
 using SW.Store.Checkout.Domain.Extensibility;
-using SW.Store.Core.Commands;
+using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers
 {
     public class OrderCommandHandler
-        : ICommandHandler<CreateOrder>
+        : IMessageHandler<CreateOrder>
     {
         private readonly IAggregationRepository repository;
 

@@ -15,7 +15,7 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
             {
                 channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-                byte[] body = GetMessageBytes(message);
+                byte[] body = GetMessageBytes<TMessage>(message);
 
                 channel.BasicPublish(exchange: "", routingKey: routingKey, basicProperties: null, body: body);
             }

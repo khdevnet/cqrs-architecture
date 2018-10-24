@@ -10,7 +10,7 @@ namespace SW.Store.Checkout.Infrastructure.RabbitMQ
         {
             builder.RegisterType<MessageSender>().As<IMessageSender>();
             builder.RegisterType<CommandBus>().As<ICommandBus>();
-            builder.RegisterType<MessageSubscriberFactory>().As<IMessageSubscriberFactory>();
+
         }
     }
 }

@@ -9,5 +9,15 @@ namespace SW.Store.Checkout.WebApi
         {
 
         }
+
+        public void Log(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogObject(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
