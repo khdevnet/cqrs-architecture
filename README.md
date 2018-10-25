@@ -3,9 +3,13 @@
 ## Start Project
 1. Configure docker RabbitMQ
 ```
-docker run -d --hostname sw-rabbit-host --name sw-rabbit -p 8080:15672 -p 5672:5672 rabbitmq:3-management
+$ docker run -d --hostname sw-rabbit-host --name sw-rabbit -p 8080:15672 -p 5672:5672 rabbitmq:3-management
 ```
-2. Run Solutions
+2. Configure PostgreSQL
+```
+$ docker run --name event-store-postgres -e POSTGRES_PASSWORD=123456 -d -p 5432:5432 postgres
+```
+3. Run Solutions
 * SW.Store.Checkout.sln
 * SW.Checkout.OrderHandler.Application.sln
 * SW.Store.Checkout.Client.sln
