@@ -5,7 +5,6 @@ using Autofac;
 using SW.Store.Checkout.Domain.Orders.Handlers;
 using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
-using SW.Store.Checkout.Service;
 using SW.Store.Core;
 using SW.Store.Core.Messages;
 using SW.Store.Core.Settings;
@@ -39,9 +38,9 @@ namespace SW.Store.Checkout.OrderHandler.Application
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
             builder.RegisterType<ConnectionStringProvider>().As<IConnectionStringProvider>();
             builder.RegisterModule<RabbitMQAutofacModule>();
-            builder.RegisterModule<ServiceAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();
             builder.RegisterModule<CoreAutofacModule>();
+            builder.RegisterModule<ReadStorageAutofacModule>();
             return builder.Build();
         }
     }

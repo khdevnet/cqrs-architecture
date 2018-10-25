@@ -1,7 +1,7 @@
 ﻿using System;
 using SW.Store.Core.Commands;
 
-namespace SW.Store.Checkout.Domain.Accounts.Commands
+namespace SW.Store.Checkout.Domain.Orders.Commands
 {
     public class RemoveOrderLine : ICommand
     {

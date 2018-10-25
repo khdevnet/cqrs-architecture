@@ -13,6 +13,6 @@ namespace SW.Store.Checkout.Domain.Orders.Events
 
         public string Status { get; set; }
 
-        public ICollection<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
+        public ICollection<OrderLine> Lines { get; set; } = new List<OrderLine>();
     }
 }

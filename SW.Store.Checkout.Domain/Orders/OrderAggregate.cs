@@ -1,10 +1,9 @@
-﻿using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Extensibility;
-using SW.Store.Checkout.Extensibility.Dto;
-using SW.Store.Core.Aggregates;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SW.Store.Checkout.Domain.Orders.Events;
+using SW.Store.Checkout.Extensibility;
+using SW.Store.Core.Aggregates;
 
 namespace SW.Store.Checkout.Domain.Orders
 {
@@ -14,19 +13,18 @@ namespace SW.Store.Checkout.Domain.Orders
 
         public int CustomerId { get; private set; }
 
-        public List<OrderLineDto> Lines { get; private set; } = new List<OrderLineDto>();
+        public List<OrderLine> Lines { get; private set; } = new List<OrderLine>();
 
         public OrderAggregate()
         {
         }
 
-        public OrderAggregate(Guid orderId, int customerId, IEnumerable<OrderLineDto> lines)
+        public OrderAggregate(Guid orderId, int customerId)
         {
             var @event = new OrderCreated
             {
                 OrderId = orderId,
                 CustomerId = customerId,
-                Lines = lines.ToList(),
                 Status = OrderStatus.Created.ToString()
             };
 
@@ -34,9 +32,9 @@ namespace SW.Store.Checkout.Domain.Orders
             Append(@event);
         }
 
-        public void AddLine(int productNumber, int quantity)
+        public void AddLine(OrderLine line)
         {
-            var @event = new OrderLineAdded(Id, productNumber, quantity);
+            var @event = new OrderLineAdded(Id, line.ProductId, line.Quantity, line.Status);
             Apply(@event);
             Append(@event);
         }
@@ -57,20 +55,20 @@ namespace SW.Store.Checkout.Domain.Orders
 
         public void Apply(OrderLineAdded @event)
         {
-            OrderLineDto line = Lines.FirstOrDefault(x => x.ProductNumber == @event.ProductNumber);
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
             if (line != null)
             {
                 line.Quantity += @event.Quantity;
             }
             else
             {
-                Lines.Add(new OrderLineDto { ProductNumber = @event.ProductNumber, Quantity = @event.Quantity });
+                Lines.Add(new OrderLine { ProductId = @event.ProductNumber, Quantity = @event.Quantity });
             }
         }
 
         public void Apply(OrderLineRemoved @event)
         {
-            Lines.RemoveAll(x => x.ProductNumber == @event.ProductNumber);
+            Lines.RemoveAll(x => x.ProductId == @event.ProductNumber);
         }
     }
 }

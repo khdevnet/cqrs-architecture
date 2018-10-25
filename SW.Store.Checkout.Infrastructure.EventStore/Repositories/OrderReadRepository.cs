@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Marten;
-using SW.Store.Checkout.Domain.Extensibility;
+using SW.Store.Checkout.Domain.Orders.Views;
+using SW.Store.Checkout.Read;
+using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Core.Aggregates;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore
+namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
 {
-    internal sealed class AggregateRepository : IAggregationRepository
+    internal sealed class OrderReadRepository : IOrderReadRepository
     {
         private readonly IDocumentStore store;
 
-        public AggregateRepository(IDocumentStore store)
+        public OrderReadRepository(IDocumentStore store)
         {
             this.store = store;
         }
@@ -35,6 +39,30 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
             }
 
             throw new InvalidOperationException($"No aggregate by id {id}.");
+        }
+
+        public OrderReadDto GetById(Guid id)
+        {
+            using (IDocumentSession session = store.OpenSession())
+            {
+                return session
+                .Query<OrderView>()
+                .ToList()
+                .Select(a => new OrderReadDto
+                {
+                    OrderId = a.Id,
+                    Lines = a.Lines.Select(l => new OrderLineReadDto
+                    {
+                        ProductNumber = l.ProductId,
+                        Quantity = l.Quantity
+                    }),
+                }).FirstOrDefault(p => p.OrderId == id);
+            }
+        }
+
+        public IEnumerable<OrderReadDto> Get()
+        {
+            throw new NotImplementedException();
         }
     }
 }

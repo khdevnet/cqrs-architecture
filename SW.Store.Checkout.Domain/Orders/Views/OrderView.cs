@@ -1,23 +1,19 @@
-﻿using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Extensibility;
-using SW.Store.Checkout.Extensibility.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SW.Store.Checkout.Domain.Orders.Events;
 
-namespace SW.Store.Checkout.Domain.Orders
+namespace SW.Store.Checkout.Domain.Orders.Views
 {
     public class OrderView
     {
-        public string Status { get; set; } = OrderStatus.Created.ToString();
+        public string Status { get; set; }
 
         public Guid Id { get; set; }
 
         public int CustomerId { get; set; }
 
-        public Customer Customer { get; set; }
-
-        public List<OrderLineDto> Lines { get; set; } = new List<OrderLineDto>();
+        public List<OrderLine> Lines { get; set; } = new List<OrderLine>();
 
         public void Apply(OrderCreated @event)
         {
@@ -29,20 +25,20 @@ namespace SW.Store.Checkout.Domain.Orders
 
         public void Apply(OrderLineAdded @event)
         {
-            OrderLineDto line = Lines.FirstOrDefault(x => x.ProductNumber == @event.ProductNumber);
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
             if (line != null)
             {
                 line.Quantity += @event.Quantity;
             }
             else
             {
-                Lines.Add(new OrderLineDto { ProductNumber = @event.ProductNumber, Quantity = @event.Quantity });
+                Lines.Add(new OrderLine { ProductId = @event.ProductNumber, Quantity = @event.Quantity, Status = @event.Status });
             }
         }
 
         public void Apply(OrderLineRemoved @event)
         {
-            Lines.RemoveAll(x => x.ProductNumber == @event.ProductNumber);
+            Lines.RemoveAll(x => x.ProductId == @event.ProductNumber);
         }
     }
 }

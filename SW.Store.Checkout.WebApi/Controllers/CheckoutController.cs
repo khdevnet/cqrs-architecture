@@ -2,7 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SW.Store.Checkout.Domain.Accounts.Commands;
+using SW.Store.Checkout.Domain.Orders.Commands;
 using SW.Store.Checkout.Extensibility.Client;
 using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Core.Commands;

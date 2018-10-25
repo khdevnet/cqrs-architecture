@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
-using SW.Store.Core.Messages;
 
 namespace SW.Store.Core.Messages
 {
@@ -18,7 +17,8 @@ namespace SW.Store.Core.Messages
             JToken verionJToken = messageJObject[nameof(MessageContext<IMessage>.Version)];
 
             Type messageType = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(ass => ass.GetTypes()).FirstOrDefault(t => t.FullName == messageTypeJToken.Value<string>());
+                .SelectMany(ass => ass.GetTypes())
+                .FirstOrDefault(t => t.FullName == messageTypeJToken.Value<string>());
 
             string verison = verionJToken.Value<string>();
             var data = (IMessage)dataJToken.ToObject(messageType);

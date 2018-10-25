@@ -16,7 +16,8 @@
     <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
     <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.EventStore\SW.Store.Checkout.Infrastructure.EventStore.csproj" />
     <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.ReadStorage\SW.Store.Checkout.Infrastructure.ReadStorage.csproj" />
     <ProjectReference Include="..\SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Service\SW.Store.Checkout.Service.csproj" />
+    <ProjectReference Include="..\SW.Store.Core\SW.Store.Core.csproj" />
   </ItemGroup>
 </Project>

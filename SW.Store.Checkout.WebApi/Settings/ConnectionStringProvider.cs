@@ -14,7 +14,7 @@ namespace SW.Store.Checkout.WebApi
         }
         public string Get()
         {
-            string connection = configuration.GetConnectionString("EventStore");
+            string connection = configuration.GetSection("EventStore")["ConnectionString"];
             return connection;
         }
     }

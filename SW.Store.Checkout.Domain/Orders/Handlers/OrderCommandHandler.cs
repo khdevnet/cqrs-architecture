@@ -1,5 +1,14 @@
-﻿using SW.Store.Checkout.Domain.Accounts.Commands;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SW.Store.Checkout.Domain.Extensibility;
+using SW.Store.Checkout.Domain.Orders.Commands;
+using SW.Store.Checkout.Domain.Orders.Views;
+using SW.Store.Checkout.Domain.Warehouses;
+using SW.Store.Checkout.Domain.Warehouses.Views;
+using SW.Store.Checkout.Extensibility;
+using SW.Store.Checkout.Extensibility.Dto;
+using SW.Store.Core.Events;
 using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers
@@ -20,27 +29,86 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
 
         public void Handle(CreateOrder command)
         {
-            // TODO: Add customer
-            //if (!session.Query<ClientView>().Any(c => c.Id == command.ClientId))
-            //    throw new ArgumentException("Client does not exist!", nameof(command.ClientId));
+            if (IsOrderExist(command.OrderId))
+            {
+                return;
+            }
 
-            var order = new OrderAggregate(command.OrderId, command.CustomerId, command.Lines);
+            repository.Store(new OrderAggregate(command.OrderId, command.CustomerId));
 
-            repository.Store(order);
+            AddOrderLines(command.OrderId, command.Lines);
         }
 
-        public void Handle(AddOrderLine message)
+
+        public void Handle(AddOrderLine command)
         {
-            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(message.OrderId);
-            orderAggregate.AddLine(message.ProductNumber, message.Quantity);
+            if (!IsOrderExist(command.OrderId))
+            {
+                return;
+            }
+
+            OrderLineDto[] lines = new[]{
+                new OrderLineDto
+                {
+                    ProductNumber = command.ProductNumber,
+                    Quantity = command.Quantity
+                }};
+
+            AddOrderLines(command.OrderId, lines);
+        }
+
+        public void Handle(RemoveOrderLine command)
+        {
+            if (!IsOrderExist(command.OrderId))
+            {
+                return;
+            }
+
+            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(command.OrderId);
+            orderAggregate.RemoveLine(command.ProductNumber);
             repository.Store(orderAggregate);
         }
 
-        public void Handle(RemoveOrderLine message)
+        private void AddOrderLines(Guid orderId, IEnumerable<OrderLineDto> orderLines)
         {
-            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(message.OrderId);
-            orderAggregate.RemoveLine(message.ProductNumber);
-            repository.Store(orderAggregate);
+            IEnumerable<WarehouseView> warehouses = repository.Query<WarehouseView, WarehouseView>((w) => new WarehouseView { Id = w.Id, Items = w.Items });
+
+            foreach (OrderLineDto orderLine in orderLines)
+            {
+                var transactions = new Dictionary<Guid, IEnumerable<IEvent>>();
+
+                repository.Transaction(() =>
+                {
+                    WarehouseView warehouse = warehouses.FirstOrDefault(w => w.Items.Any(item => item.ProductId == orderLine.ProductNumber && item.Quantity >= orderLine.Quantity));
+
+                    var orderItem = new OrderLine
+                    {
+                        ProductId = orderLine.ProductNumber,
+                        Quantity = orderLine.Quantity
+                    };
+
+                    if (warehouse != null)
+                    {
+                        WarehouseAggregate warehouseAggregate = repository.Load<WarehouseAggregate>(warehouse.Id);
+                        warehouseAggregate.SubstractItemQuantity(orderLine.ProductNumber, orderLine.Quantity);
+                        transactions.Add(warehouseAggregate.Id, warehouseAggregate.PendingEvents);
+                    }
+                    else
+                    {
+                        orderItem.Status = OrderLineStatus.OutOfStock.ToString();
+                    }
+                    OrderAggregate orderAggregate = repository.Load<OrderAggregate>(orderId);
+                    orderAggregate.AddLine(orderItem);
+                    transactions.Add(orderAggregate.Id, orderAggregate.PendingEvents);
+
+                    return transactions;
+                });
+            }
+        }
+
+        private bool IsOrderExist(Guid orderId)
+        {
+            return repository.FirstOrDefault<OrderView>(x => x.Id == orderId) != null;
         }
     }
 }

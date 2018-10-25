@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SW.Store.Checkout.Extensibility.Dto;
 using SW.Store.Core.Commands;
 
-namespace SW.Store.Checkout.Domain.Accounts.Commands
+namespace SW.Store.Checkout.Domain.Orders.Commands
 {
     public class CreateOrder : ICommand
     {
