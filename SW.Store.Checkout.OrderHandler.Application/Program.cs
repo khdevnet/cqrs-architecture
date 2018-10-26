@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
 using SW.Store.Checkout.Domain.Orders.Handlers;
+using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
+using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
 using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
 using SW.Store.Core;
@@ -13,19 +13,20 @@ namespace SW.Store.Checkout.OrderHandler.Application
 {
     class Program
     {
-        private const string HostName = "localhost";
-        private const string QueueName = "processorder";
-        private const string RoutingKey = "processorder";
-
         static void Main(string[] args)
         {
             IContainer container = CreateContainer();
 
-            IEnumerable<IQueueSubscriber> subscribers = container.Resolve<IEnumerable<IQueueSubscriber>>();
-            subscribers.ToList().ForEach(s => s.Subscribe());
+            IQueueSubscriber subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
+            subscriber.Subscribe();
+
+            IQueueSubscriber readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
+            readStorageSubscriber.Subscribe();
+
 
             Console.ReadLine();
-            subscribers.ToList().ForEach(s => s.Dispose());
+            subscriber.Dispose();
+            readStorageSubscriber.Dispose();
         }
 
         private static IContainer CreateContainer()
@@ -33,14 +34,19 @@ namespace SW.Store.Checkout.OrderHandler.Application
             var builder = new ContainerBuilder();
 
             builder.RegisterType(typeof(OrderCommandHandler)).As<IMessageHandler>();
-            builder.RegisterType(typeof(QueueSettingsProvider)).As<IQueueSettingsProvider>();
-            builder.RegisterType<QueueSubscriber<IQueueSettingsProvider, IMessageProcessor, IMessageDeserializer>>().As<IQueueSubscriber>();
+
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
-            builder.RegisterType<ConnectionStringProvider>().As<IConnectionStringProvider>();
             builder.RegisterModule<RabbitMQAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();
             builder.RegisterModule<CoreAutofacModule>();
             builder.RegisterModule<ReadStorageAutofacModule>();
+
+            builder.RegisterType(typeof(ProcessOrderQueueSettingsProvider)).As<IProcessOrderQueueSettingsProvider>();
+            builder.RegisterType(typeof(ReadStorageSyncQueueSettingsProvider)).As<IReadStorageSyncQueueSettingsProvider>();
+
+            builder.RegisterType<ReadStorageConnectionStringProvider>().As<IReadStorageConnectionStringProvider>();
+            builder.RegisterType<EventStoreConnectionStringProvider>().As<IEventStoreConnectionStringProvider>();
+
             return builder.Build();
         }
     }

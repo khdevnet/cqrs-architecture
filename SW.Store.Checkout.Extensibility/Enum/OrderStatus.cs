@@ -2,7 +2,8 @@
 {
     public enum OrderStatus
     {
-        Created = 0,
+        NotExist = 0,
+        Created,
         Shipped,
         Delivered,
         Declined

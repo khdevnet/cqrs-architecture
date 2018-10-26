@@ -9,7 +9,7 @@ namespace SW.Store.Checkout.Domain.Orders
 {
     public class OrderAggregate : EventSourcedAggregate
     {
-        public string Status { get; private set; }
+        public string Status { get; private set; } = OrderStatus.NotExist.ToString();
 
         public int CustomerId { get; private set; }
 
@@ -50,7 +50,6 @@ namespace SW.Store.Checkout.Domain.Orders
         {
             Id = @event.OrderId;
             CustomerId = @event.CustomerId;
-            Lines = @event.Lines.ToList();
         }
 
         public void Apply(OrderLineAdded @event)

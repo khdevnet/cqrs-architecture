@@ -39,13 +39,15 @@ namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
             }
         }
 
-        public void Transaction(Func<Dictionary<Guid, IEnumerable<IEvent>>> transasction)
+        public void Transaction(Func<Dictionary<Guid, List<IEvent>>> transaction, Action postProcess = null)
         {
             using (IDocumentSession session = store.OpenSession())
             {
-                IEnumerable<KeyValuePair<Guid, IEnumerable<IEvent>>> events = transasction();
+                IEnumerable<KeyValuePair<Guid, List<IEvent>>> events = transaction();
                 events.ToList().ForEach(aggEvents => session.Events.Append(aggEvents.Key, aggEvents.Value.ToArray()));
                 session.SaveChanges();
+
+                postProcess?.Invoke();
             }
         }
 

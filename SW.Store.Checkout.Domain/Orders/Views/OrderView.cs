@@ -20,7 +20,6 @@ namespace SW.Store.Checkout.Domain.Orders.Views
             Id = @event.OrderId;
             CustomerId = @event.CustomerId;
             Status = @event.Status;
-            Lines = @event.Lines.ToList();
         }
 
         public void Apply(OrderLineAdded @event)

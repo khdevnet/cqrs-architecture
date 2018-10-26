@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using AutoMapper;
-using Csrh.TimeReporting.Infrastructure.DataAccess.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
+using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
 using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
+using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Store.Core;
 using SW.Store.Core.Settings;
 
@@ -38,8 +40,10 @@ namespace SW.Store.Checkout.WebApi
         public static void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterType<FakeLogger>().As<ILogger>();
-            builder.RegisterType<ConnectionStringProvider>().As<IConnectionStringProvider>();
-            builder.RegisterType<CommandBusSettingsProvider>().As<ICommandBusSettingsProvider>();
+            builder.RegisterType<EventStoreConnectionStringProvider>().As<IEventStoreConnectionStringProvider>();
+            builder.RegisterType<ReadStorageConnectionStringProvider>().As<IReadStorageConnectionStringProvider>();
+            builder.RegisterType<ProcessOrderQueueSettingsProvider>().As<IProcessOrderQueueSettingsProvider>();
+            builder.RegisterType<ReadStorageSyncQueueSettingsProvider>().As<IReadStorageSyncQueueSettingsProvider>();
 
             builder.RegisterModule<CoreAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();

@@ -10,7 +10,7 @@ namespace SW.Store.Checkout.Domain.Extensibility
     {
         void Store(EventSourcedAggregate aggregate);
 
-        void Transaction(Func<Dictionary<Guid, IEnumerable<IEvent>>> transasction);
+        void Transaction(Func<Dictionary<Guid, List<IEvent>>> transasction, Action postProcess = null);
 
         IEnumerable<TResult> Query<TSource, TResult>(Expression<Func<TSource, TResult>> selector);
 

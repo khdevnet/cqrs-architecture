@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using SW.Store.Checkout.Read.ReadView;
 
 namespace SW.Store.Checkout.Read.Extensibility
 {
     public interface IOrderReadRepository
     {
-        OrderReadDto GetById(Guid id);
+        OrderReadView GetById(Guid id);
 
-        IEnumerable<OrderReadDto> Get();
+        IEnumerable<OrderReadView> Get();
     }
 }

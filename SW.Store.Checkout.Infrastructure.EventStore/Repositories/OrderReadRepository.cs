@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Marten;
 using SW.Store.Checkout.Domain.Orders.Views;
-using SW.Store.Checkout.Read;
 using SW.Store.Checkout.Read.Extensibility;
+using SW.Store.Checkout.Read.ReadView;
 using SW.Store.Core.Aggregates;
 
 namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
@@ -41,26 +41,26 @@ namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
             throw new InvalidOperationException($"No aggregate by id {id}.");
         }
 
-        public OrderReadDto GetById(Guid id)
+        public OrderReadView GetById(Guid id)
         {
             using (IDocumentSession session = store.OpenSession())
             {
                 return session
                 .Query<OrderView>()
                 .ToList()
-                .Select(a => new OrderReadDto
+                .Select(a => new OrderReadView
                 {
-                    OrderId = a.Id,
-                    Lines = a.Lines.Select(l => new OrderLineReadDto
+                    Id = a.Id,
+                    Lines = a.Lines.Select(l => new OrderLineReadView
                     {
-                        ProductNumber = l.ProductId,
+                        ProductId = l.ProductId,
                         Quantity = l.Quantity
-                    }),
-                }).FirstOrDefault(p => p.OrderId == id);
+                    }).ToList(),
+                }).FirstOrDefault(p => p.Id == id);
             }
         }
 
-        public IEnumerable<OrderReadDto> Get()
+        public IEnumerable<OrderReadView> Get()
         {
             throw new NotImplementedException();
         }

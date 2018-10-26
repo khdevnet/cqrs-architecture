@@ -1,9 +1,9 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
 using SW.Store.Core.Settings.Dto;
 
 namespace SW.Store.Checkout.OrderHandler.Application
 {
-    internal class QueueSettingsProvider : IQueueSettingsProvider
+    internal class ProcessOrderQueueSettingsProvider : IProcessOrderQueueSettingsProvider
     {
         public QueueSettings Get()
         {

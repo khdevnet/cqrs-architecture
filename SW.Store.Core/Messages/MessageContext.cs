@@ -10,7 +10,7 @@
 
         public string Version { get; }
 
-        public string MessageType => typeof(TMessage).FullName;
+        public string MessageType => Data.GetType().FullName;
 
         public TMessage Data { get; set; }
     }

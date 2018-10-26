@@ -26,7 +26,7 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
                  var documentStore = DocumentStore.For(options =>
                  {
                      string schemaName = "public";
-                     string connectionString = c.Resolve<IConnectionStringProvider>().Get();
+                     string connectionString = c.Resolve<IEventStoreConnectionStringProvider>().Get();
                      options.Connection(connectionString);
                      options.AutoCreateSchemaObjects = AutoCreate.All;
                      options.Events.DatabaseSchemaName = schemaName;

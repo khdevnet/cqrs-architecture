@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using SW.Store.Checkout.Extensibility.Dto;
 using SW.Store.Core.Events;
 
 namespace SW.Store.Checkout.Domain.Orders.Events
@@ -12,7 +10,5 @@ namespace SW.Store.Checkout.Domain.Orders.Events
         public int CustomerId { get; set; }
 
         public string Status { get; set; }
-
-        public ICollection<OrderLine> Lines { get; set; } = new List<OrderLine>();
     }
 }

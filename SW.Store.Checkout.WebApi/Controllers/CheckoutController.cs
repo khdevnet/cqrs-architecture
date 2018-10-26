@@ -4,8 +4,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Domain.Orders.Commands;
 using SW.Store.Checkout.Extensibility.Client;
+using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
 using SW.Store.Checkout.Read.Extensibility;
-using SW.Store.Core.Commands;
+using SW.Store.Checkout.Read.ReadView;
 using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.WebApi.Controllers
@@ -15,18 +16,16 @@ namespace SW.Store.Checkout.WebApi.Controllers
     [ApiController]
     public class CheckoutController : ControllerBase
     {
-        private readonly IMessageSender messageSender;
         private readonly IMapper mapper;
-        private readonly ICommandBus commandBus;
+        private readonly IProcessOrderQueueCommandBus commandBus;
         private readonly IOrderReadRepository orderReadRepository;
 
         public CheckoutController(
             IMessageSender messageSender,
             IMapper mapper,
-            ICommandBus commandBus,
+            IProcessOrderQueueCommandBus commandBus,
             IOrderReadRepository orderReadRepository)
         {
-            this.messageSender = messageSender;
             this.mapper = mapper;
             this.commandBus = commandBus;
             this.orderReadRepository = orderReadRepository;
@@ -63,16 +62,15 @@ namespace SW.Store.Checkout.WebApi.Controllers
         [Route("status/{id}")]
         public IActionResult Status([FromRoute] Guid id)
         {
-            Read.OrderReadDto order = orderReadRepository.GetById(id);
+            OrderReadView order = orderReadRepository.GetById(id);
             if (order != null)
             {
                 return Ok(new OrderResponseModel()
                 {
-                    OrderId = order.OrderId,
+                    OrderId = order.Id,
                     Lines = order.Lines.Select(l => new OrderLineResponseModel
                     {
-                        ProductName = l.ProductName,
-                        ProductNumber = l.ProductNumber,
+                        ProductNumber = l.ProductId,
                         Quantity = l.Quantity,
                         Status = l.Status
                     })

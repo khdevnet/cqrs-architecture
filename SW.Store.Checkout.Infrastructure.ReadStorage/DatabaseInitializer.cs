@@ -1,7 +1,7 @@
 ﻿using System;
-using Csrh.TimeReporting.Infrastructure.DataAccess.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Store.Core;
 
 namespace SW.Store.Checkout.Infrastructure.ReadStorage
@@ -21,10 +21,15 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage
         {
             using (IServiceScope serviceScope = serviceProvider.GetService<IServiceScopeFactory>().CreateScope())
             {
-                SwStoreReadDbContext context = serviceScope.ServiceProvider.GetRequiredService<SwStoreReadDbContext>();
-                context.Database.EnsureDeleted();
-                context.Database.Migrate();
+                MigrateDatabase(serviceScope.ServiceProvider);
             }
+        }
+
+        private static void MigrateDatabase(IServiceProvider serviceProvider)
+        {
+            SwStoreReadDbContext context = serviceProvider.GetRequiredService<SwStoreReadDbContext>();
+            context.Database.EnsureDeleted();
+            context.Database.Migrate();
         }
     }
 }

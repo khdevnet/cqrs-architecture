@@ -2,7 +2,7 @@
 
 namespace SW.Store.Checkout.OrderHandler.Application
 {
-    internal class ConnectionStringProvider : IConnectionStringProvider
+    internal class EventStoreConnectionStringProvider : IEventStoreConnectionStringProvider
     {
         public string Get()
         {

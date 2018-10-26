@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Domain.Warehouses;
 using SW.Store.Core;
@@ -20,8 +19,9 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
 
         public void Init()
         {
-            repository.Store(CreateWarehouseAggregate(Guid.NewGuid(), "Naboo"));
-            repository.Store(CreateWarehouseAggregate(Guid.NewGuid(), "Tatooine"));
+
+            repository.Store(CreateWarehouseAggregate(Guid.Parse("6df8744a-d464-4826-91d1-08095ab49d93"), "Naboo"));
+            repository.Store(CreateWarehouseAggregate(Guid.Parse("6df8744a-d464-4826-91d1-08095ab49d94"), "Tatooine"));
         }
 
         private static WarehouseAggregate CreateWarehouseAggregate(Guid warehouseId, string name)
