@@ -1,4 +1,4 @@
-﻿using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
+﻿using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings.Dto;
 
 namespace SW.Store.Checkout.OrderHandler.Application

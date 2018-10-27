@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Domain.Orders.Commands;
+using SW.Store.Checkout.Domain.Orders.Dto;
+using SW.Store.Checkout.Domain.Orders.Enum;
 using SW.Store.Checkout.Domain.Orders.Views;
 using SW.Store.Checkout.Domain.Warehouses;
 using SW.Store.Checkout.Domain.Warehouses.Views;
-using SW.Store.Checkout.Extensibility;
-using SW.Store.Checkout.Extensibility.Dto;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
 using SW.Store.Core.Events;
 using SW.Store.Core.Messages;
+using SW.Store.Core.Queues.ProcessOrder;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers
 {

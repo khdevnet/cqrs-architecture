@@ -1,12 +1,13 @@
 ﻿using System;
 using Autofac;
-using SW.Store.Checkout.Domain.Orders.Handlers;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
+using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
+using SW.Store.Checkout.Infrastructure.ReadStorage;
 using SW.Store.Core;
 using SW.Store.Core.Messages;
+using SW.Store.Core.Queues.ProcessOrder;
+using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings;
 
 namespace SW.Store.Checkout.OrderHandler.Application
@@ -33,16 +34,16 @@ namespace SW.Store.Checkout.OrderHandler.Application
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType(typeof(OrderCommandHandler)).As<IMessageHandler>();
-
-            builder.RegisterType<ConsoleLogger>().As<ILogger>();
+            builder.RegisterModule<DomainAutofacModule>();
             builder.RegisterModule<RabbitMQAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();
             builder.RegisterModule<CoreAutofacModule>();
             builder.RegisterModule<ReadStorageAutofacModule>();
 
-            builder.RegisterType(typeof(ProcessOrderQueueSettingsProvider)).As<IProcessOrderQueueSettingsProvider>();
-            builder.RegisterType(typeof(ReadStorageSyncQueueSettingsProvider)).As<IReadStorageSyncQueueSettingsProvider>();
+            builder.RegisterType<ConsoleLogger>().As<ILogger>();
+
+            builder.RegisterType<ProcessOrderQueueSettingsProvider>().As<IProcessOrderQueueSettingsProvider>();
+            builder.RegisterType<ReadStorageSyncQueueSettingsProvider>().As<IReadStorageSyncQueueSettingsProvider>();
 
             builder.RegisterType<ReadStorageConnectionStringProvider>().As<IReadStorageConnectionStringProvider>();
             builder.RegisterType<EventStoreConnectionStringProvider>().As<IEventStoreConnectionStringProvider>();

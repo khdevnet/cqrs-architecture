@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj" />
     <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
+    <ProjectReference Include="..\SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
 using SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ProcessOrder;
 using SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage;
 using SW.Store.Core.Messages;
+using SW.Store.Core.Queues.ProcessOrder;
+using SW.Store.Core.Queues.ReadStorageSync;
 
 namespace SW.Store.Checkout.Infrastructure.RabbitMQ
 {

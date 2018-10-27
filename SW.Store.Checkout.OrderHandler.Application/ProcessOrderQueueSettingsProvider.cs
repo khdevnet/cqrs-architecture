@@ -1,4 +1,4 @@
-﻿using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
+﻿using SW.Store.Core.Queues.ProcessOrder;
 using SW.Store.Core.Settings.Dto;
 
 namespace SW.Store.Checkout.OrderHandler.Application

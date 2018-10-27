@@ -1,6 +1,6 @@
 ﻿using SW.Store.Core.Events;
 
-namespace SW.Store.Checkout.Extensibility.Queues.ProcessOrder
+namespace SW.Store.Core.Queues.ProcessOrder
 {
     public interface IReadStorageSyncEventBus : IEventBus
     {

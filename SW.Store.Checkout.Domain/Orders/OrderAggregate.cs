@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SW.Store.Checkout.Domain.Orders.Enum;
 using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Extensibility;
 using SW.Store.Core.Aggregates;
 
 namespace SW.Store.Checkout.Domain.Orders

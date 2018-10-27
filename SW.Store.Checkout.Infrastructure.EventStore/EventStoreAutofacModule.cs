@@ -19,7 +19,6 @@ namespace SW.Store.Checkout.Infrastructure.EventStore
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AggregateRepository>().As<IAggregationRepository>();
-            builder.RegisterType<OrderReadRepository>().As<IOrderReadRepository>();
             builder.RegisterType<DatabaseInitializer>().As<IInitializer>();
             builder.Register<IDocumentStore>(c =>
              {

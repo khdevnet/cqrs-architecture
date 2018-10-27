@@ -1,8 +1,10 @@
-﻿using SW.Store.Checkout.Extensibility.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using SW.Store.Checkout.Domain.Orders.Commands;
+using SW.Store.Checkout.Domain.Orders.Dto;
+using SW.Store.Checkout.Read.ReadView;
 
 namespace SW.Store.Checkout.Client
 {
@@ -12,11 +14,11 @@ namespace SW.Store.Checkout.Client
 
         static void Main(string[] args)
         {
-            IEnumerable<CreateOrderRequestModel> createOrderModels = Enumerable.Range(0, 5)
-      .Select(n => CreateOrderRequestModel()).ToList();
+            IEnumerable<CreateOrder> createOrderModels = Enumerable.Range(0, 5)
+      .Select(n => CreateOrderCommand()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
-            foreach (CreateOrderRequestModel orderModel in createOrderModels)
+            foreach (CreateOrder orderModel in createOrderModels)
             {
                 actualOrderIds.Add(orderModel.OrderId);
                 using (var client = new HttpClient())
@@ -49,7 +51,7 @@ namespace SW.Store.Checkout.Client
                 HttpResponseMessage response = client.GetAsync($"{url}/api/v1/checkout/status/{orderId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    OrderResponseModel orderResponse = response.Content.ReadAsAsync<OrderResponseModel>().Result;
+                    OrderReadView orderResponse = response.Content.ReadAsAsync<OrderReadView>().Result;
                     PrintOrderDetails(orderResponse);
                     return true;
                 }
@@ -57,40 +59,38 @@ namespace SW.Store.Checkout.Client
             return false;
         }
 
-        private static void PrintOrderDetails(OrderResponseModel orderResponse)
+        private static void PrintOrderDetails(OrderReadView orderResponse)
         {
-            Console.WriteLine("Order Created Order Id: " + orderResponse.OrderId);
+            Console.WriteLine("Order Created Order Id: " + orderResponse.Id);
             foreach (var orderLine in orderResponse.Lines)
             {
                 Console.WriteLine("Order Line: ");
-                Console.WriteLine("-- ProductNumber: " + orderLine.ProductNumber);
-                Console.WriteLine("-- ProductName: " + orderLine.ProductName);
+                Console.WriteLine("-- ProductNumber: " + orderLine.ProductId);
                 Console.WriteLine("-- ProductQuantity: " + orderLine.Quantity);
                 Console.WriteLine("-- ProductStatus: " + orderLine.Status);
             }
             Console.WriteLine("=======================");
         }
 
-        private static CreateOrderRequestModel CreateOrderRequestModel()
+        private static CreateOrder CreateOrderCommand()
         {
-            return new CreateOrderRequestModel()
+            return new CreateOrder()
             {
                 OrderId = Guid.NewGuid(),
-                CustomerName = "Han Solo",
-                CustomerAddress = "Stars",
+                CustomerId = 1,
                 Lines = new[]
                  {
-                     new CreateOrderLineRequestModel
+                     new OrderLineDto
                      {
                           ProductNumber = 1,
                           Quantity = 1
                      },
-                     new CreateOrderLineRequestModel
+                     new OrderLineDto
                      {
                           ProductNumber = 2,
                           Quantity = 1
                      },
-                     new CreateOrderLineRequestModel
+                     new OrderLineDto
                      {
                           ProductNumber = 3,
                           Quantity = 1

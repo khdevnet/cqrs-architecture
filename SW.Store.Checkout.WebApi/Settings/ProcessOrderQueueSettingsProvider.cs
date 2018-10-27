@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
+using SW.Store.Core.Queues.ProcessOrder;
 
 namespace SW.Store.Checkout.WebApi
 {

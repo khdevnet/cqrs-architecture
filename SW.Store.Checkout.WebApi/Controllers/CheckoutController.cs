@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Domain.Orders.Commands;
-using SW.Store.Checkout.Extensibility.Client;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
 using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Checkout.Read.ReadView;
 using SW.Store.Core.Messages;
+using SW.Store.Core.Queues.ProcessOrder;
 
 namespace SW.Store.Checkout.WebApi.Controllers
 {
@@ -33,14 +31,9 @@ namespace SW.Store.Checkout.WebApi.Controllers
 
         // POST api/orders
         [HttpPost]
-        public void Post([FromBody] CreateOrderRequestModel createOrder)
+        public void Post([FromBody] CreateOrder createOrder)
         {
-            commandBus.Send(new CreateOrder()
-            {
-                CustomerId = 1,
-                OrderId = createOrder.OrderId,
-                Lines = createOrder.Lines
-            });
+            commandBus.Send(createOrder);
         }
 
         [HttpPut]
@@ -65,16 +58,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
             OrderReadView order = orderReadRepository.GetById(id);
             if (order != null)
             {
-                return Ok(new OrderResponseModel()
-                {
-                    OrderId = order.Id,
-                    Lines = order.Lines.Select(l => new OrderLineResponseModel
-                    {
-                        ProductNumber = l.ProductId,
-                        Quantity = l.Quantity,
-                        Status = l.Status
-                    })
-                });
+                return Ok(order);
             }
             return NotFound();
         }

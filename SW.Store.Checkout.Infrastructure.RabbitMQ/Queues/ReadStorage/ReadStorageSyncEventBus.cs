@@ -1,7 +1,7 @@
-﻿using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
-using SW.Store.Core.Events;
+﻿using SW.Store.Core.Events;
 using SW.Store.Core.Messages;
+using SW.Store.Core.Queues.ProcessOrder;
+using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings.Dto;
 
 namespace SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage

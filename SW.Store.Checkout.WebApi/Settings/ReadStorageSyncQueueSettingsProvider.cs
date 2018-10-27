@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
+using SW.Store.Core.Queues.ReadStorageSync;
 
 namespace SW.Store.Checkout.WebApi
 {

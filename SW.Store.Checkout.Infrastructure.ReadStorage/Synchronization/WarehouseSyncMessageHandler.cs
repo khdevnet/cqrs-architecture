@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using SW.Store.Checkout.Domain.Warehouses.Events;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
 using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Store.Checkout.Read.ReadView;
+using SW.Store.Core.Queues.ReadStorageSync;
 
 namespace SW.Store.Checkout.Infrastructure.ReadStorage.Synchronization
 {
-    public class WarehouseSyncMessageHandler :
+    internal class WarehouseSyncMessageHandler :
         IReadStorageSyncMessageHandler<WarehouseItemQuantitySubstracted>
     {
         private readonly SwStoreReadDbContext db;

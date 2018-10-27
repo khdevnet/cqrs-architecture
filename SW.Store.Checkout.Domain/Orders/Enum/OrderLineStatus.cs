@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Checkout.Extensibility
+﻿namespace SW.Store.Checkout.Domain.Orders.Enum
 {
     public enum OrderLineStatus
     {

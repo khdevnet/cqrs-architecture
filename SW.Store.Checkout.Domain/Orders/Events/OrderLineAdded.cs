@@ -1,5 +1,5 @@
 ﻿using System;
-using SW.Store.Checkout.Extensibility;
+using SW.Store.Checkout.Domain.Orders.Enum;
 using SW.Store.Core.Events;
 
 namespace SW.Store.Checkout.Domain.Orders.Events

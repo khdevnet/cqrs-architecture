@@ -1,5 +1,4 @@
-﻿using SW.Store.Checkout.Extensibility;
-using System;
+﻿using SW.Store.Checkout.Domain.Orders.Enum;
 
 namespace SW.Store.Checkout.Domain.Orders
 {

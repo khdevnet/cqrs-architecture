@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Checkout.Extensibility.Dto
+﻿namespace SW.Store.Checkout.Domain.Orders.Dto
 {
     public class OrderLineDto
     {

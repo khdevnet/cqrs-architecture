@@ -1,8 +1,8 @@
 ﻿using System;
 using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
 using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Store.Checkout.Read.ReadView;
+using SW.Store.Core.Queues.ReadStorageSync;
 
 namespace SW.Store.Checkout.Infrastructure.ReadStorage.Synchronization
 {

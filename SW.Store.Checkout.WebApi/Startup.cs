@@ -6,15 +6,15 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SW.Store.Checkout.Extensibility.Queues.ProcessOrder;
-using SW.Store.Checkout.Extensibility.Queues.ReadStorageSync;
+using SW.Store.Checkout.Domain;
 using SW.Store.Checkout.Infrastructure.EventStore;
 using SW.Store.Checkout.Infrastructure.RabbitMQ;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Store.Checkout.Infrastructure.ReadStorage;
 using SW.Store.Core;
+using SW.Store.Core.Queues.ProcessOrder;
+using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings;
 
 namespace SW.Store.Checkout.WebApi
@@ -34,7 +34,6 @@ namespace SW.Store.Checkout.WebApi
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddApiVersioning();
-            services.AddDbContext<SwStoreReadDbContext>(options => options.UseNpgsql(Configuration.GetSection("ReadStorage")["ConnectionString"]));
         }
 
         public static void ConfigureContainer(ContainerBuilder builder)
@@ -45,6 +44,7 @@ namespace SW.Store.Checkout.WebApi
             builder.RegisterType<ProcessOrderQueueSettingsProvider>().As<IProcessOrderQueueSettingsProvider>();
             builder.RegisterType<ReadStorageSyncQueueSettingsProvider>().As<IReadStorageSyncQueueSettingsProvider>();
 
+            builder.RegisterModule<DomainAutofacModule>();
             builder.RegisterModule<CoreAutofacModule>();
             builder.RegisterModule<EventStoreAutofacModule>();
             builder.RegisterModule<RabbitMQAutofacModule>();

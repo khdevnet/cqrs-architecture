@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj" />
     <ProjectReference Include="..\SW.Store.Core\SW.Store.Core.csproj" />
   </ItemGroup>
 
