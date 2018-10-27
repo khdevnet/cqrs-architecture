@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Checkout.Domain.Orders.Commands;
 using SW.Store.Checkout.Domain.Orders.Dto;
 using SW.Store.Checkout.Domain.Orders.Enum;
 using SW.Store.Checkout.Domain.Orders.Views;
 using SW.Store.Checkout.Domain.Warehouses;
 using SW.Store.Checkout.Domain.Warehouses.Views;
+using SW.Store.Core.Aggregates;
 using SW.Store.Core.Events;
 using SW.Store.Core.Messages;
 using SW.Store.Core.Queues.ProcessOrder;
@@ -112,7 +112,7 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
                 {
                     WarehouseAggregate warehouseAggregate = repository.Load<WarehouseAggregate>(warehouse.Id);
                     warehouseAggregate.SubstractItemQuantity(orderLine.ProductNumber, orderLine.Quantity);
-                    events.Add(warehouseAggregate.Id, warehouseAggregate.PendingEvents.ToList());
+                    AddAggEvents(events, warehouseAggregate.Id, warehouseAggregate.PendingEvents.ToList());
                 }
                 else
                 {
@@ -120,9 +120,22 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
                 }
                 OrderAggregate orderAggregate = repository.Load<OrderAggregate>(orderId);
                 orderAggregate.AddLine(orderItem);
-                events.Add(orderAggregate.Id, orderAggregate.PendingEvents.ToList());
+
+                AddAggEvents(events, orderAggregate.Id, orderAggregate.PendingEvents.ToList());
             }
             return events;
+        }
+
+        private static void AddAggEvents(Dictionary<Guid, List<IEvent>> aggEvents, Guid id, List<IEvent> pendingEvents)
+        {
+            if (aggEvents.ContainsKey(id))
+            {
+                aggEvents[id].AddRange(pendingEvents.ToList());
+            }
+            else
+            {
+                aggEvents.Add(id, pendingEvents.ToList());
+            }
         }
 
         private bool IsOrderExist(Guid orderId)

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using SW.Store.Checkout.Domain.Warehouses.Events;
+using SW.Store.Core.Views;
 
 namespace SW.Store.Checkout.Domain.Warehouses.Views
 {
-    public class WarehouseView
+    public class WarehouseView : IView
     {
         public Guid Id { get; set; }
 

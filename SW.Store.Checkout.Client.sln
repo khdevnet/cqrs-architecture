@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Client", "SW.Store.Checkout.Client\SW.Store.Checkout.Client.csproj", "{55375522-76CB-49FB-B00B-91FD1B3B376F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Extensibility", "SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj", "{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Core", "SW.Store.Core\SW.Store.Core.csproj", "{66071ECB-5E6F-4349-B940-A860D612C4BE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Domain", "SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj", "{32F8136A-9A3B-47DC-BB11-04B36F83734D}"
@@ -23,10 +21,6 @@ Global
 		{55375522-76CB-49FB-B00B-91FD1B3B376F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55375522-76CB-49FB-B00B-91FD1B3B376F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55375522-76CB-49FB-B00B-91FD1B3B376F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA82BBA9-513A-4A78-9ACB-E16E896B6ED7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66071ECB-5E6F-4349-B940-A860D612C4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU

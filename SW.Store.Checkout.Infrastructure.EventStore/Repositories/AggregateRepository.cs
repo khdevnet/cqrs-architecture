@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Marten;
-using SW.Store.Checkout.Domain.Extensibility;
 using SW.Store.Core.Aggregates;
 using SW.Store.Core.Events;
 
 namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
 {
-    internal sealed class AggregateRepository : IAggregationRepository
+    internal class AggregateRepository : IAggregationRepository
     {
         private readonly IDocumentStore store;
 
@@ -64,14 +63,25 @@ namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
             aggregate.PendingEvents.Clear();
         }
 
-        public T Load<T>(Guid id, int version = 0) where T : class, IAggregate, new()
+        public T Load<T>(Guid id, int version = 0, DateTime? timestamp = null) where T : class, IAggregate, new()
         {
             using (IDocumentSession session = store.OpenSession())
             {
-                return session.Events.AggregateStream<T>(id, version);
+                return session.Events.AggregateStream<T>(id, version, timestamp);
             }
 
             throw new InvalidOperationException($"No aggregate by id {id}.");
+        }
+
+        public IEnumerable<IEvent> GetEvents(Guid streamId, int version = 0, DateTime? timestamp = null)
+        {
+            using (IDocumentSession session = store.OpenSession())
+            {
+                return session.Events
+                   .FetchStream(streamId, version, timestamp).Select(ev => ev.Data)
+                   .Cast<IEvent>()
+                   .ToArray();
+            }
         }
     }
 }

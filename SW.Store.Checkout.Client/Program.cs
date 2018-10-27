@@ -14,7 +14,7 @@ namespace SW.Store.Checkout.Client
 
         static void Main(string[] args)
         {
-            IEnumerable<CreateOrder> createOrderModels = Enumerable.Range(0, 5)
+            IEnumerable<CreateOrder> createOrderModels = Enumerable.Range(0, 100)
       .Select(n => CreateOrderCommand()).ToList();
             var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();

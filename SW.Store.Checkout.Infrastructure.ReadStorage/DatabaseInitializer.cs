@@ -1,33 +1,27 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
 using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Core;
+using SW.Store.Core.Initializers;
 
 namespace SW.Store.Checkout.Infrastructure.ReadStorage
 {
     internal class DatabaseInitializer : IInitializer
     {
-        private readonly IServiceProvider serviceProvider;
+        private readonly SwStoreReadDbContext context;
 
         public int Order { get; } = 1;
 
-        public DatabaseInitializer(IServiceProvider serviceProvider)
+        public DatabaseInitializer(SwStoreReadDbContext context)
         {
-            this.serviceProvider = serviceProvider;
+            this.context = context;
         }
 
         public void Init()
         {
-            using (IServiceScope serviceScope = serviceProvider.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                MigrateDatabase(serviceScope.ServiceProvider);
-            }
+            MigrateDatabase(context);
         }
 
-        private static void MigrateDatabase(IServiceProvider serviceProvider)
+        private static void MigrateDatabase(SwStoreReadDbContext context)
         {
-            SwStoreReadDbContext context = serviceProvider.GetRequiredService<SwStoreReadDbContext>();
             context.Database.EnsureDeleted();
             context.Database.Migrate();
         }

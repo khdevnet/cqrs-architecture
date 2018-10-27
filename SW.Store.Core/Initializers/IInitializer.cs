@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Core
+﻿namespace SW.Store.Core.Initializers
 {
     public interface IInitializer
     {

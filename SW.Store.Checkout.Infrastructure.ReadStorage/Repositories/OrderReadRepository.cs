@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Checkout.Read.ReadView;
@@ -24,18 +25,7 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Repositories
 
         public IEnumerable<OrderReadView> Get()
         {
-            return db
-             .Set<OrderReadView>()
-             .Select(a => new OrderReadView
-             {
-                 Id = a.Id,
-                 Lines = a.Lines.Select(l => new OrderLineReadView
-                 {
-                     ProductId = l.ProductId,
-                     Quantity = l.Quantity,
-                     Status = l.Status
-                 }).ToList(),
-             });
+            return db.OrderViews.Include(nameof(OrderReadView.Lines));
         }
     }
 }

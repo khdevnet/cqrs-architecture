@@ -50,6 +50,7 @@ namespace SW.Store.Checkout.Domain.Orders
         {
             Id = @event.OrderId;
             CustomerId = @event.CustomerId;
+            Status = @event.Status;
         }
 
         public void Apply(OrderLineAdded @event)

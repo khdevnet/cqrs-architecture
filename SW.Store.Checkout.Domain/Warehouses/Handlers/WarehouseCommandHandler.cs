@@ -1,6 +1,6 @@
-﻿using SW.Store.Checkout.Domain.Extensibility;
-using SW.Store.Checkout.Domain.Warehouses;
+﻿using SW.Store.Checkout.Domain.Warehouses;
 using SW.Store.Checkout.Domain.Warehouses.Commands;
+using SW.Store.Core.Aggregates;
 using SW.Store.Core.Messages;
 
 namespace SW.Store.Checkout.Domain.Orders.Handlers

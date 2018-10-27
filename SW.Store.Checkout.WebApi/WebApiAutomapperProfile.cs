@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SW.Store.Checkout.Read.ReadView;
 
 namespace SW.Store.Checkout.WebApi
 {
@@ -6,6 +7,8 @@ namespace SW.Store.Checkout.WebApi
     {
         public WebApiAutomapperProfile()
         {
+            CreateMap<OrderReadView, OrderReadModel>();
+            CreateMap<OrderLineReadView, OrderLineReadModel>();
         }
     }
 }

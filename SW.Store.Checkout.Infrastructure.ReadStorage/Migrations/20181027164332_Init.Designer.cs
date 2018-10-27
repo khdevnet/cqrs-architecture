@@ -10,8 +10,8 @@ using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
 namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
 {
     [DbContext(typeof(SwStoreReadDbContext))]
-    [Migration("20181026175544_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20181027164332_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,19 +68,6 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.HasIndex("WarehouseId");
 
                     b.ToTable("WarehouseItemReadViews");
-
-                    b.HasData(
-                        new { Id = new Guid("aaacc12f-5f0d-4fb6-b71d-0186555ab076"), ProductId = 1, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d93") },
-                        new { Id = new Guid("a5310b55-5628-4b81-8ec9-302131acf330"), ProductId = 2, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d93") },
-                        new { Id = new Guid("bf5d8b3b-7334-4b9f-b424-fbe409720bee"), ProductId = 3, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d93") },
-                        new { Id = new Guid("d90af348-bd20-4d59-8456-1391e894edcb"), ProductId = 4, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d93") },
-                        new { Id = new Guid("f7ea3f87-d72a-439a-8203-90df1b5a3e1a"), ProductId = 5, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d93") },
-                        new { Id = new Guid("17366bf0-d0a2-463e-b64b-999d2d8651e9"), ProductId = 1, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d94") },
-                        new { Id = new Guid("b382ef4e-a9fc-4a6f-9d0c-23a0bff3533f"), ProductId = 2, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d94") },
-                        new { Id = new Guid("0e594240-a791-4b38-9e34-e05407091927"), ProductId = 3, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d94") },
-                        new { Id = new Guid("f492d3e5-3ca2-430c-91bf-42936fe79931"), ProductId = 4, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d94") },
-                        new { Id = new Guid("98d0b98e-f7bc-4fe2-8d20-f9f5647d28a7"), ProductId = 5, Quantity = 5000, WarehouseId = new Guid("6df8744a-d464-4826-91d1-08095ab49d94") }
-                    );
                 });
 
             modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.WarehouseReadView", b =>
@@ -92,11 +79,6 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WarehouseReadViews");
-
-                    b.HasData(
-                        new { Id = new Guid("6df8744a-d464-4826-91d1-08095ab49d93"), Name = "Naboo" },
-                        new { Id = new Guid("6df8744a-d464-4826-91d1-08095ab49d94"), Name = "Tatooine" }
-                    );
                 });
 
             modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.OrderLineReadView", b =>

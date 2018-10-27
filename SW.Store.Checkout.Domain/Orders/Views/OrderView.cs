@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using SW.Store.Checkout.Domain.Orders.Events;
+using SW.Store.Core.Views;
 
 namespace SW.Store.Checkout.Domain.Orders.Views
 {
-    public class OrderView
+    public class OrderView : IView
     {
         public string Status { get; set; }
 

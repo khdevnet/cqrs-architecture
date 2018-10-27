@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using SW.Store.Core.Aggregates;
 using SW.Store.Core.Events;
 
-namespace SW.Store.Checkout.Domain.Extensibility
+namespace SW.Store.Core.Aggregates
 {
     public interface IAggregationRepository
     {
@@ -16,6 +15,8 @@ namespace SW.Store.Checkout.Domain.Extensibility
 
         TSource FirstOrDefault<TSource>(Expression<Func<TSource, bool>> predicate);
 
-        T Load<T>(Guid id, int version = 0) where T : class, IAggregate, new();
+        IEnumerable<IEvent> GetEvents(Guid streamId, int version = 0, DateTime? timestamp = null);
+
+        T Load<T>(Guid id, int version = 0, DateTime? timestamp = null) where T : class, IAggregate, new();
     }
 }

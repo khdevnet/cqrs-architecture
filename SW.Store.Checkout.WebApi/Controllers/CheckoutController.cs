@@ -58,7 +58,7 @@ namespace SW.Store.Checkout.WebApi.Controllers
             OrderReadView order = orderReadRepository.GetById(id);
             if (order != null)
             {
-                return Ok(order);
+                return Ok(mapper.Map<OrderReadModel>(order));
             }
             return NotFound();
         }

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Core", "SW.Store.Core\SW.Store.Core.csproj", "{7720BA91-B492-4A07-B061-79FCCC6A715E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Extensibility", "SW.Store.Checkout.Extensibility\SW.Store.Checkout.Extensibility.csproj", "{E4073398-F12F-488C-AA21-3FB62939E61C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Domain", "SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj", "{AE4B65DB-DFFF-45E2-9469-3EE6FFCC670A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Read", "SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj", "{3769DBC7-9C0E-40D6-8DC4-925C335301A3}"
@@ -37,10 +35,6 @@ Global
 		{7720BA91-B492-4A07-B061-79FCCC6A715E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7720BA91-B492-4A07-B061-79FCCC6A715E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7720BA91-B492-4A07-B061-79FCCC6A715E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4073398-F12F-488C-AA21-3FB62939E61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4073398-F12F-488C-AA21-3FB62939E61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4073398-F12F-488C-AA21-3FB62939E61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4073398-F12F-488C-AA21-3FB62939E61C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE4B65DB-DFFF-45E2-9469-3EE6FFCC670A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE4B65DB-DFFF-45E2-9469-3EE6FFCC670A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE4B65DB-DFFF-45E2-9469-3EE6FFCC670A}.Release|Any CPU.ActiveCfg = Release|Any CPU
