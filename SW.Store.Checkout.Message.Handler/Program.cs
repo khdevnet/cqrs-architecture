@@ -10,7 +10,7 @@ using SW.Store.Core.Queues.ProcessOrder;
 using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings;
 
-namespace SW.Store.Checkout.OrderHandler.Application
+namespace SW.Store.Checkout.Message.Handler
 {
     class Program
     {

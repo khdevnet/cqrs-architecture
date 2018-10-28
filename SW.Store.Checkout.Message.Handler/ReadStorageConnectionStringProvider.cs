@@ -1,6 +1,6 @@
 ﻿using SW.Store.Core.Settings;
 
-namespace SW.Store.Checkout.OrderHandler.Application
+namespace SW.Store.Checkout.Message.Handler
 {
     internal class ReadStorageConnectionStringProvider : IReadStorageConnectionStringProvider
     {

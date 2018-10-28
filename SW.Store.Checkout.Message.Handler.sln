@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.OrderHandler.Application", "SW.Store.Checkout.OrderHandler.Application\SW.Store.Checkout.OrderHandler.Application.csproj", "{204B27A0-FC19-4554-9EC0-27004B7770E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Message.Handler", "SW.Store.Checkout.Message.Handler\SW.Store.Checkout.Message.Handler.csproj", "{204B27A0-FC19-4554-9EC0-27004B7770E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastructure.RabbitMQ", "SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj", "{1A4AA15A-F150-488F-80F4-D71239084E51}"
 EndProject

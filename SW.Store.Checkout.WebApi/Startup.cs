@@ -65,8 +65,8 @@ namespace SW.Store.Checkout.WebApi
 
             app.UseMvc();
 
-            //IEnumerable<IInitializer> initializers = app.ApplicationServices.GetService<IEnumerable<IInitializer>>();
-            //RunInitializers(initializers);
+            IEnumerable<IInitializer> initializers = app.ApplicationServices.GetService<IEnumerable<IInitializer>>();
+            RunInitializers(initializers);
         }
 
         public static void RunInitializers(IEnumerable<IInitializer> initializers)

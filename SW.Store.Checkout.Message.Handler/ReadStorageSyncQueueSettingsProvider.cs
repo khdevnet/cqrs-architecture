@@ -1,7 +1,7 @@
 ﻿using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.OrderHandler.Application
+namespace SW.Store.Checkout.Message.Handler
 {
     internal class ReadStorageSyncQueueSettingsProvider : IReadStorageSyncQueueSettingsProvider
     {

@@ -32,8 +32,7 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
 
         public void Handle(CreateOrder command)
         {
-            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(command.OrderId);
-            if (orderAggregate.Status != OrderStatus.NotExist.ToString())
+            if (IsOrderExist(command.OrderId))
             {
                 return;
             }
@@ -47,14 +46,7 @@ namespace SW.Store.Checkout.Domain.Orders.Handlers
 
             foreach (KeyValuePair<Guid, List<IEvent>> lineAgg in orderLinesEvents)
             {
-                if (createOrderEvents.ContainsKey(lineAgg.Key))
-                {
-                    createOrderEvents[lineAgg.Key].AddRange(lineAgg.Value);
-                }
-                else
-                {
-                    createOrderEvents.Add(lineAgg.Key, lineAgg.Value.ToList());
-                }
+                AddAggEvents(createOrderEvents, lineAgg.Key, lineAgg.Value);
             }
 
             Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => createOrderEvents;
