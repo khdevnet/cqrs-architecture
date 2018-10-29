@@ -58,8 +58,8 @@ $ dotnet SW.Store.Checkout.StorageReplication.dll "2018-10-27 16:46:54.762238+00
 * [Frameworks & Architecture Styles](https://github.com/khdevnet/sw-checkout/wiki/Architecture-Vision#frameworks--architecture-styles)
 
 ## Resources
-* [RabbitMQ](https://github.com/khdevnet/sw-checkout/blob/master/RabbitMQ.md)
-* [Distributed Systems](https://github.com/khdevnet/sw-checkout/blob/master/DistributedSystemsDocs)
+* [RabbitMQ](https://github.com/khdevnet/distributed-systems/blob/master/rabbitmq-practices.md)
+* [Distributed Systems](https://github.com/khdevnet/distributed-systems/blob/master/distributed-systems.md)
 
 ## Navigation
 * [Home](https://github.com/khdevnet/sw)
