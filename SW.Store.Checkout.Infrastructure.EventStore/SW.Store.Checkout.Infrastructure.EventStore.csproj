@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj" />
     <ProjectReference Include="..\SW.Store.Core\SW.Store.Core.csproj" />
   </ItemGroup>
 
