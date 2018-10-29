@@ -1,11 +1,12 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SW.Store.Checkout.Domain.Orders.Commands;
 using SW.Store.Checkout.Read.Extensibility;
 using SW.Store.Checkout.Read.ReadView;
+using SW.Store.Checkout.WebApi.Models;
 using SW.Store.Core.Messages;
 using SW.Store.Core.Queues.ProcessOrder;
+using System;
 
 namespace SW.Store.Checkout.WebApi.Controllers
 {
@@ -31,9 +32,16 @@ namespace SW.Store.Checkout.WebApi.Controllers
 
         // POST api/orders
         [HttpPost]
-        public void Post([FromBody] CreateOrder createOrder)
+        public IActionResult Post([FromBody] CreateOrderModel createOrder)
         {
-            commandBus.Send(createOrder);
+            var orderId = Guid.NewGuid();
+            commandBus.Send(new CreateOrder
+            {
+                OrderId = orderId,
+                CustomerId = createOrder.CustomerId,
+                Lines = createOrder.Lines
+            });
+            return Created("status", orderId);
         }
 
         [HttpPut]

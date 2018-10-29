@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,17 +16,20 @@ using SW.Store.Core.Initializers;
 using SW.Store.Core.Queues.ProcessOrder;
 using SW.Store.Core.Queues.ReadStorageSync;
 using SW.Store.Core.Settings;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SW.Store.Checkout.WebApi
 {
     public class Startup
     {
+        private const string CorsPolicyName = "CorsPolicy";
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,7 +37,18 @@ namespace SW.Store.Checkout.WebApi
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddApiVersioning();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    CorsPolicyName,
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
             services.AddDbContext<SwStoreReadDbContext>(options => options.UseNpgsql(Configuration.GetSection("ReadStorage")["ConnectionString"]));
+
         }
 
         public static void ConfigureContainer(ContainerBuilder builder)
@@ -63,6 +75,7 @@ namespace SW.Store.Checkout.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(CorsPolicyName);
             app.UseMvc();
 
             IEnumerable<IInitializer> initializers = app.ApplicationServices.GetService<IEnumerable<IInitializer>>();

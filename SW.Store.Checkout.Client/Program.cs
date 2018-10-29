@@ -20,11 +20,12 @@ namespace SW.Store.Checkout.Client
             var actualOrderIds = new List<Guid>();
             foreach (CreateOrder orderModel in createOrderModels)
             {
-                actualOrderIds.Add(orderModel.OrderId);
                 using (var client = new HttpClient())
                 {
-                    Console.WriteLine("Create Order Id: " + orderModel.OrderId);
                     HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/v1/checkout", orderModel).Result;
+                    Console.WriteLine("Create Order Id: " + response.Content.ReadAsAsync<Guid>().Result);
+                    actualOrderIds.Add(response.Content.ReadAsAsync<Guid>().Result);
+
                 }
                 CheckPendingOrders(actualOrderIds);
             }
