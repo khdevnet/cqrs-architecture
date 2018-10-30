@@ -18,7 +18,7 @@ namespace SW.Checkout.Message.Handler
     {
         static void Main(string[] args)
         {
-            Thread.Sleep(TimeSpan.FromSeconds(20));
+            Thread.Sleep(TimeSpan.FromSeconds(45));
             IContainer container = CreateContainer();
 
             IQueueSubscriber subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
