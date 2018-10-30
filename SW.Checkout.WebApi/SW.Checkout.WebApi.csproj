@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Marten" Version="3.0.1" />
+    <PackageReference Include="MediatR" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SW.Checkout.Domain\SW.Checkout.Domain.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.EventStore\SW.Checkout.Infrastructure.EventStore.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.RabbitMQ\SW.Checkout.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.ReadStorage\SW.Checkout.Infrastructure.ReadStorage.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Read\SW.Checkout.Read.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Core\SW.Checkout.Core.csproj" />
+  </ItemGroup>
+
+</Project>

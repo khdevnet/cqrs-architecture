@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Replication\Synchronization\**" />
+    <EmbeddedResource Remove="Replication\Synchronization\**" />
+    <None Remove="Replication\Synchronization\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Database\DesignTimeDbContextFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SW.Checkout.Domain\SW.Checkout.Domain.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Read\SW.Checkout.Read.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Core\SW.Checkout.Core.csproj" />
+  </ItemGroup>
+
+</Project>
