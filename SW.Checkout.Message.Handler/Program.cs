@@ -32,6 +32,8 @@ namespace SW.Checkout.Message.Handler
 
                     readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
                     readStorageSubscriber.Subscribe();
+                    attempts_count = 21;
+                    Console.WriteLine($"### Subscription to Rabbit MQ successful");
                 }
                 catch (Exception)
                 {
