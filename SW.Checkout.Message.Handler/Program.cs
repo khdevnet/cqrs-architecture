@@ -1,16 +1,16 @@
-﻿using System;
-using System.IO;
-using Autofac;
+﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using SW.Checkout.Core;
 using SW.Checkout.Core.Messages;
 using SW.Checkout.Core.Queues.ProcessOrder;
 using SW.Checkout.Core.Queues.ReadStorageSync;
-using SW.Checkout.Core.Settings;
 using SW.Checkout.Domain;
 using SW.Checkout.Infrastructure.EventStore;
 using SW.Checkout.Infrastructure.RabbitMQ;
 using SW.Checkout.Infrastructure.ReadStorage;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace SW.Checkout.Message.Handler
 {
@@ -18,6 +18,7 @@ namespace SW.Checkout.Message.Handler
     {
         static void Main(string[] args)
         {
+            Thread.Sleep(TimeSpan.FromSeconds(20));
             IContainer container = CreateContainer();
 
             IQueueSubscriber subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
