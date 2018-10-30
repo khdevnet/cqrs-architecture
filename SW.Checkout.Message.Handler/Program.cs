@@ -69,7 +69,8 @@ namespace SW.Checkout.Message.Handler
         {
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables("SW_");
 
             IConfigurationRoot configuration = configBuilder.Build();
             return configuration;
