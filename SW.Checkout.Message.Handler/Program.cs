@@ -23,7 +23,6 @@ namespace SW.Checkout.Message.Handler
             int attempts_count = 0;
             while (attempts_count <= 20)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(10));
                 try
                 {
                     IContainer container = CreateContainer();
@@ -39,6 +38,7 @@ namespace SW.Checkout.Message.Handler
                     attempts_count += 1;
                     Console.WriteLine($"### Retry connect to Rabbit MQ attempt {attempts_count}");
                 }
+                Thread.Sleep(TimeSpan.FromSeconds(10));
             }
             Console.ReadLine();
             subscriber?.Dispose();
