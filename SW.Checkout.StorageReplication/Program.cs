@@ -20,6 +20,8 @@ using SW.Checkout.Core.Queues.ProcessOrder;
 using SW.Checkout.Core.Queues.ReadStorageSync;
 using SW.Checkout.Core.Replication;
 using SW.Checkout.Core.Settings;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace SW.Checkout.StorageReplication
 {
@@ -70,16 +72,22 @@ namespace SW.Checkout.StorageReplication
 
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
 
-            builder.RegisterType<ProcessOrderQueueSettingsProvider>().As<IProcessOrderQueueSettingsProvider>();
-            builder.RegisterType<ReadStorageSyncQueueSettingsProvider>().As<IReadStorageSyncQueueSettingsProvider>();
-
-            builder.RegisterType<ReadStorageConnectionStringProvider>().As<IReadStorageConnectionStringProvider>();
-            builder.RegisterType<EventStoreConnectionStringProvider>().As<IEventStoreConnectionStringProvider>();
-
             builder.RegisterType<ReadStorageReplicaConnectionStringProvider>().As<IReadStorageReplicaConnectionStringProvider>();
             builder.RegisterType<EventStoreReplicaConnectionStringProvider>().As<IEventStoreReplicaConnectionStringProvider>();
 
+            builder.RegisterInstance(CreateConfiguration());
+
             return builder.Build();
+        }
+
+        private static IConfiguration CreateConfiguration()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            IConfigurationRoot configuration = configBuilder.Build();
+            return configuration;
         }
 
 

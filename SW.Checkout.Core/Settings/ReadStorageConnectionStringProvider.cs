@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SW.Checkout.Core.Settings;
 
-namespace SW.Checkout.WebApi
+namespace SW.Checkout.Core.Settings
 {
     public class ReadStorageConnectionStringProvider : ConnectionStringProviderBase, IReadStorageConnectionStringProvider
     {

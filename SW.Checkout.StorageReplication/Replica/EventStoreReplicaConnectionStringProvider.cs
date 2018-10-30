@@ -1,12 +1,14 @@
-﻿using SW.Checkout.Core.Replication;
+﻿using Microsoft.Extensions.Configuration;
+using SW.Checkout.Core.Replication;
+using SW.Checkout.Core.Settings;
 
 namespace SW.Checkout.StorageReplication.Replica
 {
-    internal class EventStoreReplicaConnectionStringProvider : IEventStoreReplicaConnectionStringProvider
+    internal class EventStoreReplicaConnectionStringProvider : ConnectionStringProviderBase, IEventStoreReplicaConnectionStringProvider
     {
-        public string Get()
+        public EventStoreReplicaConnectionStringProvider(IConfiguration configuration) : base(configuration, "EventStoreReplica")
         {
-            return "PORT = 5432; HOST = 127.0.0.1; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = 'swstore-rep'; PASSWORD = '123456'; USER ID = 'postgres'";
+
         }
     }
 }

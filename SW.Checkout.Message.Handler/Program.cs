@@ -1,14 +1,16 @@
 ﻿using System;
+using System.IO;
 using Autofac;
-using SW.Checkout.Domain;
-using SW.Checkout.Infrastructure.EventStore;
-using SW.Checkout.Infrastructure.RabbitMQ;
-using SW.Checkout.Infrastructure.ReadStorage;
+using Microsoft.Extensions.Configuration;
 using SW.Checkout.Core;
 using SW.Checkout.Core.Messages;
 using SW.Checkout.Core.Queues.ProcessOrder;
 using SW.Checkout.Core.Queues.ReadStorageSync;
 using SW.Checkout.Core.Settings;
+using SW.Checkout.Domain;
+using SW.Checkout.Infrastructure.EventStore;
+using SW.Checkout.Infrastructure.RabbitMQ;
+using SW.Checkout.Infrastructure.ReadStorage;
 
 namespace SW.Checkout.Message.Handler
 {
@@ -42,13 +44,19 @@ namespace SW.Checkout.Message.Handler
 
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
 
-            builder.RegisterType<ProcessOrderQueueSettingsProvider>().As<IProcessOrderQueueSettingsProvider>();
-            builder.RegisterType<ReadStorageSyncQueueSettingsProvider>().As<IReadStorageSyncQueueSettingsProvider>();
-
-            builder.RegisterType<ReadStorageConnectionStringProvider>().As<IReadStorageConnectionStringProvider>();
-            builder.RegisterType<EventStoreConnectionStringProvider>().As<IEventStoreConnectionStringProvider>();
+            builder.RegisterInstance(CreateConfiguration());
 
             return builder.Build();
+        }
+
+        private static IConfiguration CreateConfiguration()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            IConfigurationRoot configuration = configBuilder.Build();
+            return configuration;
         }
     }
 }

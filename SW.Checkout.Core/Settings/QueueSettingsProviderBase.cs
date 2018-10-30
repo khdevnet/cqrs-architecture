@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Checkout.WebApi
+namespace SW.Checkout.Core.Settings
 {
     public class QueueSettingsProviderBase
     {

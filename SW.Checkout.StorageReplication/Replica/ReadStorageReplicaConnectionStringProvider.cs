@@ -1,12 +1,14 @@
-﻿using SW.Checkout.Core.Replication;
+﻿using Microsoft.Extensions.Configuration;
+using SW.Checkout.Core.Replication;
+using SW.Checkout.Core.Settings;
 
 namespace SW.Checkout.StorageReplication.Replica
 {
-    internal class ReadStorageReplicaConnectionStringProvider : IReadStorageReplicaConnectionStringProvider
+    internal class ReadStorageReplicaConnectionStringProvider : ConnectionStringProviderBase, IReadStorageReplicaConnectionStringProvider
     {
-        public string Get()
+        public ReadStorageReplicaConnectionStringProvider(IConfiguration configuration) : base(configuration, "ReadStorageReplica")
         {
-            return "Server=127.0.0.1;Port=5432;Database=swstore-rep;User Id=postgres;Password=123456;";
+
         }
     }
 }

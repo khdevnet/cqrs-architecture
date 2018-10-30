@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace SW.Checkout.WebApi
+namespace SW.Checkout.Core.Settings
 {
     public class ConnectionStringProviderBase
     {
