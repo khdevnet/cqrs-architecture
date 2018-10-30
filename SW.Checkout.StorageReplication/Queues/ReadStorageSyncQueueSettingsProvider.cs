@@ -1,7 +1,7 @@
-﻿using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Settings.Dto;
+﻿using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.StorageReplication
+namespace SW.Checkout.StorageReplication
 {
     internal class ReadStorageSyncQueueSettingsProvider : IReadStorageSyncQueueSettingsProvider
     {

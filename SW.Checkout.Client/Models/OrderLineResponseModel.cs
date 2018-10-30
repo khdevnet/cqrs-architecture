@@ -1,9 +1,7 @@
-﻿namespace SW.Checkout.WebApi.Models
+﻿namespace SW.Checkout.Client.Models
 {
-    public class OrderLineReadModel
+    public class OrderLineResponseModel
     {
-        public int Id { get; set; }
-
         public int ProductId { get; set; }
 
         public string Status { get; set; }

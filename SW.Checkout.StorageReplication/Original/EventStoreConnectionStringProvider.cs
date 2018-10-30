@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.StorageReplication
+namespace SW.Checkout.StorageReplication
 {
     internal class EventStoreConnectionStringProvider : IEventStoreConnectionStringProvider
     {

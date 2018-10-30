@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Core.Settings;
+using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     public class EventStoreConnectionStringProvider : ConnectionStringProviderBase, IEventStoreConnectionStringProvider
     {

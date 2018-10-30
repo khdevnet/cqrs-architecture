@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
-using SW.Store.Checkout.Domain;
-using SW.Store.Checkout.Domain.Orders.Views;
-using SW.Store.Checkout.Domain.Warehouses.Views;
-using SW.Store.Checkout.Infrastructure.EventStore;
-using SW.Store.Checkout.Infrastructure.EventStore.Replication;
-using SW.Store.Checkout.Infrastructure.RabbitMQ;
-using SW.Store.Checkout.Infrastructure.ReadStorage;
-using SW.Store.Checkout.Read.ReadView;
-using SW.Store.Checkout.StorageReplication.Replica;
-using SW.Store.Checkout.StorageReplication.Replication;
-using SW.Store.Core;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Initializers;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Replication;
-using SW.Store.Core.Settings;
+using SW.Checkout.Domain;
+using SW.Checkout.Domain.Orders.Views;
+using SW.Checkout.Domain.Warehouses.Views;
+using SW.Checkout.Infrastructure.EventStore;
+using SW.Checkout.Infrastructure.EventStore.Replication;
+using SW.Checkout.Infrastructure.RabbitMQ;
+using SW.Checkout.Infrastructure.ReadStorage;
+using SW.Checkout.Read.ReadView;
+using SW.Checkout.StorageReplication.Replica;
+using SW.Checkout.StorageReplication.Replication;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Replication;
+using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.StorageReplication
+namespace SW.Checkout.StorageReplication
 {
     class Program
     {

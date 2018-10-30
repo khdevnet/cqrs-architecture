@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Messages;
+﻿using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Core.Commands
+namespace SW.Checkout.Core.Commands
 {
     public interface ICommand : IMessage { }
 }

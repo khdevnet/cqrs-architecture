@@ -1,7 +1,7 @@
 ﻿using System;
-using SW.Store.Core;
+using SW.Checkout.Core;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     internal class FakeLogger : ILogger
     {

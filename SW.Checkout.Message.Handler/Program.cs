@@ -1,16 +1,16 @@
 ﻿using System;
 using Autofac;
-using SW.Store.Checkout.Domain;
-using SW.Store.Checkout.Infrastructure.EventStore;
-using SW.Store.Checkout.Infrastructure.RabbitMQ;
-using SW.Store.Checkout.Infrastructure.ReadStorage;
-using SW.Store.Core;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Settings;
+using SW.Checkout.Domain;
+using SW.Checkout.Infrastructure.EventStore;
+using SW.Checkout.Infrastructure.RabbitMQ;
+using SW.Checkout.Infrastructure.ReadStorage;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.Message.Handler
+namespace SW.Checkout.Message.Handler
 {
     class Program
     {

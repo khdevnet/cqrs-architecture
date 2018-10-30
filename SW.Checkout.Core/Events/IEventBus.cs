@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SW.Store.Core.Events
+namespace SW.Checkout.Core.Events
 {
     public interface IEventBus
 

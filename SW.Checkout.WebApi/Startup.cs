@@ -6,20 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SW.Store.Checkout.Domain;
-using SW.Store.Checkout.Infrastructure.EventStore;
-using SW.Store.Checkout.Infrastructure.RabbitMQ;
-using SW.Store.Checkout.Infrastructure.ReadStorage;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Core;
-using SW.Store.Core.Initializers;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Settings;
+using SW.Checkout.Domain;
+using SW.Checkout.Infrastructure.EventStore;
+using SW.Checkout.Infrastructure.RabbitMQ;
+using SW.Checkout.Infrastructure.ReadStorage;
+using SW.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Settings;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     public class Startup
     {

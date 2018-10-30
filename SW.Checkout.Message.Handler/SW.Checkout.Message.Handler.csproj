@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.EventStore\SW.Store.Checkout.Infrastructure.EventStore.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Infrastructure.ReadStorage\SW.Store.Checkout.Infrastructure.ReadStorage.csproj" />
-    <ProjectReference Include="..\SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj" />
-    <ProjectReference Include="..\SW.Store.Core\SW.Store.Core.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Domain\SW.Checkout.Domain.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.EventStore\SW.Checkout.Infrastructure.EventStore.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.RabbitMQ\SW.Checkout.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Infrastructure.ReadStorage\SW.Checkout.Infrastructure.ReadStorage.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Read\SW.Checkout.Read.csproj" />
+    <ProjectReference Include="..\SW.Checkout.Core\SW.Checkout.Core.csproj" />
   </ItemGroup>
 </Project>

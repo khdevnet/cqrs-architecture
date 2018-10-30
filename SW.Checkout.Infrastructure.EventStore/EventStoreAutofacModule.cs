@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using Marten;
-using SW.Store.Checkout.Infrastructure.EventStore.Repositories;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Initializers;
-using SW.Store.Core.Settings;
+using SW.Checkout.Infrastructure.EventStore.Repositories;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore
+namespace SW.Checkout.Infrastructure.EventStore
 {
     public class EventStoreAutofacModule : Module
     {

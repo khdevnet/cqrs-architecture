@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Core.Settings.Dto
+﻿namespace SW.Checkout.Core.Settings.Dto
 {
     public class QueueSettings
     {

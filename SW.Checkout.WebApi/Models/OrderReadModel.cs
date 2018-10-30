@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SW.Store.Checkout.Read.ReadView
+namespace SW.Checkout.WebApi.Models
 {
     public class OrderReadModel
     {

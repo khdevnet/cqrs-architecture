@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Core.Messages
+﻿namespace SW.Checkout.Core.Messages
 {
     public interface IMessageHandler<in TMessage> : IMessageHandler
         where TMessage : IMessage

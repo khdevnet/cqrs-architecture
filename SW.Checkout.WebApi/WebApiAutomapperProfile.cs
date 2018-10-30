@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using SW.Store.Checkout.Read.ReadView;
+using SW.Checkout.Read.ReadView;
+using SW.Checkout.WebApi.Models;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     public class WebApiAutomapperProfile : Profile
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Core.Replication
+namespace SW.Checkout.Core.Replication
 {
     public interface IReplicationManager
     {

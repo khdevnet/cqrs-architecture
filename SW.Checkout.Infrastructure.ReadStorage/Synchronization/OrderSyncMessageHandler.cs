@@ -1,10 +1,10 @@
 ﻿using System;
-using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Checkout.Read.ReadView;
-using SW.Store.Core.Queues.ReadStorageSync;
+using SW.Checkout.Domain.Orders.Events;
+using SW.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Read.ReadView;
+using SW.Checkout.Core.Queues.ReadStorageSync;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage.Synchronization
+namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
 {
     internal class OrderSyncMessageHandler :
         IReadStorageSyncMessageHandler<OrderCreated>,

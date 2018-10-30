@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
+namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
 {
     public partial class Init : Migration
     {

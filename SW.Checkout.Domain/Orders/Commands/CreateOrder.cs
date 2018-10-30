@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using SW.Store.Checkout.Domain.Orders.Dto;
-using SW.Store.Core.Commands;
+using SW.Checkout.Domain.Orders.Dto;
+using SW.Checkout.Core.Commands;
 
-namespace SW.Store.Checkout.Domain.Orders.Commands
+namespace SW.Checkout.Domain.Orders.Commands
 {
     public class CreateOrder : ICommand
     {

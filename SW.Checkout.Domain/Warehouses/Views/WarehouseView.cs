@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Warehouses.Events;
-using SW.Store.Core.Views;
+using SW.Checkout.Domain.Warehouses.Events;
+using SW.Checkout.Core.Views;
 
-namespace SW.Store.Checkout.Domain.Warehouses.Views
+namespace SW.Checkout.Domain.Warehouses.Views
 {
     public class WarehouseView : IView
     {

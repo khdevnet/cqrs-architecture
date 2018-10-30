@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SW.Store.Core.Events;
+using SW.Checkout.Core.Events;
 
-namespace SW.Store.Core.Aggregates
+namespace SW.Checkout.Core.Aggregates
 {
     public interface IEventSourcedAggregate : IAggregate
     {

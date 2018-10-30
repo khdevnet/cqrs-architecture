@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Core.Views;
+using SW.Checkout.Domain.Orders.Events;
+using SW.Checkout.Core.Views;
 
-namespace SW.Store.Checkout.Domain.Orders.Views
+namespace SW.Checkout.Domain.Orders.Views
 {
     public class OrderView : IView
     {

@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Core.Queues.ProcessOrder
+namespace SW.Checkout.Core.Queues.ProcessOrder
 {
     public interface IProcessOrderQueueSettingsProvider : IQueueSettingsProvider
     {

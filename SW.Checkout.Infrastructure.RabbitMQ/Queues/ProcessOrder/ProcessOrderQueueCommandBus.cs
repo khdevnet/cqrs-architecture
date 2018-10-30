@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using SW.Store.Core.Commands;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Settings.Dto;
+using SW.Checkout.Core.Commands;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ProcessOrder
+namespace SW.Checkout.Infrastructure.RabbitMQ.Queues.ProcessOrder
 {
     internal class ProcessOrderQueueCommandBus : IProcessOrderQueueCommandBus
     {

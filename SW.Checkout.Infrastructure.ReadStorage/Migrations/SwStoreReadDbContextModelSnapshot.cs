@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Infrastructure.ReadStorage.Database;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
+namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
 {
     [DbContext(typeof(SwStoreReadDbContext))]
     partial class SwStoreReadDbContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.OrderLineReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderLineReadView", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -39,7 +39,7 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.ToTable("OrderLineViews");
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.OrderReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderReadView", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -50,7 +50,7 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.ToTable("OrderViews");
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.WarehouseItemReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.WarehouseItemReadView", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,7 +68,7 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.ToTable("WarehouseItemReadViews");
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.WarehouseReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.WarehouseReadView", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -79,17 +79,17 @@ namespace SW.Store.Checkout.Infrastructure.ReadStorage.Migrations
                     b.ToTable("WarehouseReadViews");
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.OrderLineReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderLineReadView", b =>
                 {
-                    b.HasOne("SW.Store.Checkout.Read.ReadView.OrderReadView", "Order")
+                    b.HasOne("SW.Checkout.Read.ReadView.OrderReadView", "Order")
                         .WithMany("Lines")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SW.Store.Checkout.Read.ReadView.WarehouseItemReadView", b =>
+            modelBuilder.Entity("SW.Checkout.Read.ReadView.WarehouseItemReadView", b =>
                 {
-                    b.HasOne("SW.Store.Checkout.Read.ReadView.WarehouseReadView", "Warehouse")
+                    b.HasOne("SW.Checkout.Read.ReadView.WarehouseReadView", "Warehouse")
                         .WithMany("Items")
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade);

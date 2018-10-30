@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Warehouses.Events;
-using SW.Store.Core.Aggregates;
+using SW.Checkout.Domain.Warehouses.Events;
+using SW.Checkout.Core.Aggregates;
 
-namespace SW.Store.Checkout.Domain.Warehouses
+namespace SW.Checkout.Domain.Warehouses
 {
     public class WarehouseAggregate : EventSourcedAggregate
     {

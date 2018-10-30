@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings.Dto;
+﻿using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Core.Settings
+namespace SW.Checkout.Core.Settings
 {
     public interface IQueueSettingsProvider
     {

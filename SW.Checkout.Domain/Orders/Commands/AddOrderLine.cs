@@ -1,7 +1,7 @@
 ﻿using System;
-using SW.Store.Core.Commands;
+using SW.Checkout.Core.Commands;
 
-namespace SW.Store.Checkout.Domain.Orders.Commands
+namespace SW.Checkout.Domain.Orders.Commands
 {
     public class AddOrderLine : ICommand
     {

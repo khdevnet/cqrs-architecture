@@ -1,6 +1,6 @@
-﻿namespace SW.Checkout.Domain.Orders.Dto
+﻿namespace SW.Checkout.Client.Models
 {
-    public class OrderLineDto
+    public class OrderLineModel
     {
         public int ProductNumber { get; set; }
 

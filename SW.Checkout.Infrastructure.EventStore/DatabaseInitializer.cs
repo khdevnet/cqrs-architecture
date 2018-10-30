@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Warehouses;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Events;
-using SW.Store.Core.Initializers;
-using SW.Store.Core.Queues.ProcessOrder;
+using SW.Checkout.Domain.Warehouses;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Events;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Queues.ProcessOrder;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore
+namespace SW.Checkout.Infrastructure.EventStore
 {
     internal class DatabaseInitializer : IInitializer
     {

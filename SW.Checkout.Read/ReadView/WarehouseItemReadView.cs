@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Checkout.Read.ReadView
+namespace SW.Checkout.Read.ReadView
 {
     public class WarehouseItemReadView
     {

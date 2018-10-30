@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Core.Settings
+﻿namespace SW.Checkout.Core.Settings
 {
     public interface IReadStorageConnectionStringProvider : IConnectionStringProvider
     {

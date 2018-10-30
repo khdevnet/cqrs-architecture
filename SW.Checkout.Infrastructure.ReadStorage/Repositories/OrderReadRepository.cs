@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Checkout.Read.Extensibility;
-using SW.Store.Checkout.Read.ReadView;
+using SW.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Read.Extensibility;
+using SW.Checkout.Read.ReadView;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage.Repositories
+namespace SW.Checkout.Infrastructure.ReadStorage.Repositories
 {
     internal sealed class OrderReadRepository : IOrderReadRepository
     {

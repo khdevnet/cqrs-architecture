@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Queues.ReadStorageSync;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     public class ReadStorageSyncQueueSettingsProvider : QueueSettingsProviderBase, IReadStorageSyncQueueSettingsProvider
     {

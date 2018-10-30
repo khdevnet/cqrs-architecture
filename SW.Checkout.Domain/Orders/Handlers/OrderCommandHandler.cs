@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Orders.Commands;
-using SW.Store.Checkout.Domain.Orders.Dto;
-using SW.Store.Checkout.Domain.Orders.Enum;
-using SW.Store.Checkout.Domain.Orders.Views;
-using SW.Store.Checkout.Domain.Warehouses;
-using SW.Store.Checkout.Domain.Warehouses.Views;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Events;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
+using SW.Checkout.Domain.Orders.Commands;
+using SW.Checkout.Domain.Orders.Dto;
+using SW.Checkout.Domain.Orders.Enum;
+using SW.Checkout.Domain.Orders.Views;
+using SW.Checkout.Domain.Warehouses;
+using SW.Checkout.Domain.Warehouses.Views;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Events;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
 
-namespace SW.Store.Checkout.Domain.Orders.Handlers
+namespace SW.Checkout.Domain.Orders.Handlers
 {
     public class OrderCommandHandler :
         IMessageHandler<CreateOrder>,

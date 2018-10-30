@@ -1,7 +1,7 @@
 ﻿using System;
-using SW.Store.Core.Events;
+using SW.Checkout.Core.Events;
 
-namespace SW.Store.Checkout.Domain.Orders.Events
+namespace SW.Checkout.Domain.Orders.Events
 {
     public class OrderLineRemoved : IEvent
     {

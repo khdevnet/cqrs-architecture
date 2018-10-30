@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Aggregates;
+﻿using SW.Checkout.Core.Aggregates;
 
-namespace SW.Store.Core.Replication
+namespace SW.Checkout.Core.Replication
 {
     public interface IAggregationReplicaRepository : IAggregationRepository
     {

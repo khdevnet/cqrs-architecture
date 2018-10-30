@@ -1,9 +1,9 @@
-﻿using SW.Store.Checkout.Domain.Warehouses;
-using SW.Store.Checkout.Domain.Warehouses.Commands;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Messages;
+﻿using SW.Checkout.Domain.Warehouses;
+using SW.Checkout.Domain.Warehouses.Commands;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Checkout.Domain.Orders.Handlers
+namespace SW.Checkout.Domain.Orders.Handlers
 {
     public class WarehouseCommandHandler :
         IMessageHandler<AddWarehouse>

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ReadStorageSync;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage
+namespace SW.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage
 {
     internal class ReadStorageSyncMessageProcessor : MessageProcessor, IReadStorageSyncMessageProcessor
     {

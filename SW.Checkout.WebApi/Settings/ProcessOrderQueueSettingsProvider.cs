@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SW.Store.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Queues.ProcessOrder;
 
-namespace SW.Store.Checkout.WebApi
+namespace SW.Checkout.WebApi
 {
     public class ProcessOrderQueueSettingsProvider : QueueSettingsProviderBase, IProcessOrderQueueSettingsProvider
     {

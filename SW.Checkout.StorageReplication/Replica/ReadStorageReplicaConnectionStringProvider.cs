@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Replication;
+﻿using SW.Checkout.Core.Replication;
 
-namespace SW.Store.Checkout.StorageReplication.Replica
+namespace SW.Checkout.StorageReplication.Replica
 {
     internal class ReadStorageReplicaConnectionStringProvider : IReadStorageReplicaConnectionStringProvider
     {

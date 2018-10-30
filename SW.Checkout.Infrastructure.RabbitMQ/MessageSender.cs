@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
-using SW.Store.Core.Messages;
+using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ
+namespace SW.Checkout.Infrastructure.RabbitMQ
 {
     internal class MessageSender : IMessageSender
     {

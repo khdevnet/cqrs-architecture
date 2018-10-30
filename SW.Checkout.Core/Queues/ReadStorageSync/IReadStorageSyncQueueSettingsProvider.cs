@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Core.Queues.ReadStorageSync
+namespace SW.Checkout.Core.Queues.ReadStorageSync
 {
     public interface IReadStorageSyncQueueSettingsProvider : IQueueSettingsProvider
     {

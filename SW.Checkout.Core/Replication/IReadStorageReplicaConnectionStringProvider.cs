@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Core.Replication
+namespace SW.Checkout.Core.Replication
 {
     public interface IReadStorageReplicaConnectionStringProvider : IReadStorageConnectionStringProvider
     {

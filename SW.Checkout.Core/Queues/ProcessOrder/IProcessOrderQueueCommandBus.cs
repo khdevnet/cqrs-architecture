@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Commands;
+﻿using SW.Checkout.Core.Commands;
 
-namespace SW.Store.Core.Queues.ProcessOrder
+namespace SW.Checkout.Core.Queues.ProcessOrder
 {
     public interface IProcessOrderQueueCommandBus : ICommandBus
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Domain", "SW.Store.Checkout.Domain\SW.Store.Checkout.Domain.csproj", "{3A9589F2-C0DD-48ED-943D-D1309026A205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Domain", "SW.Checkout.Domain\SW.Checkout.Domain.csproj", "{3A9589F2-C0DD-48ED-943D-D1309026A205}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2854D622-22C2-4A29-9596-CEDA1A4A61C3}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,19 +12,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.WebApi", "SW.Store.Checkout.WebApi\SW.Store.Checkout.WebApi.csproj", "{3251BBEF-0309-4D14-9A62-81C760A8FBDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Infrastructure.RabbitMQ", "SW.Checkout.Infrastructure.RabbitMQ\SW.Checkout.Infrastructure.RabbitMQ.csproj", "{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastructure.RabbitMQ", "SW.Store.Checkout.Infrastructure.RabbitMQ\SW.Store.Checkout.Infrastructure.RabbitMQ.csproj", "{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Core", "SW.Checkout.Core\SW.Checkout.Core.csproj", "{2ED101CD-E3A5-4AA3-BA9E-3FA31859F73C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Core", "SW.Store.Core\SW.Store.Core.csproj", "{2ED101CD-E3A5-4AA3-BA9E-3FA31859F73C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Read", "SW.Store.Checkout.Read\SW.Store.Checkout.Read.csproj", "{BD47C190-F699-4847-8C65-9A1C7CD274E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Read", "SW.Checkout.Read\SW.Checkout.Read.csproj", "{BD47C190-F699-4847-8C65-9A1C7CD274E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{BFEF8344-D5F1-4A32-ABCA-5E73645FE48F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastructure.EventStore", "SW.Store.Checkout.Infrastructure.EventStore\SW.Store.Checkout.Infrastructure.EventStore.csproj", "{1A249545-006D-41AD-B067-A87FF119CFCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Infrastructure.EventStore", "SW.Checkout.Infrastructure.EventStore\SW.Checkout.Infrastructure.EventStore.csproj", "{1A249545-006D-41AD-B067-A87FF119CFCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Store.Checkout.Infrastructure.ReadStorage", "SW.Store.Checkout.Infrastructure.ReadStorage\SW.Store.Checkout.Infrastructure.ReadStorage.csproj", "{CCBBDECF-4D02-4AAE-A1B4-C1A6D236FFFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.Infrastructure.ReadStorage", "SW.Checkout.Infrastructure.ReadStorage\SW.Checkout.Infrastructure.ReadStorage.csproj", "{CCBBDECF-4D02-4AAE-A1B4-C1A6D236FFFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Checkout.WebApi", "SW.Checkout.WebApi\SW.Checkout.WebApi.csproj", "{5989D3EB-51B2-47E4-AAD9-B580DC5AD116}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +36,6 @@ Global
 		{3A9589F2-C0DD-48ED-943D-D1309026A205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9589F2-C0DD-48ED-943D-D1309026A205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A9589F2-C0DD-48ED-943D-D1309026A205}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3251BBEF-0309-4D14-9A62-81C760A8FBDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3251BBEF-0309-4D14-9A62-81C760A8FBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3251BBEF-0309-4D14-9A62-81C760A8FBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3251BBEF-0309-4D14-9A62-81C760A8FBDB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBBD873-3DCC-42FB-A92D-8D4E311F0CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,6 +56,10 @@ Global
 		{CCBBDECF-4D02-4AAE-A1B4-C1A6D236FFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBBDECF-4D02-4AAE-A1B4-C1A6D236FFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBBDECF-4D02-4AAE-A1B4-C1A6D236FFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5989D3EB-51B2-47E4-AAD9-B580DC5AD116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5989D3EB-51B2-47E4-AAD9-B580DC5AD116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5989D3EB-51B2-47E4-AAD9-B580DC5AD116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5989D3EB-51B2-47E4-AAD9-B580DC5AD116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

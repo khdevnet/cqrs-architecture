@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Replication;
+﻿using SW.Checkout.Core.Replication;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore.Replication
+namespace SW.Checkout.Infrastructure.EventStore.Replication
 {
     internal class StoreOptionsReplicaCreator : StoreOptionsCreator
     {

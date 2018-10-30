@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Core.Aggregates
+namespace SW.Checkout.Core.Aggregates
 {
     public interface IAggregate
     {

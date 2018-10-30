@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace SW.Store.Core.Messages
+namespace SW.Checkout.Core.Messages
 {
     public class MessageProcessor : IMessageProcessor
     {

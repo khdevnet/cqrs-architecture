@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Core.Views
+namespace SW.Checkout.Core.Views
 {
     public interface IView
     {

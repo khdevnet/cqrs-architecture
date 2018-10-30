@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SW.Store.Checkout.Read.ReadView;
+using SW.Checkout.Read.ReadView;
 
-namespace SW.Store.Checkout.Read.Extensibility
+namespace SW.Checkout.Read.Extensibility
 {
     public interface IOrderReadRepository
     {

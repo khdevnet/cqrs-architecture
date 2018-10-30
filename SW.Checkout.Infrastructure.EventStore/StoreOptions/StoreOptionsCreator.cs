@@ -1,13 +1,13 @@
 ﻿using Marten;
-using SW.Store.Checkout.Domain.Orders;
-using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Checkout.Domain.Warehouses;
-using SW.Store.Checkout.Domain.Warehouses.Events;
-using SW.Store.Checkout.Infrastructure.EventStore.ViewProjections.Orders;
-using SW.Store.Checkout.Infrastructure.EventStore.ViewProjections.Warehouses;
-using SW.Store.Core.Settings;
+using SW.Checkout.Domain.Orders;
+using SW.Checkout.Domain.Orders.Events;
+using SW.Checkout.Domain.Warehouses;
+using SW.Checkout.Domain.Warehouses.Events;
+using SW.Checkout.Infrastructure.EventStore.ViewProjections.Orders;
+using SW.Checkout.Infrastructure.EventStore.ViewProjections.Warehouses;
+using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore
+namespace SW.Checkout.Infrastructure.EventStore
 {
     internal class StoreOptionsCreator
     {

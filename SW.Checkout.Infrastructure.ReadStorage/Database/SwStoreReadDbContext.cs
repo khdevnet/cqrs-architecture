@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SW.Store.Checkout.Read.ReadView;
+using SW.Checkout.Read.ReadView;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage.Database
+namespace SW.Checkout.Infrastructure.ReadStorage.Database
 {
     public class SwStoreReadDbContext : DbContext
     {

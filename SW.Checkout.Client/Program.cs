@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using SW.Store.Checkout.Domain.Orders.Commands;
-using SW.Store.Checkout.Domain.Orders.Dto;
-using SW.Store.Checkout.Read.ReadView;
+using SW.Checkout.Client.Models;
 
-namespace SW.Store.Checkout.Client
+namespace SW.Checkout.Client
 {
     class Program
     {
@@ -14,17 +12,17 @@ namespace SW.Store.Checkout.Client
 
         static void Main(string[] args)
         {
-            IEnumerable<CreateOrder> createOrderModels = Enumerable.Range(0, 1)
+            IEnumerable<CreateOrderRequest> createOrderModels = Enumerable.Range(0, 1)
       .Select(n => CreateOrderCommand()).ToList();
-            var expectedOrderIds = createOrderModels.Select(o => o.OrderId).ToList();
             var actualOrderIds = new List<Guid>();
-            foreach (CreateOrder orderModel in createOrderModels)
+            foreach (CreateOrderRequest orderModel in createOrderModels)
             {
                 using (var client = new HttpClient())
                 {
                     HttpResponseMessage response = client.PostAsJsonAsync($"{url}/api/v1/checkout", orderModel).Result;
-                    Console.WriteLine("Create Order Id: " + response.Content.ReadAsAsync<Guid>().Result);
-                    actualOrderIds.Add(response.Content.ReadAsAsync<Guid>().Result);
+                    var createdOrderId = response.Content.ReadAsAsync<Guid>().Result;
+                    Console.WriteLine("Create Order Id: " + createdOrderId);
+                    actualOrderIds.Add(createdOrderId);
 
                 }
                 CheckPendingOrders(actualOrderIds);
@@ -52,7 +50,7 @@ namespace SW.Store.Checkout.Client
                 HttpResponseMessage response = client.GetAsync($"{url}/api/v1/checkout/status/{orderId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    OrderReadView orderResponse = response.Content.ReadAsAsync<OrderReadView>().Result;
+                    OrderResponseModel orderResponse = response.Content.ReadAsAsync<OrderResponseModel>().Result;
                     PrintOrderDetails(orderResponse);
                     return true;
                 }
@@ -60,7 +58,7 @@ namespace SW.Store.Checkout.Client
             return false;
         }
 
-        private static void PrintOrderDetails(OrderReadView orderResponse)
+        private static void PrintOrderDetails(OrderResponseModel orderResponse)
         {
             Console.WriteLine("Order Created Order Id: " + orderResponse.Id);
             foreach (var orderLine in orderResponse.Lines)
@@ -73,25 +71,24 @@ namespace SW.Store.Checkout.Client
             Console.WriteLine("=======================");
         }
 
-        private static CreateOrder CreateOrderCommand()
+        private static CreateOrderRequest CreateOrderCommand()
         {
-            return new CreateOrder()
+            return new CreateOrderRequest()
             {
-                OrderId = Guid.NewGuid(),
                 CustomerId = 1,
                 Lines = new[]
                  {
-                     new OrderLineDto
+                     new OrderLineRequestModel
                      {
                           ProductNumber = 1,
                           Quantity = 1
                      },
-                     new OrderLineDto
+                     new OrderLineRequestModel
                      {
                           ProductNumber = 2,
                           Quantity = 1
                      },
-                     new OrderLineDto
+                     new OrderLineRequestModel
                      {
                           ProductNumber = 3,
                           Quantity = 1

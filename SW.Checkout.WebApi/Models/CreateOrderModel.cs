@@ -1,7 +1,7 @@
-﻿using SW.Store.Checkout.Domain.Orders.Dto;
+﻿using SW.Checkout.Domain.Orders.Dto;
 using System.Collections.Generic;
 
-namespace SW.Store.Checkout.WebApi.Models
+namespace SW.Checkout.WebApi.Models
 {
     public class CreateOrderModel
     {

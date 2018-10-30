@@ -1,7 +1,7 @@
-﻿using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Core.Initializers;
+﻿using SW.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Core.Initializers;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage
+namespace SW.Checkout.Infrastructure.ReadStorage
 {
     internal class DatabaseReplicaInitializer : DatabaseInitializer, IReplicaInitializer
     {

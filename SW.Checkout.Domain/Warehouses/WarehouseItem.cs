@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Checkout.Domain.Warehouses
+namespace SW.Checkout.Domain.Warehouses
 {
     public class WarehouseItem 
     {

@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Settings;
+﻿using SW.Checkout.Core.Settings;
 
-namespace SW.Store.Checkout.Message.Handler
+namespace SW.Checkout.Message.Handler
 {
     internal class EventStoreConnectionStringProvider : IEventStoreConnectionStringProvider
     {

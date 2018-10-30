@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using SW.Store.Core.Messages;
+using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Core
+namespace SW.Checkout.Core
 {
     public class CoreAutofacModule : Module
     {

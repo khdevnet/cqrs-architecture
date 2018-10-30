@@ -1,8 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using SW.Store.Core;
+using SW.Checkout.Core;
 
-namespace SW.Store.Checkout.Message.Handler
+namespace SW.Checkout.Message.Handler
 {
     internal class ConsoleLogger : ILogger
     {

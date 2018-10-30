@@ -1,6 +1,6 @@
-﻿using SW.Store.Checkout.Domain.Orders.Enum;
+﻿using SW.Checkout.Domain.Orders.Enum;
 
-namespace SW.Store.Checkout.Domain.Orders
+namespace SW.Checkout.Domain.Orders
 {
     public class OrderLine
     {

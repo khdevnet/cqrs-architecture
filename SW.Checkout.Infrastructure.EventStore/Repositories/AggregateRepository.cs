@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Marten;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Events;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Events;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore.Repositories
+namespace SW.Checkout.Infrastructure.EventStore.Repositories
 {
     internal class AggregateRepository : IAggregationRepository
     {

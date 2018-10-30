@@ -1,10 +1,10 @@
-﻿using SW.Store.Core.Events;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Settings.Dto;
+﻿using SW.Checkout.Core.Events;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage
+namespace SW.Checkout.Infrastructure.RabbitMQ.Queues.ReadStorage
 {
     internal class ReadStorageSyncEventBus : IReadStorageSyncEventBus
     {

@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using SW.Store.Checkout.Domain.Orders.Handlers;
-using SW.Store.Core.Messages;
+using SW.Checkout.Domain.Orders.Handlers;
+using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Checkout.Domain
+namespace SW.Checkout.Domain
 {
     public class DomainAutofacModule : Module
     {

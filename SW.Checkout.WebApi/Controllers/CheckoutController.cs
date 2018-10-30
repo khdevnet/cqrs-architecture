@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SW.Store.Checkout.Domain.Orders.Commands;
-using SW.Store.Checkout.Read.Extensibility;
-using SW.Store.Checkout.Read.ReadView;
-using SW.Store.Checkout.WebApi.Models;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
+using SW.Checkout.Domain.Orders.Commands;
+using SW.Checkout.Read.Extensibility;
+using SW.Checkout.Read.ReadView;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
 using System;
+using SW.Checkout.WebApi.Models;
 
-namespace SW.Store.Checkout.WebApi.Controllers
+namespace SW.Checkout.WebApi.Controllers
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]

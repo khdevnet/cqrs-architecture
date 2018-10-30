@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Messages;
+﻿using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Core.Events
+namespace SW.Checkout.Core.Events
 {
     public interface IEvent : IMessage
     {

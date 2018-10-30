@@ -1,8 +1,8 @@
 ﻿using System;
-using SW.Store.Checkout.Domain.Orders.Enum;
-using SW.Store.Core.Events;
+using SW.Checkout.Domain.Orders.Enum;
+using SW.Checkout.Core.Events;
 
-namespace SW.Store.Checkout.Domain.Orders.Events
+namespace SW.Checkout.Domain.Orders.Events
 {
     public class OrderLineAdded : IEvent
     {

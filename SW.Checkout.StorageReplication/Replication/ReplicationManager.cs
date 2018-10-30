@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Core;
-using SW.Store.Core.Aggregates;
-using SW.Store.Core.Events;
-using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Replication;
-using SW.Store.Core.Views;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Events;
+using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Replication;
+using SW.Checkout.Core.Views;
 
-namespace SW.Store.Checkout.StorageReplication.Replication
+namespace SW.Checkout.StorageReplication.Replication
 {
     internal class ReplicationManager<TView> : IReplicationManager
         where TView : IView

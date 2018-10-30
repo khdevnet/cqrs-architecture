@@ -1,4 +1,4 @@
-﻿namespace SW.Store.Core.Initializers
+﻿namespace SW.Checkout.Core.Initializers
 {
     public interface IInitializer
     {

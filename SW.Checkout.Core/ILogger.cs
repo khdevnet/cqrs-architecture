@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SW.Store.Core
+namespace SW.Checkout.Core
 {
     public interface ILogger
     {

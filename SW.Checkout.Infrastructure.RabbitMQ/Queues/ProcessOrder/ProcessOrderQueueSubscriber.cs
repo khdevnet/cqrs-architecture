@@ -1,8 +1,8 @@
-﻿using SW.Store.Core;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Queues.ProcessOrder;
+﻿using SW.Checkout.Core;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ.Queues.ProcessOrder
+namespace SW.Checkout.Infrastructure.RabbitMQ.Queues.ProcessOrder
 {
     internal class ProcessOrderQueueSubscriber : QueueSubscriber<IProcessOrderQueueSettingsProvider, IMessageProcessor, IMessageDeserializer>, IProcessOrderQueueSubscriber
     {

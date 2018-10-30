@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using Microsoft.EntityFrameworkCore;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Database;
-using SW.Store.Checkout.Infrastructure.ReadStorage.Synchronization;
-using SW.Store.Core.Initializers;
-using SW.Store.Core.Queues.ReadStorageSync;
-using SW.Store.Core.Replication;
+using SW.Checkout.Infrastructure.ReadStorage.Database;
+using SW.Checkout.Infrastructure.ReadStorage.Synchronization;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Replication;
 
-namespace SW.Store.Checkout.Infrastructure.ReadStorage
+namespace SW.Checkout.Infrastructure.ReadStorage
 {
     public class ReadStorageReplicaAutofacModule : Module
     {

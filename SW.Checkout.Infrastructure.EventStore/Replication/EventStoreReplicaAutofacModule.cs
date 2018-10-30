@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using SW.Store.Core.Replication;
+using SW.Checkout.Core.Replication;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore.Replication
+namespace SW.Checkout.Infrastructure.EventStore.Replication
 {
     public class EventStoreReplicaAutofacModule : Module
     {

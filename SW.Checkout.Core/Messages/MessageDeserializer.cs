@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace SW.Store.Core.Messages
+namespace SW.Checkout.Core.Messages
 {
     public class MessageDeserializer : IMessageDeserializer
     {

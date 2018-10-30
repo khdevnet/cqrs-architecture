@@ -1,6 +1,6 @@
-﻿using SW.Store.Core.Messages;
+﻿using SW.Checkout.Core.Messages;
 
-namespace SW.Store.Core.Queues.ProcessOrder
+namespace SW.Checkout.Core.Queues.ProcessOrder
 {
     public interface IProcessOrderQueueSubscriber : IQueueSubscriber
     {

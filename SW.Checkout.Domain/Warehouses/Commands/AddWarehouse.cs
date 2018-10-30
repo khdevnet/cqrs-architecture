@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SW.Store.Core.Commands;
+using SW.Checkout.Core.Commands;
 
-namespace SW.Store.Checkout.Domain.Warehouses.Commands
+namespace SW.Checkout.Domain.Warehouses.Commands
 {
     public class AddWarehouse : ICommand
     {

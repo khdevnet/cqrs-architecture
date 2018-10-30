@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SW.Store.Core.Commands
+namespace SW.Checkout.Core.Commands
 {
     public interface ICommandBus
     {

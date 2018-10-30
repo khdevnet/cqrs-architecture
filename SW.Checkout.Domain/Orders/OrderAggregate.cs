@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Store.Checkout.Domain.Orders.Enum;
-using SW.Store.Checkout.Domain.Orders.Events;
-using SW.Store.Core.Aggregates;
+using SW.Checkout.Domain.Orders.Enum;
+using SW.Checkout.Domain.Orders.Events;
+using SW.Checkout.Core.Aggregates;
 
-namespace SW.Store.Checkout.Domain.Orders
+namespace SW.Checkout.Domain.Orders
 {
     public class OrderAggregate : EventSourcedAggregate
     {

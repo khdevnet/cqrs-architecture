@@ -1,7 +1,7 @@
-﻿using SW.Store.Core.Queues.ProcessOrder;
-using SW.Store.Core.Settings.Dto;
+﻿using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.Message.Handler
+namespace SW.Checkout.Message.Handler
 {
     internal class ProcessOrderQueueSettingsProvider : IProcessOrderQueueSettingsProvider
     {

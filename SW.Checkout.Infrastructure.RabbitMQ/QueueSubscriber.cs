@@ -2,12 +2,12 @@
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using SW.Store.Core;
-using SW.Store.Core.Messages;
-using SW.Store.Core.Settings;
-using SW.Store.Core.Settings.Dto;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Settings;
+using SW.Checkout.Core.Settings.Dto;
 
-namespace SW.Store.Checkout.Infrastructure.RabbitMQ
+namespace SW.Checkout.Infrastructure.RabbitMQ
 {
     public class QueueSubscriber<TQueueSettingsProvider, TMessageProcessor, TMessageDeserializer> : IQueueSubscriber
         where TMessageDeserializer : IMessageDeserializer

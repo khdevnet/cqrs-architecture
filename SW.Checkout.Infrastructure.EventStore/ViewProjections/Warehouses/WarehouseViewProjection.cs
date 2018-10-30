@@ -1,9 +1,9 @@
 ﻿using System;
 using Marten.Events.Projections;
-using SW.Store.Checkout.Domain.Warehouses.Events;
-using SW.Store.Checkout.Domain.Warehouses.Views;
+using SW.Checkout.Domain.Warehouses.Events;
+using SW.Checkout.Domain.Warehouses.Views;
 
-namespace SW.Store.Checkout.Infrastructure.EventStore.ViewProjections.Warehouses
+namespace SW.Checkout.Infrastructure.EventStore.ViewProjections.Warehouses
 {
     public class WarehouseViewProjection : ViewProjection<WarehouseView, Guid>
     {
