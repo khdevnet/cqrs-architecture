@@ -60,7 +60,7 @@ namespace SW.Checkout.Message.Handler
 
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
 
-            builder.RegisterInstance(CreateConfiguration());
+            builder.RegisterInstance(CreateConfiguration()).As<IConfiguration>();
 
             return builder.Build();
         }
