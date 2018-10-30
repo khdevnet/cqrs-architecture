@@ -4,9 +4,9 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["SW.Checkout.WebApi.csproj", "SW.Checkout.WebApi/"]
-RUN dotnet restore "SW.Checkout.WebApi.csproj"
-COPY ../ .
+COPY ["SW.Checkout.WebApi/SW.Checkout.WebApi.csproj", "SW.Checkout.WebApi/"]
+RUN dotnet restore "SW.Checkout.WebApi/SW.Checkout.WebApi.csproj"
+COPY . .
 WORKDIR "/src/SW.Checkout.WebApi"
 RUN dotnet build "SW.Checkout.WebApi.csproj" -c Release -o /app
 
