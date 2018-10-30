@@ -18,19 +18,31 @@ namespace SW.Checkout.Message.Handler
     {
         static void Main(string[] args)
         {
-            Thread.Sleep(TimeSpan.FromSeconds(45));
-            IContainer container = CreateContainer();
+            IQueueSubscriber subscriber = null;
+            IQueueSubscriber readStorageSubscriber = null;
+            int attempts_count = 0;
+            while (attempts_count <= 20)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(10));
+                try
+                {
+                    IContainer container = CreateContainer();
 
-            IQueueSubscriber subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
-            subscriber.Subscribe();
+                    subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
+                    subscriber.Subscribe();
 
-            IQueueSubscriber readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
-            readStorageSubscriber.Subscribe();
-
-
+                    readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
+                    readStorageSubscriber.Subscribe();
+                }
+                catch (Exception)
+                {
+                    attempts_count += 1;
+                    Console.WriteLine($"### Retry connect to Rabbit MQ attempt {attempts_count}");
+                }
+            }
             Console.ReadLine();
-            subscriber.Dispose();
-            readStorageSubscriber.Dispose();
+            subscriber?.Dispose();
+            readStorageSubscriber?.Dispose();
         }
 
         private static IContainer CreateContainer()
