@@ -38,7 +38,6 @@ namespace SW.Checkout.Message.Handler
                 catch (Exception ex)
                 {
                     attempts_count += 1;
-                    Console.WriteLine(ex);
                     Console.WriteLine($"### Retry connect to Rabbit MQ attempt {attempts_count}");
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(10));

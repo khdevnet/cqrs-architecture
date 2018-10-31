@@ -29,8 +29,6 @@ namespace SW.Checkout.Infrastructure.EventStore
                 CreateWarehouseAggregate(Guid.Parse("6df8744a-d464-4826-91d1-08095ab49d94"), "Tatooine")
                 };
 
-            aggregates.ToList().ForEach(agg => repository.Store(agg));
-
             var events = aggregates.ToDictionary(agg => agg.Id, agg => agg.PendingEvents.ToList());
 
             Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => events;

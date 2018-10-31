@@ -1,7 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Autofac;
+using Microsoft.Extensions.Configuration;
+using SW.Checkout.Core;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Initializers;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Core.Replication;
 using SW.Checkout.Domain;
 using SW.Checkout.Domain.Orders.Views;
 using SW.Checkout.Domain.Warehouses.Views;
@@ -12,16 +20,6 @@ using SW.Checkout.Infrastructure.ReadStorage;
 using SW.Checkout.Read.ReadView;
 using SW.Checkout.StorageReplication.Replica;
 using SW.Checkout.StorageReplication.Replication;
-using SW.Checkout.Core;
-using SW.Checkout.Core.Aggregates;
-using SW.Checkout.Core.Initializers;
-using SW.Checkout.Core.Messages;
-using SW.Checkout.Core.Queues.ProcessOrder;
-using SW.Checkout.Core.Queues.ReadStorageSync;
-using SW.Checkout.Core.Replication;
-using SW.Checkout.Core.Settings;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace SW.Checkout.StorageReplication
 {
@@ -29,13 +27,17 @@ namespace SW.Checkout.StorageReplication
     {
         static void Main(string[] args)
         {
-            DateTime? timestamp = null;
-            if (args.Length > 0)
-            {
-                timestamp = DateTime.Parse(args[0]).ToUniversalTime();
-                Console.WriteLine($"### Replication start for period before {args[0]}");
-            }
+
             IContainer container = CreateContainer();
+
+            string timestampConfig = container.Resolve<IConfiguration>().GetSection("EventStoreReplica")["timestamp"];
+
+            DateTime? timestamp = null;
+            if (!string.IsNullOrEmpty(timestampConfig))
+            {
+                timestamp = DateTime.Parse(timestampConfig).ToUniversalTime();
+                Console.WriteLine($"### Replication start for period before {timestampConfig}");
+            }
 
             IEnumerable<IInitializer> initializers = container.Resolve<IEnumerable<IReplicaInitializer>>();
             RunInitializers(initializers);
@@ -47,7 +49,7 @@ namespace SW.Checkout.StorageReplication
             readStorageSubscriber.Subscribe();
 
             Console.ReadLine();
-
+            readStorageSubscriber.Dispose();
         }
 
         private static IEnumerable<OrderReadView> GetOrder(IAggregationRepository originalAggregationRepostory)
