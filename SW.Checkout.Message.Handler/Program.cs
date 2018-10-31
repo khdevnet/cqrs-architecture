@@ -1,16 +1,16 @@
-﻿using System;
-using System.IO;
-using Autofac;
+﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using SW.Checkout.Core;
 using SW.Checkout.Core.Messages;
 using SW.Checkout.Core.Queues.ProcessOrder;
 using SW.Checkout.Core.Queues.ReadStorageSync;
-using SW.Checkout.Core.Settings;
 using SW.Checkout.Domain;
 using SW.Checkout.Infrastructure.EventStore;
 using SW.Checkout.Infrastructure.RabbitMQ;
 using SW.Checkout.Infrastructure.ReadStorage;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace SW.Checkout.Message.Handler
 {
@@ -18,18 +18,34 @@ namespace SW.Checkout.Message.Handler
     {
         static void Main(string[] args)
         {
-            IContainer container = CreateContainer();
+            IQueueSubscriber subscriber = null;
+            IQueueSubscriber readStorageSubscriber = null;
+            int attempts_count = 0;
+            while (attempts_count <= 20)
+            {
+                try
+                {
+                    IContainer container = CreateContainer();
 
-            IQueueSubscriber subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
-            subscriber.Subscribe();
+                    subscriber = container.Resolve<IProcessOrderQueueSubscriber>();
+                    subscriber.Subscribe();
 
-            IQueueSubscriber readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
-            readStorageSubscriber.Subscribe();
-
-
+                    readStorageSubscriber = container.Resolve<IReadStorageSyncQueueSubscriber>();
+                    readStorageSubscriber.Subscribe();
+                    attempts_count = 21;
+                    Console.WriteLine($"### Subscription to Rabbit MQ successful");
+                }
+                catch (Exception ex)
+                {
+                    attempts_count += 1;
+                    Console.WriteLine(ex);
+                    Console.WriteLine($"### Retry connect to Rabbit MQ attempt {attempts_count}");
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(10));
+            }
             Console.ReadLine();
-            subscriber.Dispose();
-            readStorageSubscriber.Dispose();
+            subscriber?.Dispose();
+            readStorageSubscriber?.Dispose();
         }
 
         private static IContainer CreateContainer()
@@ -44,7 +60,7 @@ namespace SW.Checkout.Message.Handler
 
             builder.RegisterType<ConsoleLogger>().As<ILogger>();
 
-            builder.RegisterInstance(CreateConfiguration());
+            builder.RegisterInstance(CreateConfiguration()).As<IConfiguration>();
 
             return builder.Build();
         }
@@ -53,7 +69,8 @@ namespace SW.Checkout.Message.Handler
         {
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables("SW_");
 
             IConfigurationRoot configuration = configBuilder.Build();
             return configuration;

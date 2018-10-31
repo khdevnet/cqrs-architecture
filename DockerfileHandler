@@ -4,9 +4,9 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["SW.Checkout.Message.Handler.csproj", "SW.Checkout.Message.Handler/"]
-RUN dotnet restore "SW.Checkout.Message.Handler.csproj"
-COPY ../ .
+COPY ["SW.Checkout.Message.Handler/SW.Checkout.Message.Handler.csproj", "SW.Checkout.Message.Handler/"]
+RUN dotnet restore "SW.Checkout.Message.Handler/SW.Checkout.Message.Handler.csproj"
+COPY . .
 WORKDIR "/src/SW.Checkout.Message.Handler"
 RUN dotnet build "SW.Checkout.Message.Handler.csproj" -c Release -o /app
 
