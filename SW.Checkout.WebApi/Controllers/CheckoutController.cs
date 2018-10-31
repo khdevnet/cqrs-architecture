@@ -58,6 +58,20 @@ namespace SW.Checkout.WebApi.Controllers
             commandBus.Send(removeOrderLine);
         }
 
+        [HttpPut]
+        [Route("add-item-quantity")]
+        public void AddItemQuantity([FromBody] AddOrderItemQuantity item)
+        {
+            commandBus.Send(item);
+        }
+
+        [HttpPut]
+        [Route("subtract-item-quantity")]
+        public void SubtractItemQuantity([FromBody] SubtractOrderItemQuantity item)
+        {
+            commandBus.Send(item);
+        }
+
         ///GET api/orders/status
         [HttpGet]
         [Route("status/{id}")]

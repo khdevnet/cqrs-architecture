@@ -12,6 +12,8 @@ namespace SW.Checkout.Infrastructure.EventStore.ViewProjections.Orders
             ProjectEvent<OrderCreated>((ev) => ev.OrderId, (view, @event) => view.Apply(@event));
             ProjectEvent<OrderLineAdded>((ev) => ev.OrderId, (view, @event) => view.Apply(@event));
             ProjectEvent<OrderLineRemoved>((ev) => ev.OrderId, (view, @event) => view.Apply(@event));
+            ProjectEvent<OrderItemQuantitySubtracted>((ev) => ev.OrderId, (view, @event) => view.Apply(@event));
+            ProjectEvent<OrderItemQuantityAdded>((ev) => ev.OrderId, (view, @event) => view.Apply(@event));
         }
     }
 }

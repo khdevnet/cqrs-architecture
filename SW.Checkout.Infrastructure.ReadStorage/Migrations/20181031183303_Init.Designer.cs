@@ -10,7 +10,7 @@ using SW.Checkout.Infrastructure.ReadStorage.Database;
 namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
 {
     [DbContext(typeof(SwStoreReadDbContext))]
-    [Migration("20181031132824_Init")]
+    [Migration("20181031183303_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
 
                     b.Property<string>("Status")
                         .HasColumnName("status");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnName("warehouse_id");
 
                     b.HasKey("Id");
 

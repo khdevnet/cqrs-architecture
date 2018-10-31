@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SW.Checkout.Core.Queues.ReadStorageSync;
 using SW.Checkout.Domain.Orders.Events;
 using SW.Checkout.Infrastructure.ReadStorage.Database;
@@ -8,7 +9,11 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
 {
     internal class OrderSyncMessageHandler :
         IReadStorageSyncMessageHandler<OrderCreated>,
-        IReadStorageSyncMessageHandler<OrderLineAdded>
+        IReadStorageSyncMessageHandler<OrderLineAdded>,
+        IReadStorageSyncMessageHandler<OrderLineRemoved>,
+        IReadStorageSyncMessageHandler<OrderItemQuantityAdded>,
+        IReadStorageSyncMessageHandler<OrderItemQuantitySubtracted>
+
     {
         private readonly SwStoreReadDbContext db;
 
@@ -46,12 +51,53 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
                 OrderId = message.OrderId,
                 Status = message.Status,
                 ProductId = message.ProductNumber,
+                WarehouseId = message.WarehouseId,
                 Quantity = message.Quantity
             };
             db.OrderLineViews.Add(orderView);
             db.SaveChanges();
         }
 
+        public void Handle(OrderItemQuantityAdded message)
+        {
+            var orderItemView = db.OrderLineViews.FirstOrDefault(item => item.OrderId == message.OrderId && item.ProductId == message.ProductNumber);
+
+            if (!IsOrderExist(message.OrderId) || orderItemView == null)
+            {
+                return;
+            }
+
+            orderItemView.Quantity += message.Quantity;
+
+            db.SaveChanges();
+        }
+
+        public void Handle(OrderItemQuantitySubtracted message)
+        {
+            var orderItemView = db.OrderLineViews.FirstOrDefault(item => item.OrderId == message.OrderId && item.ProductId == message.ProductNumber);
+
+            if (!IsOrderExist(message.OrderId) || orderItemView == null)
+            {
+                return;
+            }
+
+            orderItemView.Quantity -= message.Quantity;
+
+            db.SaveChanges();
+        }
+
+        public void Handle(OrderLineRemoved message)
+        {
+            var orderItemView = db.OrderLineViews.FirstOrDefault(item => item.OrderId == message.OrderId && item.ProductId == message.ProductNumber);
+
+            if (!IsOrderExist(message.OrderId) || orderItemView == null)
+            {
+                return;
+            }
+
+            db.OrderLineViews.Remove(orderItemView);
+            db.SaveChanges();
+        }
 
         private bool IsOrderExist(Guid id)
         {

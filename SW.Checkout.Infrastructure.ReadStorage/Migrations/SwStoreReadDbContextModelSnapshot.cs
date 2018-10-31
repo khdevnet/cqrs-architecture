@@ -37,6 +37,9 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
                     b.Property<string>("Status")
                         .HasColumnName("status");
 
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnName("warehouse_id");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");

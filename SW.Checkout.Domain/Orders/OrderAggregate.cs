@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SW.Checkout.Core.Aggregates;
 using SW.Checkout.Domain.Orders.Enum;
 using SW.Checkout.Domain.Orders.Events;
-using SW.Checkout.Core.Aggregates;
 
 namespace SW.Checkout.Domain.Orders
 {
@@ -34,7 +34,7 @@ namespace SW.Checkout.Domain.Orders
 
         public void AddLine(OrderLine line)
         {
-            var @event = new OrderLineAdded(Id, line.ProductId, line.Quantity, line.Status);
+            var @event = new OrderLineAdded(Id, line.WarehouseId, line.ProductId, line.Quantity, line.Status);
             Apply(@event);
             Append(@event);
         }
@@ -44,6 +44,28 @@ namespace SW.Checkout.Domain.Orders
             var @event = new OrderLineRemoved(Id, productNumber);
             Apply(@event);
             Append(@event);
+        }
+
+        public void SubtractItemQuantity(int productNumber, int qty)
+        {
+            var oredrLine = Lines.FirstOrDefault(l => l.ProductId == productNumber);
+            if (oredrLine != null)
+            {
+                var @event = new OrderItemQuantitySubtracted(Id, oredrLine.WarehouseId, productNumber, qty);
+                Apply(@event);
+                Append(@event);
+            }
+        }
+
+        public void AddItemQuantity(int productNumber, int qty)
+        {
+            var oredrLine = Lines.FirstOrDefault(l => l.ProductId == productNumber);
+            if (oredrLine != null)
+            {
+                var @event = new OrderItemQuantityAdded(Id, oredrLine.WarehouseId, productNumber, qty);
+                Apply(@event);
+                Append(@event);
+            }
         }
 
         public void Apply(OrderCreated @event)
@@ -62,13 +84,35 @@ namespace SW.Checkout.Domain.Orders
             }
             else
             {
-                Lines.Add(new OrderLine { ProductId = @event.ProductNumber, Quantity = @event.Quantity });
+                Lines.Add(new OrderLine { WarehouseId = @event.WarehouseId, ProductId = @event.ProductNumber, Quantity = @event.Quantity });
             }
         }
 
         public void Apply(OrderLineRemoved @event)
         {
             Lines.RemoveAll(x => x.ProductId == @event.ProductNumber);
+        }
+
+        public void Apply(OrderItemQuantitySubtracted @event)
+        {
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
+            if (line != null && line.Quantity >= @event.Quantity)
+            {
+                line.Quantity -= @event.Quantity;
+                if (line.Quantity <= 0)
+                {
+                    RemoveLine(@event.ProductNumber);
+                }
+            }
+        }
+
+        public void Apply(OrderItemQuantityAdded @event)
+        {
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
+            if (line != null)
+            {
+                line.Quantity += @event.Quantity;
+            }
         }
     }
 }

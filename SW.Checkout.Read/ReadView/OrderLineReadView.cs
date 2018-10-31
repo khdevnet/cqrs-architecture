@@ -8,6 +8,8 @@ namespace SW.Checkout.Read.ReadView
 
         public int ProductId { get; set; }
 
+        public Guid WarehouseId { get; set; }
+
         public string Status { get; set; }
 
         public int Quantity { get; set; }

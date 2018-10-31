@@ -71,6 +71,10 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Database
                        .HasColumnName("product_id");
 
             modelBuilder.Entity<OrderLineReadView>()
+                       .Property(b => b.WarehouseId)
+                       .HasColumnName("warehouse_id");
+
+            modelBuilder.Entity<OrderLineReadView>()
                        .Property(b => b.Quantity)
                        .HasColumnName("quantity");
 

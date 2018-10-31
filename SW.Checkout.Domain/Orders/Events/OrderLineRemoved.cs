@@ -8,6 +8,7 @@ namespace SW.Checkout.Domain.Orders.Events
 
         public OrderLineRemoved(Guid orderId, int productNumber)
         {
+            OrderId = orderId;
             ProductNumber = productNumber;
         }
 

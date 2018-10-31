@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SW.Checkout.Core.Aggregates;
+using SW.Checkout.Core.Events;
+using SW.Checkout.Core.Messages;
+using SW.Checkout.Core.Queues.ProcessOrder;
 using SW.Checkout.Domain.Orders.Commands;
 using SW.Checkout.Domain.Orders.Dto;
 using SW.Checkout.Domain.Orders.Enum;
 using SW.Checkout.Domain.Orders.Views;
 using SW.Checkout.Domain.Warehouses;
 using SW.Checkout.Domain.Warehouses.Views;
-using SW.Checkout.Core.Aggregates;
-using SW.Checkout.Core.Events;
-using SW.Checkout.Core.Messages;
-using SW.Checkout.Core.Queues.ProcessOrder;
 
 namespace SW.Checkout.Domain.Orders.Handlers
 {
     public class OrderCommandHandler :
         IMessageHandler<CreateOrder>,
         IMessageHandler<AddOrderLine>,
-        IMessageHandler<RemoveOrderLine>
+        IMessageHandler<RemoveOrderLine>,
+        IMessageHandler<AddOrderItemQuantity>,
+        IMessageHandler<SubtractOrderItemQuantity>
     {
         private readonly IAggregationRepository repository;
         private readonly IReadStorageSyncEventBus readStorageSyncEventBus;
@@ -71,7 +73,47 @@ namespace SW.Checkout.Domain.Orders.Handlers
                     Quantity = command.Quantity
                 }};
 
-            repository.Transaction(() => AddOrderLines(command.OrderId, lines));
+            var aggEvents = AddOrderLines(command.OrderId, lines);
+            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => AddOrderLines(command.OrderId, lines);
+            Action transactionPostProcessFunc = () => aggEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
+
+            repository.Transaction(transactionFunc, transactionPostProcessFunc);
+        }
+
+        public void Handle(AddOrderItemQuantity command)
+        {
+            if (!IsOrderExist(command.OrderId))
+            {
+                return;
+            }
+
+            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(command.OrderId);
+
+            orderAggregate.AddItemQuantity(command.ProductNumber, command.Quantity);
+
+            var aggEvents = new Dictionary<Guid, List<IEvent>>() { { orderAggregate.Id, orderAggregate.PendingEvents.ToList() } };
+
+            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => aggEvents;
+            Action transactionPostProcessFunc = () => aggEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
+            repository.Transaction(transactionFunc, transactionPostProcessFunc);
+        }
+
+        public void Handle(SubtractOrderItemQuantity command)
+        {
+            if (!IsOrderExist(command.OrderId))
+            {
+                return;
+            }
+
+            OrderAggregate orderAggregate = repository.Load<OrderAggregate>(command.OrderId);
+
+            orderAggregate.SubtractItemQuantity(command.ProductNumber, command.Quantity);
+
+            var aggEvents = new Dictionary<Guid, List<IEvent>>() { { orderAggregate.Id, orderAggregate.PendingEvents.ToList() } };
+
+            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => aggEvents;
+            Action transactionPostProcessFunc = () => aggEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
+            repository.Transaction(transactionFunc, transactionPostProcessFunc);
         }
 
         public void Handle(RemoveOrderLine command)
@@ -83,7 +125,11 @@ namespace SW.Checkout.Domain.Orders.Handlers
 
             OrderAggregate orderAggregate = repository.Load<OrderAggregate>(command.OrderId);
             orderAggregate.RemoveLine(command.ProductNumber);
-            repository.Store(orderAggregate);
+            var aggEvents = new Dictionary<Guid, List<IEvent>>() { { command.OrderId, orderAggregate.PendingEvents.ToList() } };
+            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => aggEvents;
+            Action transactionPostProcessFunc = () => aggEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
+
+            repository.Transaction(transactionFunc, transactionPostProcessFunc);
         }
 
         private Dictionary<Guid, List<IEvent>> AddOrderLines(Guid orderId, IEnumerable<OrderLineDto> orderLines)
@@ -105,11 +151,13 @@ namespace SW.Checkout.Domain.Orders.Handlers
                     WarehouseAggregate warehouseAggregate = repository.Load<WarehouseAggregate>(warehouse.Id);
                     warehouseAggregate.SubstractItemQuantity(orderLine.ProductNumber, orderLine.Quantity);
                     AddAggEvents(events, warehouseAggregate.Id, warehouseAggregate.PendingEvents.ToList());
+                    orderItem.WarehouseId = warehouseAggregate.Id;
                 }
                 else
                 {
                     orderItem.Status = OrderLineStatus.OutOfStock.ToString();
                 }
+
                 OrderAggregate orderAggregate = repository.Load<OrderAggregate>(orderId);
                 orderAggregate.AddLine(orderItem);
 

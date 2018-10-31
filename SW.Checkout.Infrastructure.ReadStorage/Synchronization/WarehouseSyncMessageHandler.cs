@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Linq;
+using SW.Checkout.Core.Queues.ReadStorageSync;
+using SW.Checkout.Domain.Orders.Events;
 using SW.Checkout.Domain.Warehouses.Events;
 using SW.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Checkout.Read.ReadView;
-using SW.Checkout.Core.Queues.ReadStorageSync;
 
 namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
 {
     internal class WarehouseSyncMessageHandler :
         IReadStorageSyncMessageHandler<WarehouseItemAdded>,
         IReadStorageSyncMessageHandler<WarehouseCreated>,
-        IReadStorageSyncMessageHandler<WarehouseItemQuantitySubstracted>
+        IReadStorageSyncMessageHandler<WarehouseItemQuantitySubstracted>,
+        IReadStorageSyncMessageHandler<OrderItemQuantityAdded>,
+        IReadStorageSyncMessageHandler<OrderItemQuantitySubtracted>
     {
         private readonly SwStoreReadDbContext db;
 
@@ -79,6 +82,35 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
         {
             return db.WarehouseItemReadViews
                     .FirstOrDefault(item => item.WarehouseId == warehouseId && item.ProductId == productId);
+        }
+
+        public void Handle(OrderItemQuantitySubtracted message)
+        {
+            WarehouseItemReadView warehouseItem = db.WarehouseItemReadViews.FirstOrDefault(l => l.WarehouseId == message.WarehouseId && l.ProductId == message.ProductNumber);
+
+            if (warehouseItem != null)
+            {
+                warehouseItem.Quantity += message.Quantity;
+                db.SaveChanges();
+            }
+        }
+
+        public void Handle(OrderItemQuantityAdded message)
+        {
+            OrderLineReadView orderLine = db.OrderLineViews.FirstOrDefault(l => l.OrderId == message.OrderId && l.ProductId == message.ProductNumber);
+            if (orderLine == null)
+            {
+                return;
+            }
+
+            WarehouseItemReadView warehouse = db.WarehouseItemReadViews.FirstOrDefault(l => l.WarehouseId == orderLine.WarehouseId && l.ProductId == message.ProductNumber);
+
+            if (warehouse != null)
+            {
+                warehouse.Quantity -= message.Quantity;
+                db.SaveChanges();
+            }
+
         }
     }
 }

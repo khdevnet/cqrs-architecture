@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Checkout.Domain.Orders.Events;
 using SW.Checkout.Core.Views;
+using SW.Checkout.Domain.Orders.Events;
 
 namespace SW.Checkout.Domain.Orders.Views
 {
@@ -32,13 +32,31 @@ namespace SW.Checkout.Domain.Orders.Views
             }
             else
             {
-                Lines.Add(new OrderLine { ProductId = @event.ProductNumber, Quantity = @event.Quantity, Status = @event.Status });
+                Lines.Add(new OrderLine { WarehouseId = @event.WarehouseId, ProductId = @event.ProductNumber, Quantity = @event.Quantity, Status = @event.Status });
             }
         }
 
         public void Apply(OrderLineRemoved @event)
         {
             Lines.RemoveAll(x => x.ProductId == @event.ProductNumber);
+        }
+
+        public void Apply(OrderItemQuantitySubtracted @event)
+        {
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
+            if (line != null && line.Quantity >= @event.Quantity)
+            {
+                line.Quantity -= @event.Quantity;
+            }
+        }
+
+        public void Apply(OrderItemQuantityAdded @event)
+        {
+            OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
+            if (line != null)
+            {
+                line.Quantity += @event.Quantity;
+            }
         }
     }
 }

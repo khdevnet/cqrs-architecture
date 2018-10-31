@@ -40,6 +40,7 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     product_id = table.Column<int>(nullable: false),
+                    warehouse_id = table.Column<Guid>(nullable: false),
                     status = table.Column<string>(nullable: true),
                     quantity = table.Column<int>(nullable: false),
                     order_id = table.Column<Guid>(nullable: false)
