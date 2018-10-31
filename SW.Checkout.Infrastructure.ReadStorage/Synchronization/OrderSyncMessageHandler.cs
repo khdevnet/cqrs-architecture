@@ -1,8 +1,8 @@
 ﻿using System;
+using SW.Checkout.Core.Queues.ReadStorageSync;
 using SW.Checkout.Domain.Orders.Events;
 using SW.Checkout.Infrastructure.ReadStorage.Database;
 using SW.Checkout.Read.ReadView;
-using SW.Checkout.Core.Queues.ReadStorageSync;
 
 namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
 {
@@ -28,7 +28,8 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Synchronization
             var orderView = new OrderReadView
             {
                 Id = message.OrderId,
-                Status = message.Status
+                Status = message.Status,
+                CustomerId = message.CustomerId
             };
             db.OrderViews.Add(orderView);
             db.SaveChanges();

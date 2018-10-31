@@ -9,5 +9,9 @@ namespace SW.Checkout.Read.Extensibility
         OrderReadView GetById(Guid id);
 
         IEnumerable<OrderReadView> Get();
+
+        IEnumerable<OrderReadView> GetByCustomer(int customerId);
+
+        int GetCountByCustomer(int customerId);
     }
 }

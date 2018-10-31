@@ -10,7 +10,7 @@ using SW.Checkout.Infrastructure.ReadStorage.Database;
 namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
 {
     [DbContext(typeof(SwStoreReadDbContext))]
-    [Migration("20181027164332_Init")]
+    [Migration("20181031132824_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,61 +24,77 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Migrations
             modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderLineReadView", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
-                    b.Property<Guid>("OrderId");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnName("order_id");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnName("product_id");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnName("quantity");
 
-                    b.Property<string>("Status");
+                    b.Property<string>("Status")
+                        .HasColumnName("status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderLineViews");
+                    b.ToTable("order_line_read_view");
                 });
 
             modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderReadView", b =>
                 {
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .HasColumnName("id");
 
-                    b.Property<string>("Status");
+                    b.Property<int>("CustomerId")
+                        .HasColumnName("customer_id");
+
+                    b.Property<string>("Status")
+                        .HasColumnName("status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderViews");
+                    b.ToTable("order_read_view");
                 });
 
             modelBuilder.Entity("SW.Checkout.Read.ReadView.WarehouseItemReadView", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnName("product_id");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnName("quantity");
 
-                    b.Property<Guid>("WarehouseId");
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnName("warehouse_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("WarehouseItemReadViews");
+                    b.ToTable("warehouse_item_read_view");
                 });
 
             modelBuilder.Entity("SW.Checkout.Read.ReadView.WarehouseReadView", b =>
                 {
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .HasColumnName("id");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("WarehouseReadViews");
+                    b.ToTable("warehouse_read_view");
                 });
 
             modelBuilder.Entity("SW.Checkout.Read.ReadView.OrderLineReadView", b =>

@@ -7,6 +7,8 @@ namespace SW.Checkout.Read.ReadView
     {
         public Guid Id { get; set; }
 
+        public int CustomerId { get; set; }
+
         public string Status { get; set; }
 
         public ICollection<OrderLineReadView> Lines { get; set; } = new List<OrderLineReadView>();

@@ -19,13 +19,28 @@ namespace SW.Checkout.Infrastructure.ReadStorage.Repositories
 
         public OrderReadView GetById(Guid id)
         {
-            return Get().FirstOrDefault(p => p.Id == id);
+            return GetQueryable().FirstOrDefault(p => p.Id == id);
 
         }
 
         public IEnumerable<OrderReadView> Get()
         {
+            return GetQueryable();
+        }
+
+        public IEnumerable<OrderReadView> GetByCustomer(int customerId)
+        {
+            return GetQueryable().Where(o => o.CustomerId == customerId);
+        }
+
+        private IQueryable<OrderReadView> GetQueryable()
+        {
             return db.OrderViews.Include(nameof(OrderReadView.Lines));
+        }
+
+        public int GetCountByCustomer(int customerId)
+        {
+            return GetQueryable().Count(x => x.CustomerId == customerId);
         }
     }
 }
