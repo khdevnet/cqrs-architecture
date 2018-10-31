@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SW.Checkout.Domain.Warehouses;
+using System.Threading;
 using SW.Checkout.Core.Aggregates;
 using SW.Checkout.Core.Events;
 using SW.Checkout.Core.Initializers;
 using SW.Checkout.Core.Queues.ProcessOrder;
+using SW.Checkout.Domain.Warehouses;
 
 namespace SW.Checkout.Infrastructure.EventStore
 {
@@ -34,7 +35,21 @@ namespace SW.Checkout.Infrastructure.EventStore
             Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => events;
             Action transactionPostProcessFunc = () => events.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
 
-            repository.Transaction(transactionFunc, transactionPostProcessFunc);
+            int attempts_count = 0;
+            while (attempts_count <= 20)
+            {
+                try
+                {
+                    repository.Transaction(transactionFunc, transactionPostProcessFunc);
+                    attempts_count = 21;
+                }
+                catch (Exception)
+                {
+                    attempts_count += 1;
+                    Console.WriteLine($"### Retry connect to Rabbit MQ attempt {attempts_count}");
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(10));
+            }
         }
 
         private static WarehouseAggregate CreateWarehouseAggregate(Guid warehouseId, string name)
