@@ -34,17 +34,12 @@ namespace SW.Checkout.Domain.Orders.Handlers
 
         public void Handle(CreateOrder command)
         {
-            if (IsOrderExist(command.OrderId))
-            {
-                return;
-            }
-
             var createOrderEvents = new Dictionary<Guid, List<IEvent>>();
 
             var order = new OrderAggregate(command.OrderId, command.CustomerId);
             createOrderEvents.Add(order.Id, order.PendingEvents.ToList());
 
-            Dictionary<Guid, List<IEvent>> orderLinesEvents = AddOrderLines(command.OrderId, command.Lines);
+            Dictionary<Guid, List<IEvent>> orderLinesEvents = AddOrderLines(order, command.Lines);
 
             foreach (KeyValuePair<Guid, List<IEvent>> lineAgg in orderLinesEvents)
             {
@@ -55,7 +50,6 @@ namespace SW.Checkout.Domain.Orders.Handlers
             Action transactionPostProcessFunc = () => createOrderEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
 
             repository.Transaction(transactionFunc, transactionPostProcessFunc);
-
         }
 
 
@@ -72,9 +66,9 @@ namespace SW.Checkout.Domain.Orders.Handlers
                     ProductNumber = command.ProductNumber,
                     Quantity = command.Quantity
                 }};
-
-            var aggEvents = AddOrderLines(command.OrderId, lines);
-            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => AddOrderLines(command.OrderId, lines);
+            var order = repository.Load<OrderAggregate>(command.OrderId);
+            var aggEvents = AddOrderLines(order, lines);
+            Func<Dictionary<Guid, List<IEvent>>> transactionFunc = () => aggEvents;
             Action transactionPostProcessFunc = () => aggEvents.SelectMany(agg => agg.Value).ToList().ForEach(@event => readStorageSyncEventBus.Send(@event));
 
             repository.Transaction(transactionFunc, transactionPostProcessFunc);
@@ -132,7 +126,7 @@ namespace SW.Checkout.Domain.Orders.Handlers
             repository.Transaction(transactionFunc, transactionPostProcessFunc);
         }
 
-        private Dictionary<Guid, List<IEvent>> AddOrderLines(Guid orderId, IEnumerable<OrderLineDto> orderLines)
+        private Dictionary<Guid, List<IEvent>> AddOrderLines(OrderAggregate orderAggregate, IEnumerable<OrderLineDto> orderLines)
         {
             IEnumerable<WarehouseView> warehouses = repository.Query<WarehouseView, WarehouseView>((w) => new WarehouseView { Id = w.Id, Items = w.Items });
             var events = new Dictionary<Guid, List<IEvent>>();
@@ -158,7 +152,6 @@ namespace SW.Checkout.Domain.Orders.Handlers
                     orderItem.Status = OrderLineStatus.OutOfStock.ToString();
                 }
 
-                OrderAggregate orderAggregate = repository.Load<OrderAggregate>(orderId);
                 orderAggregate.AddLine(orderItem);
 
                 AddAggEvents(events, orderAggregate.Id, orderAggregate.PendingEvents.ToList());
@@ -180,7 +173,7 @@ namespace SW.Checkout.Domain.Orders.Handlers
 
         private bool IsOrderExist(Guid orderId)
         {
-            return repository.FirstOrDefault<OrderView>(x => x.Id == orderId) != null;
+            return repository.Load<OrderAggregate>(orderId).Status != OrderStatus.NotExist.ToString();
         }
     }
 }

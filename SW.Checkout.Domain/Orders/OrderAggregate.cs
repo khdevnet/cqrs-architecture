@@ -48,10 +48,23 @@ namespace SW.Checkout.Domain.Orders
 
         public void SubtractItemQuantity(int productNumber, int qty)
         {
-            var oredrLine = Lines.FirstOrDefault(l => l.ProductId == productNumber);
-            if (oredrLine != null)
+            var line = Lines.FirstOrDefault(l => l.ProductId == productNumber);
+            if (line != null)
             {
-                var @event = new OrderItemQuantitySubtracted(Id, oredrLine.WarehouseId, productNumber, qty);
+                int eventQuantity = 0;
+                int difference = line.Quantity - qty;
+                if (difference > 0)
+                {
+                    eventQuantity = qty;
+                }
+                else
+                {
+                    eventQuantity = line.Quantity;
+                    RemoveLine(productNumber);
+                }
+
+                var @event = new OrderItemQuantitySubtracted(Id, line.WarehouseId, productNumber, eventQuantity);
+
                 Apply(@event);
                 Append(@event);
             }
@@ -96,13 +109,9 @@ namespace SW.Checkout.Domain.Orders
         public void Apply(OrderItemQuantitySubtracted @event)
         {
             OrderLine line = Lines.FirstOrDefault(x => x.ProductId == @event.ProductNumber);
-            if (line != null && line.Quantity >= @event.Quantity)
+            if (line != null)
             {
                 line.Quantity -= @event.Quantity;
-                if (line.Quantity <= 0)
-                {
-                    RemoveLine(@event.ProductNumber);
-                }
             }
         }
 
