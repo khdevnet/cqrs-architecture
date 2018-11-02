@@ -32,6 +32,8 @@ namespace SW.Checkout.Infrastructure.EventStore
             options.Events.AddEventType(typeof(OrderCreated));
             options.Events.AddEventType(typeof(OrderLineAdded));
             options.Events.AddEventType(typeof(OrderLineRemoved));
+            options.Events.AddEventType(typeof(OrderItemQuantityAdded));
+            options.Events.AddEventType(typeof(OrderItemQuantitySubtracted));
 
             //  options.Events.InlineProjections.AggregateStreamsWith<WarehouseAggregate>();
             options.Events.InlineProjections.Add(new WarehouseViewProjection());
